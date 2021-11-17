@@ -1,0 +1,96 @@
+@use '../abstract/colors' as *;
+
+
+.lg-nav{
+  height: 64px;
+  background-color: $tmdb-dark-blue;
+}
+
+.lg-nav-container{
+  display: flex;
+  position: fixed;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  height: 64px;
+  padding: 22px 34px;
+  background: $tmdb-dark-blue;
+  z-index: 10;
+  
+  a{
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+}
+
+.nav-logo{
+  height: 20px;
+}
+
+
+
+.nav-items-container {
+  display: inline-flex;
+  justify-content: space-between;
+  width: 285px;
+  padding:0 24px;
+}
+
+.nav-left-part{
+  display: flex;
+  align-items: center;
+  width: 520px;
+}
+
+.nav-right-part{
+  @extend .nav-items-container;
+  align-items: center;
+  width: 305px;
+  display: flex;
+  padding: 0;
+
+  .plus{
+    width: 22.39px;
+  }
+
+  .magnifier{
+    width: 29.1px;
+  }
+
+  span{
+    cursor: pointer;
+    color: white;
+    border: white 1px solid;
+    padding: 3px 5px;
+    border-radius: 3px;
+    font-size: .85rem;
+    font-weight: 600;
+  }
+
+}
+
+
+.menu-1:hover .movies-menu,
+.menu-2:hover .tv-shows-menu,
+.menu-3:hover .people-menu,
+.menu-4:hover .more-menu{
+display: block;
+}
+
+
+
+
+
+@media (max-width:850px){
+.lg-nav{
+  display: none;
+}
+.sm-nav{
+  display: flex;
+}
+
+
+}

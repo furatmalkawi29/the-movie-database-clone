@@ -1,0 +1,52 @@
+@use './navbar';
+@use '../abstract/colors' as *;
+
+.sm-nav{
+  height: 72px;
+  background-color: $tmdb-dark-blue;
+}
+
+.sm-nav-container{
+@extend .lg-nav-container !optional;
+padding: 25px;
+height: 70px;
+
+img,svg{
+  cursor: pointer;
+}
+}
+
+.menu-icon-container{
+  width: 48px;
+}
+
+
+.sm-nav-logo{
+  height: 43px;
+}
+
+.sm-icons-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 48px;
+
+:nth-child(1){
+  width: 17px;
+  max-width: 17px;
+  max-height: 16px;
+}
+
+:nth-child(2){
+  width: 21px;
+  max-width: 21px;
+  max-height: 21px;
+}
+}
+
+
+@media (min-width:851px){
+  .sm-nav{
+    display: none;
+  }
+  }

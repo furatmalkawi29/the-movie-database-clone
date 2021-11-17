@@ -1,0 +1,81 @@
+@use '../abstract/colors' as *;
+@use '../base/typography' as *;
+
+
+.home-search-container{
+color: white;
+padding: 20px 40px;
+min-height: 265px;
+display: flex;
+align-items: center;
+
+*{
+  width: 100%;
+}
+
+h2{
+font-size: 3rem;
+font-weight: 700;
+}
+
+h3{
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+form{
+position: relative;
+margin-top: 45px;
+}
+
+input[type="text"]{
+  box-sizing: border-box;
+  height: 45px;
+  border-radius: 30px;
+  border: none;
+  width: 100%;
+  padding: 5px 20px;
+  font-size: 1.1em;
+  color: $text-dark-gray;
+  font-family: $source-sans-pro;
+
+}
+
+input[type="text"]:focus-visible {
+  outline: none;
+}
+
+input[type="submit"]{
+  position: absolute;
+  color: white;
+  background: linear-gradient(to right, $tmdb-green 0%, $tmdb-blue 100%);
+  width: 100px;
+  border: none;
+  height: 45px;
+  z-index: 5;
+  right: 0px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover{
+  color: $tmdb-dark-blue;
+}
+}
+
+
+// .home-search-content{
+//   margin-top: 75px;
+// }
+
+
+
+@media (max-width:855px){
+
+  .home-search-container{
+    padding: 28px 25px;
+  }
+}

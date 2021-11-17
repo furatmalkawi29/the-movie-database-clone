@@ -1,0 +1,54 @@
+
+
+%dropdown-menu{
+  position: relative;
+  box-sizing: border-box;
+  background: white;
+  border-radius: 5px;
+  padding: 8px 25px;
+  min-width: 175px;
+  border: solid 1px rgb(209, 209, 209);
+
+  a{
+    font-size: 1rem;
+    font-weight: 400;
+    color: black;
+  }
+
+  div{
+    padding: 8px 0;
+  }
+}
+
+%dropdown-menu:hover{
+  display: block;
+}
+
+.movies-menu, .tv-shows-menu, .people-menu , .more-menu{
+  @extend %dropdown-menu;
+  position: absolute;
+  top: 53px;
+  display: none;
+}
+
+// .movies-menu, .tv-shows-menu, .people-menu , .more-menu{
+// display: block;
+// }
+
+
+
+.movies-menu{
+left: 205px;
+}
+
+.tv-shows-menu{
+  left: 282px;
+}
+
+.people-menu{
+  left: 375px;
+} 
+
+.more-menu{
+  left: 452px;
+}

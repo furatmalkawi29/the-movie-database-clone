@@ -1,0 +1,63 @@
+@use '../abstract/colors' as *;
+@use '../abstract/animation' as *;
+
+.side-menu{
+box-sizing: border-box;
+position: absolute;
+background-color: $transparent-dark-blue;
+width: 90vw;
+height: 91vh;
+top: 68px;
+left: -1000px;
+padding: 20px 22px;
+z-index: 10;
+
+
+span{
+  display: inline-block;
+  color: white;
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+
+div div{
+  margin-bottom: 26px;
+}
+
+a{
+  display: block;
+  text-decoration: none;
+  font-weight: 300;
+  font-size: .9rem;
+  margin-bottom: 10px;
+}
+}
+
+.side-menu-content-1,.side-menu-content-2,.side-menu-content-3{
+display: none;
+}
+
+
+.menu-outer-link{
+  a{
+    color: $text-light-gray;
+    font-weight: 500;
+    font-size: .85rem;
+  }
+
+  :last-child{
+    margin-top: 22px;
+  }
+}
+
+.side-menu-show{
+  -webkit-animation: $slide-in-left;
+animation: $slide-in-left;
+}
+
+.side-menu-hide{
+  -webkit-animation: $slide-in-right;
+animation: $slide-in-right;
+}
+
