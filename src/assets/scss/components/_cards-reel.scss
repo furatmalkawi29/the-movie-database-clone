@@ -1,0 +1,66 @@
+@use '../abstract/colors' as *;
+
+.cards-reel{
+  display: grid;
+  grid-template-rows: auto auto;
+
+  h2{
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-right: 20px;
+  }
+
+}
+
+.reel-top-container{
+  display: flex;
+  align-items: center;
+  padding: 30px 40px;
+}
+
+.selector{
+position: relative;
+border: solid 1px $tmdb-dark-blue;
+width: max-content;
+border-radius: 50px;
+cursor: pointer;
+
+div{
+  display: inline-block;
+  padding: 6px 20px;
+  box-sizing: border-box;
+}
+
+span{
+  font-size: 1rem;
+  font-weight: 600;
+  color: $tmdb-dark-blue;
+}
+}
+
+
+
+.selector-btn{
+  position: absolute;
+  box-sizing: border-box;
+  z-index: -2;
+  background-color: $tmdb-dark-blue;
+  border-radius: 50px;
+  height: 29px;
+}
+
+
+
+.gradient-text{
+    background:linear-gradient(to right, #c0fecf 0%, #1ed5a9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+
+.cards-container{
+  box-sizing: border-box;
+  margin-top: 30px;
+}
+
