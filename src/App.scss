@@ -1,6 +1,23 @@
 @use './assets/scss/base/typography' as *;
+@use './assets/scss/abstract/colors' as *;
 
 
 body{
   font-family: $source-sans-pro;
+}
+
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: white; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $scrollbar-light-gray; 
+  border-radius: 50px;
 }

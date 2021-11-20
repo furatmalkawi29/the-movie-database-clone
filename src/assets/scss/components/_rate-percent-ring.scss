@@ -1,0 +1,42 @@
+@use '../abstract/colors' as *;
+@use '../base/typography' as *;
+
+.rate-circle{
+  background-color: $tmd-dark-navy;
+  border-radius: 50%;
+}
+
+
+.rate-circle-text{
+position: absolute;
+top: 13px;
+color: white;
+font-size: .85rem;
+font-weight: 600;
+font-family: $outfit;
+
+span{
+  position: absolute;
+    font-size: 0.4rem;
+    top: 1.5px;
+  }
+}
+
+
+.one-digit-num{
+  left: 14px;
+}
+.two-digit-num{
+  left: 11px;
+}
+.three-digit-num{
+  left: 7px;
+  font-size: .75rem;
+}
+
+
+.rate-circle-container{
+  position: absolute;
+  top: 202px;
+  left: 10px;
+}

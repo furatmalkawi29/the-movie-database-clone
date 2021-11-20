@@ -1,0 +1,30 @@
+
+.movie-card{
+  position: relative;
+  width: 150px;
+  min-width: 150px;
+  height: 255px;
+  margin-right: 20px;
+
+  h3{
+
+  }
+
+  p{
+    
+  }
+}
+
+.movie-poster{
+  border-radius: 8px;
+  width: 100%;
+}
+
+.dotted-circle{
+  position: absolute;
+  width: 25px;
+  top: 9px;
+  right: 9px;
+  opacity: .6;
+  cursor: pointer;
+}

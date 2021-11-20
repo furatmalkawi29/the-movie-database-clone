@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react'
 import $ from 'jquery'
+import MovieCard from './MovieCard';
 
 export default function CardsReel(props) {
 
@@ -69,7 +70,16 @@ export default function CardsReel(props) {
         </div>
       </div>
       </div>
-      <div className="cards-container">    
+      <div className="cards-container">
+        <MovieCard/>
+        <MovieCard/>
+        <MovieCard/>
+        <MovieCard/>
+        <MovieCard/>
+        <MovieCard/>
+        <MovieCard/>
+        <MovieCard/>
+        <MovieCard/>
       </div>
     </section>
   )
