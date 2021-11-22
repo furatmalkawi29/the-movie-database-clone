@@ -21,7 +21,7 @@
   display: flex;
   align-items: center;
   padding: 30px 40px;
-  padding-bottom: 20px;
+  padding-bottom: 0px;
 }
 
 .selector{
@@ -41,6 +41,8 @@ span{
   font-size: 1rem;
   font-weight: 600;
   color: $tmdb-dark-blue;
+  position: relative;
+    z-index: 5;
 }
 }
 
@@ -49,7 +51,6 @@ span{
 .selector-btn{
   position: absolute;
   box-sizing: border-box;
-  z-index: -2;
   background-color: $tmdb-dark-blue;
   border-radius: 50px;
   height: 29px;
@@ -70,6 +71,99 @@ span{
   box-sizing: border-box;
   overflow-x: scroll;
   padding: 0px 40px;
-  height: 50vw;
+  padding-top: 20px;
+  height: 350px;
+}
+
+
+
+.sm-selector{
+position: relative;
+font-weight: 600;
+display: flex;
+flex-direction: column;
+}
+
+
+.sm-choiceOne{
+  position: relative;
+  z-index: 25;
+background-color: $tmdb-dark-blue;
+width: max-content;
+border-radius: 50px;
+cursor: pointer;
+padding: 6px 20px;
+box-sizing: border-box;
+
+
+span{
+@extend .gradient-text;
+font-weight: 600;
+}
+
+svg {
+      fill: rgb(186,252,205);
+      margin-left: 5px;
+      margin-bottom: -4px;
+}
+
+
+}
+
+
+.sm-choiceTwo{
+  position: absolute;
+  border-radius: 15px;
+  top: 0px;
+  z-index: 20;
+  background:linear-gradient(to right, #c0fecf 0%, #1ed5a9 100%);
+  width: 120px;
+  height: 57px;
+  cursor: pointer;
+  color: $tmdb-dark-blue;
+  padding: 8px 20px;
+  padding-top: 32px;
+  border: 1px solid $tmdb-dark-blue;
+  box-sizing: border-box;
+}
+
+
+
+
+
+
+
+@media (max-width:450px){
+  .reel-top-container{
+    padding: 30px 20px;
+    padding-bottom: 20px;
+  }
+
+
+  .cards-container{
+    padding: 0px 20px;
+  }
+
+}
+
+@media (min-width:850px){
+  .sm-selector{
+    display: none;
+  }
+
+}
+
+@media (max-width:850px){
+.selector{
+  display: none;
+}
+
+.sm-selector{
+  display: block;
+}
+
+#cards-reel-2{
+  display: none;
+}
 }
 

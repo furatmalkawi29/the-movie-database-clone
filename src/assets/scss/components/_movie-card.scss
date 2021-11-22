@@ -1,3 +1,4 @@
+@use '../abstract/colors' as *;
 
 .movie-card{
   position: relative;
@@ -5,15 +6,35 @@
   min-width: 150px;
   height: 255px;
   margin-right: 20px;
+}
+
+
+.movie-info{
+  font-size: 1rem;
+  box-sizing: border-box;
+  padding: 20px 10px;
 
   h3{
-
+font-weight: 700;
+line-height: 1.3;
   }
 
   p{
-    
+font-weight: 400;
+color: $card-gray;
+margin-top: 3px;
+  }
+
+  a{
+    text-decoration: none;
+    color: black;
+  }
+
+  a:hover{
+    color: $tmdb-blue;
   }
 }
+
 
 .movie-poster{
   border-radius: 8px;
@@ -27,4 +48,14 @@
   right: 9px;
   opacity: .6;
   cursor: pointer;
+  z-index: 20;
 }
+
+.dotted-circle:hover{
+  opacity: 1;
+  filter: brightness(0) saturate(100%) invert(53%) sepia(33%) saturate(3054%) hue-rotate(
+156deg) brightness(98%) contrast(99%);
+}
+
+
+

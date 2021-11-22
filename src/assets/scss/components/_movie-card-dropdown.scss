@@ -1,0 +1,70 @@
+@use '../abstract/colors' as *;
+
+.movie-card-dropdown{
+  position: absolute;
+  top: 38px;
+  left: -20px;
+  z-index: 10;
+box-sizing: border-box;
+background: white;
+width: 270px;
+height: 150px;
+border-radius: 5px;
+border: 1px solid $text-light-gray;
+font-size: 0.875rem;
+
+
+  h3{
+    font-weight: 600;
+    padding:10px 20px;
+    cursor: default;
+    color: initial;
+  }
+  
+  div div{
+    display: flex;
+    align-items: center;
+    color: $text-dark-gray;
+    padding:10px 20px;
+    cursor: pointer;
+
+    img{
+      width: 13px;
+      margin-left: 10px;
+    }
+  }
+}
+
+
+
+.first-box , .second-box{
+  padding:2px 0;
+}
+
+.second-box{
+  border-top: 1px solid $text-light-gray;
+}
+
+.second-box div:hover{
+  background: $tmdb-dark-blue;
+  color: white;
+  font-weight: 600;
+  img{
+    display: none;
+  }
+}
+
+.first-box div:hover{
+  background: $tmdb-dark-blue;
+  color: white;
+  font-weight: 600;
+
+  img{
+    display: none;
+  }
+}
+
+
+.active-dropdown{
+display: block;
+}
