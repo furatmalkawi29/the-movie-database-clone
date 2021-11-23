@@ -9,7 +9,9 @@
   .cards-container{
     height: 300px;
   }
-  
+
+
+  /*large screen selector*/
   .selector{
     border: solid 1px #2bd8ac;
   }
@@ -24,7 +26,35 @@
   .choiceTwo span {
     color: #ffffff;
   }
+
+
+  /*small screen selector*/
+  .sm-choiceTwo{
+    border: 1px solid #1ed5a9;
+  }
+  .sm-choiceOne{
+    background: linear-gradient(to right, #c0fecf 0%, #1ed5a9 100%);
+    border: 1px solid #1ed5a9;
+
+    span{
+      -webkit-text-fill-color: unset;
+      color: $tmdb-dark-blue;
+    }
+    }
+
+    .sm-choiceOne svg {
+      fill: #032541;
+    }
 }
+
+
+
+/*selectors jquery classes*/
+.no-background{
+  background: unset !important;
+  border: none !important;
+}
+
 
 .white-text{
   color: #ffffff !important;

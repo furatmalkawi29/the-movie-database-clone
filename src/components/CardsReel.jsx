@@ -86,11 +86,22 @@ export default function CardsReel(props) {
       
       
 
+
       
       $(`#sm-choiceTwo-${props.reelId}`).hide();
       
+    
+
       /*small screen selector */
       $(`#sm-choiceOne-${props.reelId}`).on("click",function(){
+       
+        /* changes on small screen selector in trailers section */
+        if(props.reelId ==='3'){
+          $(`#sm-choiceOne-${props.reelId}`).toggleClass('no-background');
+
+        }
+        
+
         if($(`#sm-choiceTwo-${props.reelId}`).css("display")==="none"){
           $(`#sm-choiceTwo-${props.reelId}`).show();
           $(this).css("width",props.smChoiceTwoWidth);
@@ -99,6 +110,7 @@ export default function CardsReel(props) {
           $(`#sm-choiceTwo-${props.reelId}`).hide();
           $(this).css("width","max-content");
         }
+
       })
 
       $(`#sm-choiceTwo-${props.reelId}`).on("click",function(){
