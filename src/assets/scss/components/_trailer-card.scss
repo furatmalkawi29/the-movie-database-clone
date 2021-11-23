@@ -1,14 +1,15 @@
 @use '../abstract/colors' as *;
 
 
-.trailer-cards-container{
-  height: 300px;
-}
 
 
 #cards-reel-3{
   color: white;
 
+  .cards-container{
+    height: 300px;
+  }
+  
   .selector{
     border: solid 1px #2bd8ac;
   }
@@ -30,6 +31,18 @@
 }
 .dark-blue-text{
   color: $tmdb-dark-blue !important;
+}
+
+
+
+.play-icon{
+  width: 65px;
+  position: absolute;
+  z-index: 30;
+  top: 52px;
+  left: 116px;
+  transition: .3s;
+  cursor: pointer;
 }
 
 
@@ -73,6 +86,10 @@ transition: .3s;
 
 .movie-trailer:hover{
   transform: scale(1.05);
+
+  .play-icon{
+    transform: scale(1.3);
+  }
 }
 
 

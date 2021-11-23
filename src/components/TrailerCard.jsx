@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { ClickAwayListener } from "@mui/material";
 import circleDotted from "../assets/images/circle-dotted.svg";
+import playIcon from "../assets/images/playIcon.svg";
 import MovieCardDropdown from "./MovieCardDropdown";
 import {Link} from 'react-router-dom';
 import $ from 'jquery'
@@ -58,6 +59,7 @@ export default function TrailerCard(props) {
           <Link to="/">
       <img id={`trailer-thumbnail-${props.id}`} className="trailer-thumbnail" src={props.thum}/>
        </Link>
+      <img className="play-icon" src={playIcon}/>
     </div>
 
     <div className="trailer-info">

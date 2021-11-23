@@ -26,7 +26,7 @@ export default function MovieCard({ id }) {
       </a>
       <div className="movie-info">
         <a href="">
-          <h3>Teenage Mutant Ninja Turtles</h3>
+          <h3>The Princess Switch 3: Romancing the Star</h3>
         </a>
         <p>Oct 07, 2014</p>
       </div>
