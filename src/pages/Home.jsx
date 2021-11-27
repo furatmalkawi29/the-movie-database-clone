@@ -28,6 +28,8 @@ export default function Home() {
         choiceOneWidth="80px"
         choiceTwoWidth="112px"
         smChoiceTwoWidth="138px"
+
+        trailers="true"
       />
 
       <CardsReel

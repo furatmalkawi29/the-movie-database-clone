@@ -151,7 +151,8 @@ export default function CardsReel(props) {
   
       </div>
       <div className='cards-container'>
-        <MovieCard id="1"/>
+        {!props.trailers?(<>
+          <MovieCard id="1"/>
         <MovieCard id="2"/>
         <MovieCard id="3"/>
         <MovieCard id="4"/>
@@ -161,11 +162,18 @@ export default function CardsReel(props) {
         <MovieCard id="8"/>
       <MovieCard id="9"/>
       <MovieCard id="10"/>
-        {/* <TrailerCard cover="https://www.themoviedb.org/t/p/w1920_and_h427_multi_faces/eyG9srihv68ScRdEbJZj66WT4O0.jpg" thum="https://www.themoviedb.org/t/p/w355_and_h200_multi_faces/eyG9srihv68ScRdEbJZj66WT4O0.jpg" id="1"/>
+      </>):(
+        <>
+ <TrailerCard cover="https://www.themoviedb.org/t/p/w1920_and_h427_multi_faces/eyG9srihv68ScRdEbJZj66WT4O0.jpg" thum="https://www.themoviedb.org/t/p/w355_and_h200_multi_faces/eyG9srihv68ScRdEbJZj66WT4O0.jpg" id="1"/>
         <TrailerCard cover="https://www.themoviedb.org/t/p/w1920_and_h427_multi_faces/iW74tZ8y2qobdpt4J9UQ71sw8q7.jpg" thum="https://www.themoviedb.org/t/p/w355_and_h200_multi_faces/iW74tZ8y2qobdpt4J9UQ71sw8q7.jpg" id="2"/>
+        <TrailerCard cover="https://www.themoviedb.org/t/p/w1920_and_h427_multi_faces/xHsc5OzhylbxDzJUTIDXckwcF2F.jpg" thum="https://www.themoviedb.org/t/p/w355_and_h200_multi_faces/xHsc5OzhylbxDzJUTIDXckwcF2F.jpg" id="4"/>
         <TrailerCard cover="https://www.themoviedb.org/t/p/w1920_and_h427_multi_faces/iW74tZ8y2qobdpt4J9UQ71sw8q7.jpg" thum="https://www.themoviedb.org/t/p/w355_and_h200_multi_faces/iW74tZ8y2qobdpt4J9UQ71sw8q7.jpg" id="3"/>
-        <TrailerCard cover="https://www.themoviedb.org/t/p/w1920_and_h427_multi_faces/iW74tZ8y2qobdpt4J9UQ71sw8q7.jpg" thum="https://www.themoviedb.org/t/p/w355_and_h200_multi_faces/iW74tZ8y2qobdpt4J9UQ71sw8q7.jpg" id="4"/>
-        <TrailerCard cover="https://www.themoviedb.org/t/p/w1920_and_h427_multi_faces/iW74tZ8y2qobdpt4J9UQ71sw8q7.jpg" thum="https://www.themoviedb.org/t/p/w355_and_h200_multi_faces/iW74tZ8y2qobdpt4J9UQ71sw8q7.jpg" id="5"/> */}
+        <TrailerCard cover="https://www.themoviedb.org/t/p/w1920_and_h427_multi_faces/iW74tZ8y2qobdpt4J9UQ71sw8q7.jpg" thum="https://www.themoviedb.org/t/p/w355_and_h200_multi_faces/iW74tZ8y2qobdpt4J9UQ71sw8q7.jpg" id="5"/>
+        </>
+      )
+        }
+        
+        
 
       </div>
     </section>
