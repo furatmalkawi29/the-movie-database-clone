@@ -116,7 +116,7 @@ transition: .3s;
 
 .movie-trailer:hover{
   transform: scale(1.05);
-
+   background:unset;
   .play-icon{
     transform: scale(1.3);
   }

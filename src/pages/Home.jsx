@@ -1,7 +1,20 @@
-import React from "react";
+import React, {useState} from 'react'
 import CardsReel from "../components/CardsReel";
+import TrailerModal from "../components/TrailerModal";
+
 
 export default function Home() {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [trailerUrl, setTrailerUrl] = useState('');
+
+  function changeModalVisibility (){
+    setIsModalVisible(!isModalVisible);
+  }
+
+  function changeModalUrl (newUrl){
+    setTrailerUrl(newUrl);
+  }
+
   return (
     <>
       <CardsReel
@@ -28,8 +41,11 @@ export default function Home() {
         choiceOneWidth="80px"
         choiceTwoWidth="112px"
         smChoiceTwoWidth="138px"
+        changeModalVisibility={changeModalVisibility}
+        changeModalUrl={changeModalUrl}
 
         trailers="true"
+
       />
 
       <CardsReel
@@ -40,6 +56,8 @@ export default function Home() {
         choiceTwoWidth="112px"
         smChoiceTwoWidth="138px"
       />
+
+      {isModalVisible?(<TrailerModal changeModalVisibility={changeModalVisibility} trailerUrl={trailerUrl}/>):null}
 
       <section className="join-banner">
         <h2>Join Today</h2>

@@ -18,33 +18,51 @@ export default function TrailerCard(props) {
     setOpen(false);
   };
 
-  useEffect(()=>{
 
+  
+  useEffect(()=>{
+    
     /*set default background to the first trailer thumbnail */
     var firstThumb = 'https://www.themoviedb.org/t/p/w1920_and_h427_multi_faces/eyG9srihv68ScRdEbJZj66WT4O0.jpg';
-
+    
     $('#cards-reel-3').css({backgroundImage:`linear-gradient(to right, rgba(3, 37, 65, 0.8) 0%, rgba(3, 37, 65, .75) 100%), url(${firstThumb})`,backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundPosition: "center",
-    })
-
-
-
-    /*change background to the trailer thumbnail when hovering over the card  */
-    $(`#trailer-container-${props.id}`).on("mouseover",function(){
-      $('#cards-reel-3').css({backgroundImage:`linear-gradient(to right, rgba(3, 37, 65, 0.8) 0%, rgba(3, 37, 65, .75) 100%), url(${props.cover})`,backgroundRepeat: "no-repeat",
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-     }) 
-  });
+  })
   
-  });
+  
+  
+  /*change background to the trailer thumbnail when hovering over the card  */
+  $(`#trailer-card-${props.id}`).off().on("mouseenter",function(){
 
-  return (
-    <div id={`trailer-container-${props.id}`}className="trailer-container">
+    $('#cards-reel-3').css({backgroundImage:`linear-gradient(to right, rgba(3, 37, 65, 0.8) 0%, rgba(3, 37, 65, .75) 100%), url(${props.cover})`,backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  }) 
+});
+
+
+
+$(`#trailer-card-${props.id}`).on('click',function(){
+
+  /* render trailer modal */
+  props.changeModalVisibility();
+
+  /* add the clicked trailer url to modal */
+  props.changeModalUrl(props.trailerUrl);
+
+
+  /* turn everything behind modal into black and white */
+  $("header,footer,.cards-reel,.join-banner").addClass("grayscale-filter");
+  
+})
+});
+
+return (
+    <div id={`trailer-container-${props.id}`} className="trailer-container">
       {/* hide dropdown when it detects clicks outside dropdown component*/}
 
-    <div className="trailer-card">
+    <div id={`trailer-card-${props.id}`} className="trailer-card" >
     <div className="movie-trailer">
       <ClickAwayListener onClickAway={handleClickAway}>
         <div>
