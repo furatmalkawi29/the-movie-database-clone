@@ -30,10 +30,10 @@ export default function Navbar() {
             <Link to="">Movies</Link>
             <DropdownMenu
               content={[
-                "Popular,/about",
-                "Now Playing,/about",
-                "Upcoming,/about",
-                "Top Rated,/about",
+                "Popular,/",
+                "Now Playing,/",
+                "Upcoming,/",
+                "Top Rated,/",
               ]}
               menuClass="movies-menu"
             />
@@ -42,10 +42,10 @@ export default function Navbar() {
             <Link to="">TV Shows</Link>
             <DropdownMenu
               content={[
-                "Popular,/about",
-                "Airing Today,/about",
-                "On TV,/about",
-                "Top Rated,/about",
+                "Popular,/",
+                "Airing Today,/",
+                "On TV,/",
+                "Top Rated,/",
               ]}
               menuClass="tv-shows-menu"
             />
@@ -53,7 +53,7 @@ export default function Navbar() {
           <div className="menu-3">
             <Link to="">People</Link>
             <DropdownMenu
-              content={["Popular People,/about"]}
+              content={["Popular People,/"]}
               menuClass="people-menu"
             />
           </div>
@@ -61,10 +61,10 @@ export default function Navbar() {
             <Link to="">More</Link>
             <DropdownMenu
               content={[
-                "Discussions,/about",
-                "Leaderboard,/about",
-                "Support,/about",
-                "API,/about",
+                "Discussions,/",
+                "Leaderboard,/",
+                "Support,/",
+                "API,/",
               ]}
               menuClass="more-menu"
             />

@@ -1,14 +1,16 @@
 import './App.scss';
-import Header from './components/Header';
 import Main from './components/Main';
 import Footer from './components/Footer';
+import Navbar from './components/Navbar';
+import NavbarSmallScreen from './components/NavbarSmallScreen';
 import { BrowserRouter } from 'react-router-dom';
 
 function App() {
   return (
     <div>
       <BrowserRouter>
-      <Header/>
+      <Navbar/>
+      <NavbarSmallScreen/>
       <Main/>
       <Footer/>
       </BrowserRouter>

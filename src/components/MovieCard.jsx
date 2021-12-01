@@ -43,7 +43,7 @@ export default function MovieCard({ id }) {
         </div>
       </ClickAwayListener>
 
-      <RateCircle percentage={83} />
+      <RateCircle percentage={83} smallSize={true} />
     </div>
   );
 }

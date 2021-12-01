@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import CardsReel from "../components/CardsReel";
+import Header from '../components/Header';
 import TrailerModal from "../components/TrailerModal";
 
 
@@ -17,6 +18,8 @@ export default function Home() {
 
   return (
     <>
+
+    <Header/>
       <CardsReel
         reelId="1"
         heading="What's Popular"

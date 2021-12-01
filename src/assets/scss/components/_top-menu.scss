@@ -1,0 +1,72 @@
+@use '../abstract/mixins' as *;
+@use '../abstract/colors' as *;
+
+
+
+.top-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  overflow-x: scroll;
+  margin: auto;
+  padding: 0 25px;
+  background-color: white;
+  height: 44px;
+}
+
+
+::-webkit-scrollbar {
+  height: 3px;
+}
+
+
+.active-menu-item{
+  border-bottom: 4px solid $tmdb-blue;
+  box-sizing: border-box;
+  padding: 6px 0;
+}
+
+
+.menu-item{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  line-height: 24px;
+
+  span{
+    display: inline-block;
+    margin-right: 3px;
+  }
+}
+
+
+.menu-item:hover{
+  color: $text-dark-gray;
+}
+
+
+
+
+
+
+
+
+
+@media (min-width:415px){
+  .top-menu {
+    width: 430px;
+  }
+}
+
+
+@media (max-width:414px){
+  .middle-item-1{
+    margin-left: 25px;
+  }
+
+  .middle-item-2{
+    margin-left: 25px;
+    margin-right: 25px;
+  }
+}

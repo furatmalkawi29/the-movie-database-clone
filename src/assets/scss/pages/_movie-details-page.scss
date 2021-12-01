@@ -1,0 +1,243 @@
+@use '../abstract/colors' as *;
+
+
+.movie-overview-banner{
+  display: flex;
+  min-height: 570px;
+  padding: 30px 40px;
+  background-color: rgb(190, 110, 255);
+  
+  
+  a{
+    text-decoration: none;
+  }
+}
+
+.poster-wrapper{
+  position: relative;
+}
+
+
+.movie-poster{
+  width: 300px;
+  height: 450px;
+  border-radius: 8px;
+}
+
+
+.movie-overview{
+  padding-left: 40px;
+  color: white;
+}
+
+
+@mixin flex-content{
+  display: flex;
+  align-items: center;
+}
+
+
+
+.line-1{
+@include flex-content;
+flex-wrap: wrap;
+
+h2{
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-right: 10px;
+    line-height: 1.3;
+  }
+  span{
+    font-size: 2.2rem;
+    opacity: .8;
+  }
+}
+
+
+.line-2{
+  @include flex-content;
+
+  .movie-safety{
+    color: rgb(96,96,96);
+    font-weight: 300;
+    border: 1px solid rgb(96,96,96);
+    padding: 1px 5px;
+    border-radius: 2px;
+    margin-right: 8px;
+  }
+
+  .dot{
+    content:"";
+      background: white;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      margin: 0 8px;
+    }
+
+}
+
+
+
+.line-3{
+  @include flex-content;
+  padding: 25px 0;
+}
+
+
+.rate-circle-wrapper{
+  position: relative;
+  display: flex;
+  align-items: center;
+  
+  
+  .rate-circle-container{
+    position: static;
+    top: 0;
+    transition: .2s;
+  }
+  
+  .rate-circle-text{
+    font-size: 1.4rem;
+    top: 22px;
+    span {
+      position: absolute;
+      font-size: 0.55rem;
+      top: 3px;
+    }
+  }
+  
+}
+
+.circle-title{
+  font-weight: 700;
+  display: inline-block;
+  width: min-content;
+  margin-left: 8px;
+}
+
+.icons-block{
+  @include flex-content;
+  padding: 0 10px;
+div{
+  background-color: $tmdb-dark-blue;
+  border-radius: 50%;
+  height: 46px;
+  width: 46px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+svg{
+  display: block;
+  margin: auto;
+  margin-top: 15px;
+  width: 12px;
+}
+
+}
+
+
+.play-btn{
+  @include flex-content;
+  span{
+    margin-left: 6px;
+    font-weight: 700;
+    width: max-content;
+  }
+}
+
+
+.line-4{
+  padding-bottom: 20px;
+  
+  h3{
+    font-style: italic;
+    font-size: 18px;
+    opacity: .7;
+  }
+}
+
+.line-5{
+  padding-bottom: 20px;
+    h3{
+      font-size: 21px;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+  }
+  
+  
+  .line-6{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    row-gap: 20px;
+    
+    div{
+      padding-right: 30px;
+      h4{
+        font-weight: 700;
+        line-height: 1.3;
+      }
+      p{
+        font-size:14px;
+      }
+    }
+  }
+
+
+
+
+  .poster-glass-cover{
+position: absolute;
+display: none;
+top: 0;
+background-color: blueviolet;
+width: 300px;
+height: 450px;
+border-radius: 8px;
+background-color: rgba(26, 26, 26, 0.576);  
+backdrop-filter: blur(15px);
+transition: display 3s;
+  }
+
+
+  .poster-overlay{
+    @include flex-content;
+    position: absolute;
+    font-size: 21px;
+    top: 210px;
+    left:100px;
+    display: none;
+    color: white;
+    cursor: pointer;
+
+    span{
+      display: block;
+      margin-left: 4px;
+      opacity: .8;
+    }
+  }
+
+
+  .play-btn:hover, .line-1 h2:hover ,  .movie-category span:hover, .line-6 h4:hover {
+    opacity: .7;
+    cursor: pointer;
+  }
+  
+  .rate-circle-container:hover{
+  transform: scale(1.07);
+  cursor: pointer;
+  }
+
+
+  .poster-wrapper:hover .poster-glass-cover {
+display: block;
+cursor: pointer;
+  }
+
+
+  .poster-wrapper:hover .poster-overlay{
+    display: flex;
+  }

@@ -23,15 +23,29 @@ span{
 }
 
 
+
+/* small rate ring*/
 .one-digit-num{
   left: 14px;
 }
 .two-digit-num{
-  left: 11px;
+  left: 10px;
 }
 .three-digit-num{
   left: 7px;
   font-size: .75rem;
+}
+
+
+/* large rate ring*/
+.one-digit-num-lg{
+  left: 24px;
+}
+.two-digit-num-lg{
+  left: 19px;
+}
+.three-digit-num-lg{
+  left: 12px;
 }
 
 

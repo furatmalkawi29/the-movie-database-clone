@@ -1,6 +1,8 @@
 @use '../abstract/colors' as *;
+@use '../abstract/mixins' as *;
 
 .cards-reel{
+  position: relative;
   display: grid;
   grid-template-rows: auto auto;
   padding-right: 0px;
@@ -132,6 +134,12 @@ svg {
   background-repeat: no-repeat ;
   background-size: 125%;
   background-position: 50% 82%;
+}
+
+
+
+.cards-reel::after{
+@include  white-cloudy-effect
 }
 
 

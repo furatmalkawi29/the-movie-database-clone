@@ -27,7 +27,6 @@ $("header,footer,.cards-reel,.join-banner").removeClass("grayscale-filter");
         <IoCloseSharp className="close-icon"/>
       </div>
 <iframe  src={`${props.trailerUrl && props.trailerUrl}?autoplay=1&mute=1`}>
-
 </iframe>
     </div>
   )
