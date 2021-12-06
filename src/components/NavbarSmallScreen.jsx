@@ -10,7 +10,6 @@ export default function NavbarSmallScreen() {
 
   /*side menu toggle*/
   $('.menu-icon-container').off('click').on("click",function(){
-    console.log('clicked');
     if($('.side-menu').css("left")==="0px"){
       $('.side-menu').stop().animate({left:'-1000'},600);
     }else{

@@ -12,3 +12,9 @@ background: linear-gradient(to right, rgba(255,255,255,0) 0%, #fff 100%);
     will-change: opacity;
     pointer-events: none;
 }
+
+
+@mixin flex-content{
+  display: flex;
+  align-items: center;
+}

@@ -40,12 +40,10 @@ export default function CardsReel(props) {
       if(props.reelId!=='3'){
         $(`#choiceTwo-${props.reelId} span`).removeClass("gradient-text");
         $(`#choiceOne-${props.reelId} span`).addClass("gradient-text");
-        console.log('000000');
       }else{
         /* change selector text color in trailers section */
         $(`#choiceTwo-${props.reelId} span`).removeClass("dark-blue-text");
         $(`#choiceOne-${props.reelId} span`).removeClass("white-text");
-        console.log('11111');
       }
         
       
