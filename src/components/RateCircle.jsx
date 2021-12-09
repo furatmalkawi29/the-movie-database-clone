@@ -77,7 +77,7 @@ export default function RateCircle({ percentage, size }) {
       case "small":
         {
           setFontStyle({
-            fontSize: ".75rem",
+            fontSize: "0.85rem",
             top: "13px",
             left: fontLeftPosition,
           });
@@ -121,13 +121,13 @@ export default function RateCircle({ percentage, size }) {
 
       switch (percentDigits) {
         case 1:  
-        setFontLeftPosition("15px");
+        setFontLeftPosition("14px");
         break;
         case 2:
-          setFontLeftPosition("12px");
+          setFontLeftPosition("10px");
           break;
       case 3:       
-          setFontLeftPosition("7px");
+          setFontLeftPosition("6px");
           break;
           
           default:
@@ -173,6 +173,9 @@ export default function RateCircle({ percentage, size }) {
   useEffect(() => {
     chooseFontLeftPosition();
     chooseFontStyle();
+
+    $('.rate-circle-container svg').addClass('rate-circle');
+
   },[fontLeftPosition]);
 
 
@@ -181,7 +184,6 @@ export default function RateCircle({ percentage, size }) {
   return (
     <div className="rate-circle-container">
       <svg
-        className="rate-circle"
         width={dimentions.width}
         height={dimentions.height}
       >

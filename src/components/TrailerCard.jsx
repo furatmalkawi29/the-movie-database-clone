@@ -43,7 +43,7 @@ export default function TrailerCard(props) {
 
 
 
-$(`#trailer-card-${props.id}`).on('click',function(){
+$(`#trailer-play-btn-${props.id}`).on('click',function(){
 
   /* render trailer modal */
   props.changeModalVisibility();
@@ -75,9 +75,9 @@ return (
         </div>
       </ClickAwayListener>
           <Link to="/">
-      <img id={`trailer-thumbnail-${props.id}`} className="trailer-thumbnail" src={props.thum}/>
+      <img className="trailer-thumbnail" src={props.thum}/>
        </Link>
-      <img className="play-icon" src={playIcon}/>
+      <img id={`trailer-play-btn-${props.id}`} className="play-icon" src={playIcon}/>
     </div>
 
     <div className="trailer-info">

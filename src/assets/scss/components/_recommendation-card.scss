@@ -1,0 +1,56 @@
+@use '../abstract/colors' as *;
+
+
+.recommendation-card{
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+
+.poster-container{
+  position: relative;
+}
+
+.poster{
+  width: 250px;
+  height: 140px;
+  border-radius: 7px;
+}
+
+.date-box{
+  display: none;
+  position: absolute;
+  background-color: $transparent-white;
+  align-items: center;
+  height: 38px;
+  width: 100%;
+  bottom: 2px;
+  border-radius: 0 0 6px 6px;
+  padding-left: 10px;
+
+  img{
+    width: 16px;
+    margin-right: 5px;
+  }
+
+}
+
+
+.poster-container:hover{
+  .date-box{
+    display: flex;
+  }
+}
+
+
+.bottom-info{
+  display: flex;
+  justify-content: space-between;
+  padding-top: 3px;
+
+  p{
+    line-height: 1.3;
+    font-size: .98rem;
+  }
+
+}

@@ -9,8 +9,15 @@ background: linear-gradient(to right, rgba(255,255,255,0) 0%, #fff 100%);
     position: absolute;
     top: 0;
     right: 0;
-    will-change: opacity;
-    pointer-events: none;
+}
+
+@mixin seperation-line {
+  content: "";
+  background-color: rgb(218, 218, 218);
+  height: 1px;
+  position: absolute;
+  width: 95.5%;
+  margin-left:10px;
 }
 
 

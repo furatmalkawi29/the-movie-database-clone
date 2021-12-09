@@ -117,8 +117,15 @@ transition: .3s;
 .movie-trailer:hover{
   transform: scale(1.05);
    background:unset;
+   z-index: 200;
   .play-icon{
     transform: scale(1.3);
+  }
+
+  .movie-card-dropdown{
+
+    left: 162px;
+    z-index: 100;
   }
 }
 

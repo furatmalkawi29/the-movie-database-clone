@@ -37,9 +37,19 @@ export default function MovieDetailsHeader() {
   }
 
 
+  /* reset bg on large screen */
+  function resetBgColor(params) {
+    $('.line-2-wrapper').css({"backgroundColor":"unset"});
 
+    $('.movie-overview-banner').css(
+     {"backgroundImage": `linear-gradient(to bottom right, rgba(${rgbValue[0]},${rgbValue[1]},${rgbValue[2]}, 1.00), rgba(${rgbValue[0]},${rgbValue[1]},${rgbValue[2]}, 0.84)), url(https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/urwz7vJ52QJnHH04zPNO1NKghyl.jpg)`});
+  }
+
+
+
+
+  /* pick black or white font based on bg color (light/drak)*/
   function decideFontColor() {
-    /* pick black or white font based on bg color (light/drak)*/
 
     if((rgbValue[0]*0.299 + rgbValue[1]*0.587 + rgbValue[2]*0.114) > 184){
       $('.movie-overview').addClass('dark-font')
@@ -66,13 +76,11 @@ if(!loading){
 
 
       /*change background color in case of resize */
-      $(window).off().on('resize',function(){
+      $(window).on('resize',function(){
         if($(window).width()<=950){
         changeBgColor();
         }else{
-          /* reset bg on large screen */
-          $('.movie-overview-banner').css(
-            {"backgroundImage": `linear-gradient(to bottom right, rgba(${rgbValue[0]},${rgbValue[1]},${rgbValue[2]}, 1.00), rgba(${rgbValue[0]},${rgbValue[1]},${rgbValue[2]}, 0.84)), url(https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/urwz7vJ52QJnHH04zPNO1NKghyl.jpg)`});
+          resetBgColor();
         }
           })
         }
@@ -105,7 +113,7 @@ if(!loading){
     <section className="movie-overview-banner" style={styleLargeScreen} >
     <div className="poster-wrapper-bg" style={styleSmallScreen}>
     <div className="poster-wrapper">
-    <img className="movie-poster"
+    <img className="header-movie-poster"
       src={
         "https://www.themoviedb.org/t/p/w300_and_h450_bestv2/xBaeUYKNJfX8VhIFvvgPpFSYxBZ.jpg"
       }
