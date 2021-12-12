@@ -2,6 +2,7 @@
 @use '../abstract/colors' as *;
 
 .sm-nav{
+  width: 100vw;
   height: 72px;
   background-color: $tmdb-dark-blue;
 }
@@ -43,6 +44,9 @@ img,svg{
   max-height: 21px;
 }
 }
+
+
+
 
 
 @media (min-width:851px){
