@@ -7,6 +7,9 @@ import circleDotted from "../assets/images/circle-dotted.svg";
 
 export default function MovieCard({ id, movieData }) {
   
+  let monthsList = ["","Jan","Feb","Mar","Apr","May","Jun","Jul",
+  "Aug","Sep","Oct","Nov","Dec"]
+
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
@@ -17,7 +20,22 @@ export default function MovieCard({ id, movieData }) {
     setOpen(false);
   };
 
+  function getDateNewFormat(){
+let dateArr = movieData.first_air_date.split('-');
 
+let monthNum = dateArr[1];
+
+let monthNumChecked = monthNum.split('')[0]!=='0'?monthNum:monthNum.split('')[1];
+
+let monthName = monthsList[monthNumChecked]
+
+let newFormateDate = `${monthName} ${dateArr[1]}, ${dateArr[0]}`
+return newFormateDate;
+
+  }
+
+  getDateNewFormat()
+//redux
     // const birds = useSelector(state => state.birds);
 
   return (
@@ -30,10 +48,9 @@ export default function MovieCard({ id, movieData }) {
       </a>
       <div className="movie-info">
         <a href="">
-          <h3>{movieData.name}</h3>
+          <h3>{movieData.name?movieData.name:null}</h3>
         </a>
-        <p>Oct 07, 2014</p>
-      </div>
+        <p>{movieData.first_air_date?getDateNewFormat():null}</p></div>
 
       {/* hide dropdown when it detects clicks outside dropdown component*/}
       <ClickAwayListener onClickAway={handleClickAway}>
