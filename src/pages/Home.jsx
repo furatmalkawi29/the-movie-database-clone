@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import CardsReel from "../components/CardsReel";
 import Header from '../components/Header';
 import TrailerModal from "../components/TrailerModal";
@@ -16,49 +16,20 @@ export default function Home() {
     setTrailerUrl(newUrl);
   }
 
+
   return (
     <>
 
     <Header/>
-      <CardsReel
-        reelId="1"
-        heading="What's Popular"
-        selectorChoices={["On TV", "In Theaters"]}
-        choiceOneWidth="80px"
-        choiceTwoWidth="112px"
-        smChoiceTwoWidth="138px"
-      />
+      <CardsReel type="popular" heading="What's Popular" reelId="1"/>
 
-      <CardsReel
-        reelId="2"
-        heading="Free To Watch"
-        selectorChoices={["Movie", "On TV"]}
-        choiceOneWidth="80px"
-        choiceTwoWidth="80px"
-      />
-
-      <CardsReel
+      <CardsReel type="trailers" heading="Latest Trailers"
         reelId="3"
-        heading="Latest Trailers"
-        selectorChoices={["On TV", "In Theaters"]}
-        choiceOneWidth="80px"
-        choiceTwoWidth="112px"
-        smChoiceTwoWidth="138px"
         changeModalVisibility={changeModalVisibility}
         changeModalUrl={changeModalUrl}
+        trailers="true" />
 
-        trailers="true"
-
-      />
-
-      <CardsReel
-        reelId="4"
-        heading="Trending"
-        selectorChoices={["Today", "This Week"]}
-        choiceOneWidth="80px"
-        choiceTwoWidth="112px"
-        smChoiceTwoWidth="138px"
-      />
+      <CardsReel type="trending" heading="Trending" reelId="4"/>
 
       {isModalVisible?(<TrailerModal changeModalVisibility={changeModalVisibility} trailerUrl={trailerUrl}/>):null}
 

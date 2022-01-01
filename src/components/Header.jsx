@@ -1,7 +1,7 @@
 import React, {useState,useEffect} from 'react'
 import NavbarSmallScreen from './NavbarSmallScreen'
 import $ from 'jquery';
-import headerImagesList from '../assets/export/header-images'
+import headerImagesList from '../assets/helpers/header-images'
 
 export default function Header() {
 

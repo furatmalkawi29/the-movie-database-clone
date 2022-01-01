@@ -5,7 +5,9 @@ import Navbar from './components/Navbar';
 import NavbarSmallScreen from './components/NavbarSmallScreen';
 import { BrowserRouter } from 'react-router-dom';
 
+
 function App() {
+
   return (
     <div>
       <BrowserRouter>

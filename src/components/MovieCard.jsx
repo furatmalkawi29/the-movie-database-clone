@@ -3,8 +3,9 @@ import MovieCardDropdown from "./MovieCardDropdown";
 import RateCircle from "./RateCircle";
 import { ClickAwayListener } from "@mui/material";
 import circleDotted from "../assets/images/circle-dotted.svg";
+// import { useSelector } from 'react-redux';
 
-export default function MovieCard({ id }) {
+export default function MovieCard({ id, movieData }) {
   
   const [open, setOpen] = useState(false);
 
@@ -16,17 +17,20 @@ export default function MovieCard({ id }) {
     setOpen(false);
   };
 
+
+    // const birds = useSelector(state => state.birds);
+
   return (
-    <div id={`movie-${id}`} className="movie-card">
+    <div id={id} className="movie-card">
       <a href="">
         <img
           className="movie-poster"
-          src="https://www.themoviedb.org/t/p/w220_and_h330_face/5AaKulwpUtkscAokKWtLenGTfVS.jpg"
+          src={`https://www.themoviedb.org/t/p/w220_and_h330_face/${movieData.backdrop_path}`}
         />
       </a>
       <div className="movie-info">
         <a href="">
-          <h3>The Princess Switch 3: Romancing the Star</h3>
+          <h3>{movieData.name}</h3>
         </a>
         <p>Oct 07, 2014</p>
       </div>
@@ -43,7 +47,7 @@ export default function MovieCard({ id }) {
         </div>
       </ClickAwayListener>
 
-      <RateCircle percentage={8} size={"small"} />
+      <RateCircle percentage={movieData.vote_average*10} size={"small"} />
     </div>
   );
 }

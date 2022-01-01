@@ -6,9 +6,9 @@ import SearchResultsPage from '../pages/SearchResultsPage'
 export default function Main() {
   return (
     <main>
-      {/* <Home/> */}
+      <Home/>
       {/* <MovieDetailsPage/> */}
-      <SearchResultsPage/>
+      {/* <SearchResultsPage/> */}
     </main>
   )
 }
