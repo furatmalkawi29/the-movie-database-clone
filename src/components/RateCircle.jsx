@@ -16,16 +16,20 @@ export default function RateCircle({ percentage, size }) {
   let lightRed = "rgb(87,20,53)";
   let lightYellow = "rgb(66,63,17)";
   let lightGreen = "rgb(32,69,41)";
-
+  let gray = "rgb(145 145 145)"
   /* set ring color based on percentage */
   function setCircleColors() {
-    if (percentage <= 50) {
+    if (percentage===null) {
+      return [gray, gray];
+  }
+      else if (percentage <= 50) {
       return [darkRed, lightRed];
     } else if (percentage > 50 && percentage <= 70) {
       return [darkYellow, lightYellow];
     } else if (percentage > 70) {
       return [darkGreen, lightGreen];
     }
+    
   }
 
 
@@ -107,18 +111,24 @@ export default function RateCircle({ percentage, size }) {
         default:
           break;
       }
+      
+    }
 
-  }
 
-
-
+    
 
   /* style font position in circle */
   function chooseFontLeftPosition() {
-    let percentDigits = percentage.toString().length;
-    
-    if(size==="small"){
 
+    let percentDigits;
+
+    if(percentage!==null){
+      percentDigits = percentage.toString().length;
+    }else {
+      percentDigits = 2;
+    }
+
+      if(size==="small"){
       switch (percentDigits) {
         case 1:  
         setFontLeftPosition("14px");
@@ -141,7 +151,7 @@ export default function RateCircle({ percentage, size }) {
     case 2:
       setFontLeftPosition("16px");
       break;
-  case 3:       
+      case 3:       
       setFontLeftPosition("10px");
       break;
       
@@ -163,6 +173,7 @@ export default function RateCircle({ percentage, size }) {
                 break;
               }
          }
+        
   }
 
 
@@ -196,15 +207,15 @@ export default function RateCircle({ percentage, size }) {
           />
           <Circle
             color={setCircleColors()[0]}
-            percentage={percentage}
+            percentage={percentage?percentage:null}
             radius={dimentions.radius}
             strokeWidth={dimentions.strokeWidth}
           />
         </g>
       </svg>
       <p className="rate-circle-text" style={fontStyle}>
-        {percentage}
-        <span>%</span>
+        {percentage!==null?percentage:"NR"}
+        <span>{percentage!==null?"%":null}</span>
       </p>
     </div>
   );
@@ -225,7 +236,7 @@ const Circle = ({ color, percentage, radius, strokeWidth }) => {
       stroke={strokepercentage !== circ ? color : ""}
       strokeWidth={strokeWidth}
       strokeDasharray={circ}
-      strokeDashoffset={percentage ? strokepercentage : 0}
+      strokeDashoffset={percentage? strokepercentage : 0}
       strokeLinecap="round"
     ></circle>
   );

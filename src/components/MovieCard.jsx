@@ -34,7 +34,6 @@ return newFormateDate;
 
   }
 
-  getDateNewFormat()
 //redux
     // const birds = useSelector(state => state.birds);
 
@@ -64,7 +63,7 @@ return newFormateDate;
         </div>
       </ClickAwayListener>
 
-      <RateCircle percentage={movieData.vote_average*10} size={"small"} />
+      <RateCircle percentage={movieData.vote_average?movieData.vote_average*10:null} size={"small"} />
     </div>
   );
 }
