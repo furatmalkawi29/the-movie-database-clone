@@ -2,9 +2,13 @@ import React, {useState, useEffect} from 'react'
 import { IoIosArrowDown } from "react-icons/io";
 import $ from 'jquery'
 
-export default function ToggleButton(props) {
+export default function ToggleButton({
+  getActiveSelection,
+  reelId,
+  size
+}) {
 
-  const [selectorChoices, setSelectorChoices] = useState([]);
+  const [selectorChoicesText, setSelectorChoicesText] = useState([]);
   const [isValuesSet, setisValuesSet] = useState(false);
   const [indexOne, setIndexOne] = useState(0);
   const [indexTwo, setIndexTwo] = useState(1);
@@ -16,23 +20,23 @@ export default function ToggleButton(props) {
     
     if(!isValuesSet){
 
-      switch (props.reelId) {
+      switch (reelId) {
         case "1":{
           // setHeading("What's Popular");
-        setSelectorChoices(["On TV", "In Theaters"]);
+        setSelectorChoicesText(["On TV", "In Theaters"]);
         setisValuesSet(true);
       }
         break;
 
       case "3":{
         // setHeading("Latest Trailers");
-        setSelectorChoices(["On TV", "In Theaters"]);
+        setSelectorChoicesText(["On TV", "In Theaters"]);
         setisValuesSet(true);
       }
       break;
       case "4":{
         // setHeading("Trending");
-        setSelectorChoices(["Today", "This Week"]);
+        setSelectorChoicesText(["Today", "This Week"]);
         setisValuesSet(true);
       }
         break;
@@ -54,92 +58,98 @@ export default function ToggleButton(props) {
     }
   }
 
+  function changeActiveSelection(e) {
+    let selection = e.target?e.target.innerText:'';
+    getActiveSelection(selection);
+          }
+          
+
   useEffect(()=>{
 
     /* best practice to put jquery inside useEffect */
 
     /* set default choice text color*/
-    $(`#choiceOne-${props.reelId} span`).addClass('gradient-text');
-    $(`#selector-btn-${props.reelId}`).css({"width": choiceOneWidth});
+    $(`#choiceOne-${reelId} span`).addClass('gradient-text');
+    $(`#selector-btn-${reelId}`).css({"width": choiceOneWidth});
 
 
-    $(`#choiceOne-${props.reelId}`).off().on("click", function(){
+    $(`#choiceOne-${reelId}`).off().on("click", function(){
       /* move selector button*/
-      $(`#selector-btn-${props.reelId}`).animate({left: '0'}, 180);
+      $(`#selector-btn-${reelId}`).animate({left: '0'}, 180);
 
 
       /* change selector text color*/
-      if(props.reelId!=='3'){
-        $(`#choiceTwo-${props.reelId} span`).removeClass("gradient-text");
-        $(`#choiceOne-${props.reelId} span`).addClass("gradient-text");
+      if(reelId!=='3'){
+        $(`#choiceTwo-${reelId} span`).removeClass("gradient-text");
+        $(`#choiceOne-${reelId} span`).addClass("gradient-text");
       }else{
         /* change selector text color in trailers section */
-        $(`#choiceTwo-${props.reelId} span`).removeClass("dark-blue-text");
-        $(`#choiceOne-${props.reelId} span`).removeClass("white-text");
+        $(`#choiceTwo-${reelId} span`).removeClass("dark-blue-text");
+        $(`#choiceOne-${reelId} span`).removeClass("white-text");
       }
         
       
       /* set selector button size*/
-      $(`#selector-btn-${props.reelId}`).css({"width": choiceOneWidth});
+      $(`#selector-btn-${reelId}`).css({"width": choiceOneWidth});
     })
 
 
 
 
-    $(`#choiceTwo-${props.reelId}`).off().on("click", function(){
+    $(`#choiceTwo-${reelId}`).off().on("click", function(){
 
       /* only reset in this case */
-      if($(`#selector-btn-${props.reelId}`).css('left')==="0px"){
+      if($(`#selector-btn-${reelId}`).css('left')==="0px"){
 
         /*reset left/right for next use*/
-        $(`#selector-btn-${props.reelId}`).css({'right':"unset"})
-        $(`#selector-btn-${props.reelId}`).css({'left':"unset"})
+        $(`#selector-btn-${reelId}`).css({'right':"unset"})
+        $(`#selector-btn-${reelId}`).css({'left':"unset"})
       }
         
         /* move selector button*/
-        $(`#selector-btn-${props.reelId}`).animate({right: '0'}, 180);
+        $(`#selector-btn-${reelId}`).animate({right: '0'}, 180);
 
 
         /* change selector text color*/
-        if(props.reelId!=="3"){
-          $(`#choiceOne-${props.reelId} span`).removeClass("gradient-text");
-          $(`#choiceTwo-${props.reelId} span`).addClass("gradient-text");
+        if(reelId!=="3"){
+          $(`#choiceOne-${reelId} span`).removeClass("gradient-text");
+          $(`#choiceTwo-${reelId} span`).addClass("gradient-text");
         }else{
         /* change selector text color in trailers section */
-        $(`#choiceOne-${props.reelId} span`).addClass("white-text");
-        $(`#choiceTwo-${props.reelId} span`).addClass("dark-blue-text");
+        $(`#choiceOne-${reelId} span`).addClass("white-text");
+        $(`#choiceTwo-${reelId} span`).addClass("dark-blue-text");
         }
 
         /* set selector button size*/
-        $(`#selector-btn-${props.reelId}`).css({"width": choiceTwoWidth});
+        $(`#selector-btn-${reelId}`).css({"width": choiceTwoWidth});
       })
       
       
       
-      $(`#sm-choiceTwo-${props.reelId}`).hide();
+      $(`#sm-choiceTwo-${reelId}`).hide();
     
 
       /*small screen selector */
-      $(`#sm-choiceOne-${props.reelId}`).off().on("click",function(){
+      $(`#sm-choiceOne-${reelId}`).off().on("click",function(){
         /* changes on small screen selector in trailers section */
-        if(props.reelId ==='3'){
-          $(`#sm-choiceOne-${props.reelId}`).toggleClass('no-background');
+        if(reelId ==='3'){
+          $(`#sm-choiceOne-${reelId}`).toggleClass('no-background');
 
         }
         
 
-        if($(`#sm-choiceTwo-${props.reelId}`).css("display")==="none"){
-          $(`#sm-choiceTwo-${props.reelId}`).show();
+        if($(`#sm-choiceTwo-${reelId}`).css("display")==="none"){
+          $(`#sm-choiceTwo-${reelId}`).show();
           $(this).css("width",smChoiceTwoWidth);
-          $(`#sm-choiceTwo-${props.reelId}`).css("width",smChoiceTwoWidth);
+          $(`#sm-choiceTwo-${reelId}`).css("width",smChoiceTwoWidth);
         }else{          
-          $(`#sm-choiceTwo-${props.reelId}`).hide();
+          $(`#sm-choiceTwo-${reelId}`).hide();
           $(this).css("width","max-content");
         }
 
       })
 
-      $(`#sm-choiceTwo-${props.reelId}`).on("click",function(){
+      $(`#sm-choiceTwo-${reelId}`).on("click",function(){
         swapSelectorChoices();
       })
   })
@@ -147,23 +157,23 @@ export default function ToggleButton(props) {
 
   return (
     <>
-    {props.size=="small"?(
-  <div id={`sm-selector-${props.reelId}`} className="sm-selector">
-  <div id={`sm-choiceOne-${props.reelId}`} className="sm-choiceOne">
-    <span>{selectorChoices[indexOne]}</span>
+    {size=="small"?(
+  <div id={`sm-selector-${reelId}`} className="sm-selector">
+  <div id={`sm-choiceOne-${reelId}`} className="sm-choiceOne">
+    <span>{selectorChoicesText[indexOne]}</span>
     <IoIosArrowDown/>
     </div>
-  <div id={`sm-choiceTwo-${props.reelId}`} className="sm-choiceTwo" >
-  <span>{selectorChoices[indexTwo]}</span>
+  <div id={`sm-choiceTwo-${reelId}`} className="sm-choiceTwo" >
+  <span>{selectorChoicesText[indexTwo]}</span>
   </div>
 </div>
     ):(     <div className="selector">
-    <div id={`selector-btn-${props.reelId}`} className="selector-btn"/>
-    <div id={`choiceOne-${props.reelId}`} className="choiceOne">
-      <span>{selectorChoices[0]}</span>
+    <div id={`selector-btn-${reelId}`} className="selector-btn"/>
+    <div id={`choiceOne-${reelId}`} className="choiceOne" onClick={changeActiveSelection} >
+      <span>{selectorChoicesText[0]}</span>
       </div>
-    <div id={`choiceTwo-${props.reelId}`} className="choiceTwo">
-    <span>{selectorChoices[1]}</span>
+    <div id={`choiceTwo-${reelId}`} className="choiceTwo" onClick={changeActiveSelection}>
+    <span>{selectorChoicesText[1]}</span>
     </div>
   </div>)}
     </>

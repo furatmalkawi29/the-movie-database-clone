@@ -21,17 +21,56 @@ export default function Home() {
     <>
 
     <Header/>
-      <CardsReel type="popular" heading="What's Popular" reelId="1"/>
+      <CardsReel 
+       reelType="popular"
+        heading="What's Popular"
+        reelId="1"/>
 
-      <CardsReel type="trailers" heading="Latest Trailers"
+      <CardsReel 
+       reelType="now_playing"
+        heading="Latest Trailers"
         reelId="3"
         changeModalVisibility={changeModalVisibility}
         changeModalUrl={changeModalUrl}
         trailers="true" />
+{/* 
+to get videos of movie, using moviie id :
+https://api.themoviedb.org/3/movie/634649/videos?api_key=12bc6ecb9c283f7d949b6d6c91e417ac&language=en-US 
 
-      <CardsReel type="trending" heading="Trending" reelId="4"/>
+response : 
+[
+{
+"iso_639_1": "en",
+"iso_3166_1": "US",
+"name": "Walking Corpses Clip",
+"key": "GGe_h2MWMrs", <=============
+"site": "YouTube",
+"size": 1080,
+"type": "Clip",
+"official": true,
+"published_at": "2022-01-29T17:00:39.000Z",
+"id": "61f77629bb105700a0b16a3f"
+},
 
-      {isModalVisible?(<TrailerModal changeModalVisibility={changeModalVisibility} trailerUrl={trailerUrl}/>):null}
+
+
+you use the video key in a youtube url, if the site was youtube:
+
+https://www.youtube.com/watch?v=GGe_h2MWMrs
+  ,....
+]
+
+*/}
+      <CardsReel 
+       reelType="trending"
+        heading="Trending"
+        reelId="4"/>
+
+      {isModalVisible?(
+      <TrailerModal 
+      changeModalVisibility={changeModalVisibility} 
+      trailerUrl={trailerUrl}/>
+      ):null}
 
       <section className="join-banner">
         <h2>Join Today</h2>
