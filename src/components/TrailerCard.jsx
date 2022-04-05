@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useReducer} from 'react'
 import { ClickAwayListener } from "@mui/material";
 import circleDotted from "../assets/images/circle-dotted.svg";
 import playIcon from "../assets/images/playIcon.svg";
@@ -6,9 +6,26 @@ import MovieCardDropdown from "./MovieCardDropdown";
 import {Link} from 'react-router-dom';
 import $ from 'jquery'
 
-export default function TrailerCard(props) {
+export default function TrailerCard({
+  id,
+  changeModalUrl,
+  changeModalVisibility,
+  moviesAndSeiresTrailers,
+  movieData
 
+}) {
+
+  const initialState ={
+    backdrop:'',
+    trailerUrl:'',
+    thumbnailUrl:'',
+    name:''
+  }
+  const reducer = (state, action) => {
+    return { ...state, [action.id]: action.value };
+  };
   const [open, setOpen] = useState(false);
+  const [state, setState] = useReducer(reducer,initialState);
 
   const handleClick = () => {
     setOpen((prev) => !prev);
@@ -18,13 +35,32 @@ export default function TrailerCard(props) {
     setOpen(false);
   };
 
-
+  // https://www.themoviedb.org/t/p/w355_and_h200_multi_faces/o56X5GUWgzkGJ90QDWn6NNkGEN7.jpg
+  useEffect(()=>{
+    if(moviesAndSeiresTrailers&&movieData){
+      setState({
+        id:"trailerUrl",
+        value:(moviesAndSeiresTrailers[id]&&moviesAndSeiresTrailers[id].key&& `https://www.youtube.com/embed/${moviesAndSeiresTrailers[id]&&moviesAndSeiresTrailers[id].key}`)
+      })
+      setState({
+        id:"thumbnailUrl",
+        value:(movieData&&movieData.poster_path&& `https://www.themoviedb.org/t/p/w355_and_h200_multi_faces/${movieData.poster_path}`)
+      })
+      setState({
+        id:"backdrop",
+        value:(movieData&&movieData.backdrop_path&& `https://www.themoviedb.org/t/p/w780/${movieData.backdrop_path}`)
+      })
+      setState({
+        id:"name",
+        value:movieData.name||''
+      })
+    }
+  },[moviesAndSeiresTrailers,movieData,id])
   
   useEffect(()=>{
     
     /*set default background to the first trailer thumbnail */
-    var firstThumb = 'https://www.themoviedb.org/t/p/w1920_and_h427_multi_faces/eyG9srihv68ScRdEbJZj66WT4O0.jpg';
-    
+    var firstThumb = state.backdrop;
     $('#cards-reel-3').css({backgroundImage:`linear-gradient(to right, rgba(3, 37, 65, 0.8) 0%, rgba(3, 37, 65, .75) 100%), url(${firstThumb})`,backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundPosition: "center",
@@ -33,9 +69,9 @@ export default function TrailerCard(props) {
   
   
   /*change background to the trailer thumbnail when hovering over the card  */
-  $(`#trailer-card-${props.id}`).off().on("mouseenter",function(){
+  $(`#trailer-card-${id}`).off().on("mouseenter",function(){
 
-    $('#cards-reel-3').css({backgroundImage:`linear-gradient(to right, rgba(3, 37, 65, 0.8) 0%, rgba(3, 37, 65, .75) 100%), url(${props.cover})`,backgroundRepeat: "no-repeat",
+    $('#cards-reel-3').css({backgroundImage:`linear-gradient(to right, rgba(3, 37, 65, 0.8) 0%, rgba(3, 37, 65, .75) 100%), url(${state.backdrop})`,backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundPosition: "center",
   }) 
@@ -43,13 +79,13 @@ export default function TrailerCard(props) {
 
 
 
-$(`#trailer-play-btn-${props.id}`).on('click',function(){
+$(`#trailer-play-btn-${id}`).on('click',function(){
 
   /* render trailer modal */
-  props.changeModalVisibility();
+  changeModalVisibility();
 
   /* add the clicked trailer url to modal */
-  props.changeModalUrl(props.trailerUrl);
+  changeModalUrl(state.trailerUrl);
 
 
   /* turn everything behind modal into black and white */
@@ -59,10 +95,10 @@ $(`#trailer-play-btn-${props.id}`).on('click',function(){
 });
 
 return (
-    <div id={`trailer-container-${props.id}`} className="trailer-container">
+    <div id={`trailer-container-${id}`} className="trailer-container">
       {/* hide dropdown when it detects clicks outside dropdown component*/}
 
-    <div id={`trailer-card-${props.id}`} className="trailer-card" >
+    <div id={`trailer-card-${id}`} className="trailer-card" >
     <div className="movie-trailer">
       <ClickAwayListener onClickAway={handleClickAway}>
         <div>
@@ -75,14 +111,14 @@ return (
         </div>
       </ClickAwayListener>
           <Link to="/">
-      <img className="trailer-thumbnail" src={props.thum}/>
+      <img className="trailer-thumbnail" src={state.thumbnailUrl}/>
        </Link>
-      <img id={`trailer-play-btn-${props.id}`} className="play-icon" src={playIcon}/>
+      <img id={`trailer-play-btn-${id}`} className="play-icon" src={playIcon}/>
     </div>
 
     <div className="trailer-info">
-      <h3><Link to="">The Making of Happier Than Ever: A Love Letter to Los Angeles</Link></h3>
-      <p>Preview - Best Christmas Party Ever</p>
+      <h3><Link to="">{state.name}</Link></h3>
+      {/* <p>Preview - Best Christmas Party Ever</p> */}
     </div>
    </div>
    </div>

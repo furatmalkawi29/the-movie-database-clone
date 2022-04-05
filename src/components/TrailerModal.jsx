@@ -2,7 +2,9 @@ import React, {useEffect, useState} from 'react'
 import { IoCloseSharp } from "react-icons/io5";
 import $ from 'jquery'
 
-export default function TrailerModal(props) {
+export default function TrailerModal({
+  changeModalVisibility,
+  trailerUrl}) {
 
 
 
@@ -12,7 +14,7 @@ export default function TrailerModal(props) {
 
     $('.close-icon').on("click",function(){
 /* close modal */
-props.changeModalVisibility();
+changeModalVisibility();
 
 /* return original colors */
 $("header,footer,.cards-reel,.join-banner").removeClass("grayscale-filter");
@@ -26,7 +28,7 @@ $("header,footer,.cards-reel,.join-banner").removeClass("grayscale-filter");
         <h3>Season 2 Announcement</h3>
         <IoCloseSharp className="close-icon"/>
       </div>
-<iframe  src={`${props.trailerUrl && props.trailerUrl}?autoplay=1&mute=1`}>
+<iframe  src={`${trailerUrl}?autoplay=1&mute=1`}>
 </iframe>
     </div>
   )

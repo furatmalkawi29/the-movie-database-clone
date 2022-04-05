@@ -1,17 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import MovieCardDropdown from "./MovieCardDropdown";
 import RateCircle from "./RateCircle";
 import { ClickAwayListener } from "@mui/material";
 import circleDotted from "../assets/images/circle-dotted.svg";
+import moment from 'moment';
 // import { useSelector } from 'react-redux';
 
 export default function MovieCard({ id, movieData }) {
   
-  let monthsList = ["","Jan","Feb","Mar","Apr","May","Jun","Jul",
-  "Aug","Sep","Oct","Nov","Dec"]
+
 
   const [open, setOpen] = useState(false);
+  const initialState={
+    name:null,
+    imageUrl:null,
+    date:null,
+    votes:null,
+  }
 
+  const reducer = (state, action) => {
+    return { ...state, [action.id]: action.value };
+  };
+
+  const [state,setState]=useReducer(reducer,initialState)
   const handleClick = () => {
     setOpen((prev) => !prev);
   };
@@ -20,20 +31,27 @@ export default function MovieCard({ id, movieData }) {
     setOpen(false);
   };
 
-  function getDateNewFormat(){
-let dateArr = movieData.first_air_date.split('-');
-
-let monthNum = dateArr[1];
-
-let monthNumChecked = monthNum.split('')[0]!=='0'?monthNum:monthNum.split('')[1];
-
-let monthName = monthsList[monthNumChecked]
-
-let newFormateDate = `${monthName} ${dateArr[1]}, ${dateArr[0]}`
-return newFormateDate;
+useEffect(()=>{
+  if(movieData){
+setState({
+  id:"name",
+  value:movieData.name || movieData.title||null
+})
+setState({
+  id:"date",
+  value:movieData.first_air_date||movieData.release_date||null
+})
+setState({
+  id:"votes",
+  value:(movieData.vote_average&&movieData.vote_average*10)||null
+})
+setState({
+  id:"imageUrl",
+  value:(movieData.backdrop_path&&`https://www.themoviedb.org/t/p/w220_and_h330_face/${movieData.backdrop_path}`)||null
+})
 
   }
-
+},[movieData])
 //redux
     // const birds = useSelector(state => state.birds);
 
@@ -42,14 +60,14 @@ return newFormateDate;
       <a href="">
         <img
           className="movie-poster"
-          src={`https://www.themoviedb.org/t/p/w220_and_h330_face/${movieData.backdrop_path}`}
+          src={state.imageUrl||''}
         />
       </a>
       <div className="movie-info">
         <a href="">
-          <h3>{movieData.name?movieData.name:null}</h3>
+          <h3>{state.name}</h3>
         </a>
-        <p>{movieData.first_air_date?getDateNewFormat():null}</p></div>
+        <p>{(state.date&&moment(state.date).format('LL'))}</p></div>
 
       {/* hide dropdown when it detects clicks outside dropdown component*/}
       <ClickAwayListener onClickAway={handleClickAway}>
@@ -63,7 +81,7 @@ return newFormateDate;
         </div>
       </ClickAwayListener>
 
-      <RateCircle percentage={movieData.vote_average?movieData.vote_average*10:null} size={"small"} />
+      <RateCircle percentage={state.votes} size={"small"} />
     </div>
   );
 }

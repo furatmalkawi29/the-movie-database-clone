@@ -33,44 +33,17 @@ export default function Home() {
         changeModalVisibility={changeModalVisibility}
         changeModalUrl={changeModalUrl}
         trailers="true" />
-{/* 
-to get videos of movie, using moviie id :
-https://api.themoviedb.org/3/movie/634649/videos?api_key=12bc6ecb9c283f7d949b6d6c91e417ac&language=en-US 
 
-response : 
-[
-{
-"iso_639_1": "en",
-"iso_3166_1": "US",
-"name": "Walking Corpses Clip",
-"key": "GGe_h2MWMrs", <=============
-"site": "YouTube",
-"size": 1080,
-"type": "Clip",
-"official": true,
-"published_at": "2022-01-29T17:00:39.000Z",
-"id": "61f77629bb105700a0b16a3f"
-},
-
-
-
-you use the video key in a youtube url, if the site was youtube:
-
-https://www.youtube.com/watch?v=GGe_h2MWMrs
-  ,....
-]
-
-*/}
       <CardsReel 
        reelType="trending"
         heading="Trending"
         reelId="4"/>
 
-      {isModalVisible?(
+      {isModalVisible&&(
       <TrailerModal 
       changeModalVisibility={changeModalVisibility} 
       trailerUrl={trailerUrl}/>
-      ):null}
+      )||null}
 
       <section className="join-banner">
         <h2>Join Today</h2>
