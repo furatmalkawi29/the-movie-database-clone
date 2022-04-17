@@ -35,7 +35,9 @@ cursor: pointer;
 
 div{
   display: inline-block;
-  padding: 6px 20px;
+  padding: 6px 0px;
+  padding-right: 10px;
+  padding-left:25px;
   box-sizing: border-box;
 }
 
@@ -151,6 +153,7 @@ svg {
   .reel-top-container{
     padding: 30px 20px;
     padding-bottom: 20px;
+    justify-content: space-around;
   }
 
 
@@ -187,3 +190,9 @@ svg {
 
 }
 
+
+@media (max-width:450px){
+  .cards-reel h2 {
+    width: min-content;
+  }
+}

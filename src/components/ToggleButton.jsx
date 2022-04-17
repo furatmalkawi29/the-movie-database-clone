@@ -12,7 +12,7 @@ export default function ToggleButton({
   const [isValuesSet, setisValuesSet] = useState(false);
   const [indexOne, setIndexOne] = useState(0);
   const [indexTwo, setIndexTwo] = useState(1);
-  let choiceOneWidth="80px";
+  let choiceOneWidth="95px";
   let choiceTwoWidth="112px";
   let smChoiceTwoWidth="138px";
 
@@ -74,7 +74,6 @@ export default function ToggleButton({
     $(`#choiceOne-${reelId} span`).addClass('gradient-text');
     $(`#selector-btn-${reelId}`).css({"width": choiceOneWidth});
 
-
     $(`#choiceOne-${reelId}`).off().on("click", function(){
       /* move selector button*/
       $(`#selector-btn-${reelId}`).animate({left: '0'}, 180);
@@ -93,6 +92,7 @@ export default function ToggleButton({
       
       /* set selector button size*/
       $(`#selector-btn-${reelId}`).css({"width": choiceOneWidth});
+
     })
 
 
