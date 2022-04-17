@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import { IoCloseSharp } from "react-icons/io5";
 import $ from 'jquery'
 
-export default function TrailerModal({
+export function TrailerModal({
   changeModalVisibility,
   trailerUrl}) {
 

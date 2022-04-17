@@ -61,6 +61,8 @@ export default function ToggleButton({
   function changeActiveSelection(e) {
     let selection = e.target?e.target.innerText:'';
     getActiveSelection(selection);
+
+    console.log('changeActiveSelection',selection);
           }
           
 
@@ -156,18 +158,7 @@ export default function ToggleButton({
 
 
   return (
-    <>
-    {size=="small"?(
-  <div id={`sm-selector-${reelId}`} className="sm-selector">
-  <div id={`sm-choiceOne-${reelId}`} className="sm-choiceOne">
-    <span>{selectorChoicesText[indexOne]}</span>
-    <IoIosArrowDown/>
-    </div>
-  <div id={`sm-choiceTwo-${reelId}`} className="sm-choiceTwo" >
-  <span>{selectorChoicesText[indexTwo]}</span>
-  </div>
-</div>
-    ):(     <div className="selector">
+        <div className="selector">
     <div id={`selector-btn-${reelId}`} className="selector-btn"/>
     <div id={`choiceOne-${reelId}`} className="choiceOne" onClick={changeActiveSelection} >
       <span>{selectorChoicesText[0]}</span>
@@ -175,7 +166,6 @@ export default function ToggleButton({
     <div id={`choiceTwo-${reelId}`} className="choiceTwo" onClick={changeActiveSelection}>
     <span>{selectorChoicesText[1]}</span>
     </div>
-  </div>)}
-    </>
+  </div>
   )
 }

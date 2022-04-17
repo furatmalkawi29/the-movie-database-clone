@@ -1,8 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import CardsReel from "../components/CardsReel";
-import Header from '../components/Header';
-import TrailerModal from "../components/TrailerModal";
-
+import {CardsReel,Header,TrailerModal} from "../components";
+import { useTitle } from '../assets/Hookes';
 
 export default function Home() {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -16,6 +14,7 @@ export default function Home() {
     setTrailerUrl(newUrl);
   }
 
+  useTitle("TMDB")
 
   return (
     <>

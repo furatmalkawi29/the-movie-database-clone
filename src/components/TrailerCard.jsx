@@ -52,7 +52,7 @@ export default function TrailerCard({
       })
       setState({
         id:"name",
-        value:movieData.name||''
+        value:movieData.original_title||movieData.name||''
       })
     }
   },[moviesAndSeiresTrailers,movieData,id])

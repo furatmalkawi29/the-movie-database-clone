@@ -53,7 +53,6 @@ switch (selection) {
 
   const getMoviesAndSeiresVedios = async (id,isMovie) =>{
     try{
-//1576
       const res = await axios.get(`https://api.themoviedb.org/3/${(isMovie&&'movie')||'tv'}/${id}/videos?api_key=12bc6ecb9c283f7d949b6d6c91e417ac&language=en-US`)
 
 
@@ -71,7 +70,6 @@ switch (selection) {
 
   }
 
-  console.log('moviesAndSeiresTrailers',moviesAndSeiresTrailers);
   
   const getMoviesAndSeiresTrailers = async () =>{
     reelData&&reelData.forEach(item=>{
@@ -79,6 +77,7 @@ switch (selection) {
     })
   }
 
+  //replace this with services function
   useEffect(()=>{
     if (reelType&&(activeScreenType|| activeTimeWindow)) {
       switch(reelType){
@@ -88,11 +87,16 @@ switch (selection) {
         case 'popular' : {setDynamicRoute(`/${activeScreenType}/popular`)
     }
         break;
-        case 'now_playing' : {setDynamicRoute(defaultRoute)
-        // case 'now_playing' : {setDynamicRoute(activeScreenType?`/${activeScreenType}/now_playing`:defaultRoute)
-  }
-        break;
+        case 'now_playing' : {
+          if(activeScreenType==="tv"){
+            setDynamicRoute(`/${activeScreenType}/on_the_air`)
+          }else if(activeScreenType==="movie"){
+        
+          setDynamicRoute(`/${activeScreenType}/now_playing`)
+        }
       }
+        break;
+}
     }
   }, [activeScreenType, activeTimeWindow])
     
@@ -114,9 +118,9 @@ switch (selection) {
       getActiveSelection={getActiveSelection}/>
 
        {/* small screen selector */}
-      <ToggleButton getActiveSelection={getActiveSelection}
+      {/* <ToggleButton
       reelId={reelId}
-      size="small" />
+      size="small" /> */}
       </div>
 
 
@@ -148,4 +152,4 @@ switch (selection) {
   )
 }
 
-export default CardsReel
+export {CardsReel}

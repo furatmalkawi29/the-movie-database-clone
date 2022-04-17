@@ -3,7 +3,7 @@ import NavbarSmallScreen from './NavbarSmallScreen'
 import $ from 'jquery';
 import headerImagesList from '../assets/helpers/header-images'
 
-export default function Header() {
+export function Header() {
 
   const [placeholderText, setPlaceholderText] = useState("Search for a movie, tv show, person......")
 
