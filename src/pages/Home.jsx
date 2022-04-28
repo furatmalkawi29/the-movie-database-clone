@@ -26,7 +26,7 @@ export default function Home() {
         reelId="1"/>
 
       <CardsReel 
-       reelType="now_playing"
+        reelType="now_playing"
         heading="Latest Trailers"
         reelId="3"
         changeModalVisibility={changeModalVisibility}

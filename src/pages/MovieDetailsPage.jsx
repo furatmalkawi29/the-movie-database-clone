@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState, useReducer } from "react";
 import BottomMenu from "../components/BottomMenu";
 import MovieDetailsHeader from "../components/MovieDetailsHeader";
 import MovieFacts from "../components/MovieFacts";
@@ -8,12 +8,28 @@ import rightArrow from '../assets/images/right-arrow.svg'
 import RecommendationCard from "../components/RecommendationCard";
 import ReviewCard from "../components/ReviewCard";
 import playIcon from '../assets/images/playIcon.svg'
+import { useLocation, useParams, useNavigate } from 'react-router-dom'
+
 
 export default function MovieDetailsPage() {
+
+  const { id } = useParams();
+  const navigate = useNavigate();
+  let location = useLocation();
+
+  useEffect(()=>{
+    if(location&&location.pathname){
+      if(location.pathname.includes('movie')){
+        navigate(`/movie/${id}`);
+      }else {
+        navigate(`/tv/${id}`);
+      }
+    }
+  },[id])
   return (
     <>
       <TopMenu />
-      <MovieDetailsHeader />
+      <MovieDetailsHeader id={id}/>
       <section className="info-content">
         <div>
           <section className="cards-wrapper">

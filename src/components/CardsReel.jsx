@@ -6,6 +6,7 @@ import TrailerCard from './TrailerCard';
 import getRequest from '../assets/helpers/useGetRequest.jsx'
 import ToggleButton from './ToggleButton'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 const CardsReel = ({reelId,
   heading,
@@ -138,13 +139,16 @@ switch (selection) {
       moviesAndSeiresTrailers={moviesAndSeiresTrailers}
       changeModalUrl={changeModalUrl}
       changeModalVisibility={changeModalVisibility}/>)||
+      <Link to={`/${activeScreenType}/${movieData.id}`}>
       <MovieCard
        key={`${movieData.id}`} 
        movieData={movieData}
-      id={`${movieData.id}`}
-        />
+       id={`${movieData.id}`}
+       />
+       </Link>
     )})
-    )||null
+    )
+    ||null
   )
 }
       </div>

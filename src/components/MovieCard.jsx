@@ -5,10 +5,13 @@ import { ClickAwayListener } from "@mui/material";
 import circleDotted from "../assets/images/circle-dotted.svg";
 import moment from 'moment';
 // import { useSelector } from 'react-redux';
+import {Skeleton} from './SkeletonComponents';
 
-export default function MovieCard({ id, movieData }) {
-  
-
+export default function MovieCard({ 
+  id,
+  movieData,
+  activeScreenType
+  }) {
 
   const [open, setOpen] = useState(false);
   const initialState={
@@ -56,6 +59,7 @@ setState({
     // const birds = useSelector(state => state.birds);
 
   return (
+    (movieData&&
     <div id={id} className="movie-card">
       <a href="">
         <img
@@ -82,6 +86,6 @@ setState({
       </ClickAwayListener>
 
       <RateCircle percentage={state.votes} size={"small"} />
-    </div>
+    </div>)||<Skeleton/>
   );
 }

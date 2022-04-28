@@ -76,6 +76,12 @@ span{
   overflow-x: scroll;
   padding: 0px 40px;
   padding-top: 20px;
+
+  a{
+    color: inherit;
+    cursor: pointer;
+    text-decoration: none;
+  }
 }
 
 

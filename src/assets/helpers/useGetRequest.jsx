@@ -15,7 +15,7 @@ export default async function getRequest(route,params) {
     const responseJson= await response.json();
     
 
-    return responseJson["results"];
+    return responseJson["results"] || responseJson;
   }
   
 }
