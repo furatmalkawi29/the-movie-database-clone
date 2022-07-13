@@ -1,11 +1,94 @@
-import React from 'react'
+import React, {useEffect, useReducer} from 'react'
 import facebook from '../assets/images/facebook.svg'
 import insta from '../assets/images/insta.svg'
 import twitter from '../assets/images/twitter.svg'
 import link from '../assets/images/link.svg'
 import justwatch from '../assets/images/justwatch.svg'
+import getRequest from '../assets/helpers/useGetRequest.jsx'
+import { useLocation} from 'react-router-dom'
 
-export default function MovieFacts() {
+
+export default function MovieFacts({movieData}) {
+  let location = useLocation();
+
+  const reducer = (state, action) => {
+    return { ...state, [action.id]: action.value };
+  };
+
+  const initialState = {
+    productionCompanies: [],
+    type: '-',
+    movieKeywords:[],
+    status: '-',
+    originalName: '-',
+    originalLanguage: '-',
+    movieKeywords: [],
+    movieHomePageLink: ''
+  }
+  const [state,setState] = useReducer(reducer,initialState);
+
+  const getMovieKeywords = async () =>{
+
+    if(location&&location.pathname){
+      if(location.pathname.includes('movie')){
+       
+        const response = await getRequest(`/movie/${movieData.id}/keywords`)
+    
+        if(!(response&&response.status)){
+          setState({
+            id:'movieKeywords',
+            value: response
+          })
+        }
+      }else {
+        const response = await getRequest(`/tv/${movieData.id}/keywords`)
+    
+        if(!(response&&response.status)){
+          setState({
+            id:'movieKeywords',
+            value: response
+          })
+        }
+
+      }
+    }
+
+  }
+
+  useEffect(()=>{
+
+    getMovieKeywords()
+  },[movieData])
+
+  useEffect(()=>{
+
+    setState({
+      id:'productionCompanies',
+      value: movieData.production_companies || []
+    });
+    setState({
+      id:'type',
+      value: movieData.type || '-'
+    });
+    setState({
+      id:'status',
+      value: movieData.status || '-'
+    });
+    setState({
+      id:'originalName',
+      value: movieData.original_name || '-'
+    });
+    setState({
+      id:'originalLanguage',
+      value: movieData.original_language || '-'
+    });
+    setState({
+      id:'movieHomePageLink',
+      value: movieData.homepage || '#'
+    });
+
+
+  },[movieData])
   return (
     <div className="info-column">
 
@@ -19,39 +102,45 @@ export default function MovieFacts() {
   <span/>
 <img src={justwatch} className="justwatch-icon"/>
   <span/>
+  <a href={state.movieHomePageLink} target="_blank">
 <img src={link}/>
+  </a>
+    
 </div>
 
 <div className="facts">
       <h2>Facts</h2>
       <div className="fact-block">
 <h3>Original Name</h3>
-<bdi>오징어 게임</bdi>
+<bdi>{state.originalName}</bdi>
       </div>
 
 <div className="fact-block">
 <h3>Status</h3>
-<p>Ended</p>
+<p>{state.status}</p>
 </div>
 
       {/* series facts */}
 <div className="fact-block">
   <h3>Network</h3>
 <div className="network-img">
-  <img src="https://www.themoviedb.org/t/p/h30/wwemzKWzjKYJFfCeiB57q3r4Bcm.png"/>
-  <img src="https://www.themoviedb.org/t/p/h30/wwemzKWzjKYJFfCeiB57q3r4Bcm.png"/>
+  {
+state.productionCompanies&&state.productionCompanies.map(item=>(
+  <img src={`https://www.themoviedb.org/t/p/h30/${item.logo_path}`}/>
+))
+  }
 </div>
 </div>
 
       {/* series facts */}
 <div className="fact-block">
 <h3>Type</h3>
-<p>Scripted</p>
+<p>{state.type}</p>
 </div>
 
 <div className="fact-block">
 <h3>Original Language</h3>
-<p>Korean</p>
+<p>{state.originalLanguage}</p>
 </div>
 
 
@@ -71,10 +160,11 @@ export default function MovieFacts() {
 
 <div className="keywords">
 <h2>Keywords</h2>
-<div><span>survival</span></div>
-<div><span>thriller</span></div>
-<div><span>fictional game show</span></div>
-<div><span>death match</span></div>
+{
+  state.movieKeywords&&state.movieKeywords.map(item=>(
+<div><span>{item.name}</span></div>
+  ))
+}
 </div>
 
 

@@ -60,14 +60,13 @@ switch (selection) {
       if (res&&res.data&&res.data.results){
         res.data.results.length&&res.data.results.forEach(item=>{
           if (item.site === 'YouTube'&&(item.type=="Trailer"||item.type=="Clip"))
-          setMoviesAndSeiresTrailers(oldx => ({...oldx,[`${id}`]:item}))
+          setMoviesAndSeiresTrailers(prevState => ({...prevState,[`${id}`]:item}))
         })
       }
       
     } catch(error){
       return null;
     }
-
 
   }
 

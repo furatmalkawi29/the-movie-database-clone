@@ -4,6 +4,8 @@
   position: relative;
   padding: 20px 0px;
   padding-left: 40px;
+  display: grid;
+  grid-auto-columns: 1fr;
 
   h3 {
     font-size: 1.4rem;

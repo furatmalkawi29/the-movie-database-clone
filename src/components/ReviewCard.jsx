@@ -1,18 +1,11 @@
 import React from 'react'
 import star from '../assets/images/star.svg'
+import moment from 'moment';
 
-export default function ReviewCard() {
+export default function ReviewCard({
+  data
+}) {
 
-  let reviewBody =`
-  Given I wasn't a big fan of Halloween 2018, the bar on Halloween Kills was rather low and... pretty much met it. While some of the deaths were pretty gruesome, the rest was kind of bland and character decisions as dumb as others. Like the initial sequel, Halloween II, Jamie Lee Curtis spends the bulk of her time in the hospital.
-
-  clumsily choreographed, showed him taking on 5-6 people; just looked so good`
-
-  function clipText(text,charactersNum) {
-    let clippedText = text.substr(0,charactersNum);
-
-    return clippedText+'... ';
-  }
 
 
   return (
@@ -22,22 +15,17 @@ export default function ReviewCard() {
 
         <div className="author-info">
           <div>
-            <p>A review by RADIO1'S MR. MOVIE!-MAD AMI</p>
+            <p>A review by {data&&data.author}</p>
             <div className="star-rate">
               <img src={star} alt=""/>
-              <span>10.0</span></div>
+              <span>{data&&data.author_details&&data.author_details.rating}</span></div>
           </div>
-          <p className="review-date">Written by <span>raf qpsk</span> on October 24, 2021</p>
+          <p className="review-date">Written by <span>{data&&data.author}</span> on {data&&data.created_at&&moment(data.created_at).format('LL')}</p>
         </div>
       </div>
 
       <div className="review-body">
-        { reviewBody.length>598?(
-          <p>{clipText(reviewBody,598)}
-        <a href="">read the rest.</a>
-        </p>
-        ):<p>{reviewBody}</p>}
-        
+        {<p>{data&&data.content}</p>}
       </div>
     </div>
   )

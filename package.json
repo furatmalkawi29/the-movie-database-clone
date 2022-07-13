@@ -1,8 +1,7 @@
 {
   "name": "the-mdb2",
   "version": "0.1.0",
-  "homepage" :"https://furatmalkawi29.github.io/the-movie-database-clone",
-  "private": true,
+  "homepage" :".",
   "dependencies": {
     "@emotion/react": "^11.6.0",
     "@emotion/styled": "^11.6.0",

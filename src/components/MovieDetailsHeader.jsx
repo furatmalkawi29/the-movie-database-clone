@@ -9,41 +9,30 @@ import { FaPlay } from 'react-icons/fa'
 import { HiArrowsExpand } from 'react-icons/hi'
 import { useColor } from "color-thief-react";
 import getRequest from '../assets/helpers/useGetRequest.jsx'
-import { useLocation } from 'react-router-dom'
 
 
 
 
-export default function MovieDetailsHeader({ id }) {
+export default function MovieDetailsHeader({ id, movieData }) {
 
-  let location = useLocation();
   const [rgbValue, setRgbValue] = useState([31, 36, 61])
 
-  const [dynamicRoute, setDynamicRoute] = useState('/popular');
   const [isLoading, setIsLoading] = useState(true);
-  const [movieData, setMovieData] = useState({});
 
   const initialState = {
     name: null,
     year: null,
     date: null,
     genres: [],
-    imageUrl: null,
+    posetrUrl: null,
     votes: null,
     overview: "",
     tagline: null,
     runtime: null,
+    creditsFormatted:[],
   }
 
-  useEffect(() => {
-    if (location && location.pathname) {
-      if (location.pathname.includes('movie')) {
-        setDynamicRoute(`/movie/${id}`)
-      } else {
-        setDynamicRoute(`/tv/${id}`)
-      }
-    }
-  }, [id])
+
 
   const reducer = (state, action) => {
     return { ...state, [action.id]: action.value };
@@ -78,8 +67,12 @@ export default function MovieDetailsHeader({ id }) {
         value: (movieData.vote_average && movieData.vote_average * 10) || null
       })
       setState({
-        id: "imageUrl",
+        id: "posetrUrl",
         value: ((movieData.poster_path || movieData.backdrop_path) && `https://www.themoviedb.org/t/p/w220_and_h330_face/${movieData.poster_path || movieData.backdrop_path}`) || null
+      })
+      setState({
+        id: "backdropUrl",
+        value: ( movieData.backdrop_path && `https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/${movieData.backdrop_path}`) || null
       })
       setState({
         id: "overview",
@@ -97,18 +90,38 @@ export default function MovieDetailsHeader({ id }) {
         id: "episodeRuntime",
         value: ((movieData.episode_run_time&&movieData.episode_run_time.length&&movieData.episode_run_time[0])&&(`${Math.floor(movieData.episode_run_time[0] / 60)}h ${movieData.episode_run_time[0] % 60}m`))
       });
-
+      setState({
+        id: "credits",
+        value: movieData.created_by||[]
+      })
     }
   }, [movieData])
 
-  useEffect(async () => {
-    setIsLoading(true);
-    let data = await getRequest(dynamicRoute);
-    setMovieData(data)
+
+
+  useEffect(async ()=>{
+
+    if(state.credits&&state.credits.length>0){
+      setIsLoading(true);
+
+      for(const credit of state.credits){
+
+          let response = await getRequest(`/credit/${credit.credit_id}`);
+          
+          
+          if(!(response&&response.success===false)){
+            setState({
+              id: "creditsFormatted",
+              value: [...state.creditsFormatted, {
+                name:credit.name,
+                job:response&&response.job
+              }]
+            })
+          }
+        }
     setIsLoading(false);
-
-  }, [dynamicRoute])
-
+  }
+  },[state.credits])
 
   let quality = 10;
   let crossOrigin = "anonymous";
@@ -135,7 +148,7 @@ export default function MovieDetailsHeader({ id }) {
     $('.line-2-wrapper').css({ "backgroundColor": "unset" });
 
     $('.movie-overview-banner').css(
-      { "backgroundImage": `linear-gradient(to bottom right, rgba(${rgbValue[0]},${rgbValue[1]},${rgbValue[2]}, 1.00), rgba(${rgbValue[0]},${rgbValue[1]},${rgbValue[2]}, 0.84)), url(https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/urwz7vJ52QJnHH04zPNO1NKghyl.jpg)` });
+      { "backgroundImage": `linear-gradient(to bottom right, rgba(${rgbValue[0]},${rgbValue[1]},${rgbValue[2]}, 1.00), rgba(${rgbValue[0]},${rgbValue[1]},${rgbValue[2]}, 0.84)), url(${state.backdropUrl})` });
   }
 
 
@@ -183,7 +196,7 @@ export default function MovieDetailsHeader({ id }) {
 
   let styleSmallScreen = {
     /* to get random header image each time you refresh */
-    backgroundImage: `linear-gradient(to right, rgba(${rgbValue[0]},${rgbValue[1]},${rgbValue[2]}, 1.00) 20%, rgba(${rgbValue[0]},${rgbValue[1]},${rgbValue[2]}, 0.00) 50%), url(https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/urwz7vJ52QJnHH04zPNO1NKghyl.jpg)`,
+    backgroundImage: `linear-gradient(to right, rgba(${rgbValue[0]},${rgbValue[1]},${rgbValue[2]}, 1.00) 20%, rgba(${rgbValue[0]},${rgbValue[1]},${rgbValue[2]}, 0.00) 50%), url(${state.backdropUrl})`,
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     // backgroundPosition: "20px 0px",
@@ -193,7 +206,7 @@ export default function MovieDetailsHeader({ id }) {
 
   let styleLargeScreen = {
     /* to get random header image each time you refresh */
-    backgroundImage: `linear-gradient(to bottom right, rgba(${rgbValue[0]},${rgbValue[1]},${rgbValue[2]}, 1.00), rgba(${rgbValue[0]},${rgbValue[1]},${rgbValue[2]}, 0.84)), url(https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/urwz7vJ52QJnHH04zPNO1NKghyl.jpg)`,
+    backgroundImage: `linear-gradient(to bottom right, rgba(${rgbValue[0]},${rgbValue[1]},${rgbValue[2]}, 1.00), rgba(${rgbValue[0]},${rgbValue[1]},${rgbValue[2]}, 0.84)), url(${state.backdropUrl})`,
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundPosition: "center top",
@@ -207,7 +220,7 @@ export default function MovieDetailsHeader({ id }) {
       <div className="poster-wrapper-bg" style={styleSmallScreen}>
         <div className="poster-wrapper">
           <img className="header-movie-poster"
-            src={state.imageUrl}
+            src={state.posetrUrl}
           />
           <div className="poster-glass-cover" />
           <div className="poster-overlay">
@@ -246,7 +259,7 @@ export default function MovieDetailsHeader({ id }) {
                   (state.episodeRuntime && (<>
                     <span className="dot"></span>
                     <p>{state.episodeRuntime}</p>
-                  </>))
+                  </>))||null
                   }
                 </div>
                 <p className="movie-category-sm">
@@ -307,22 +320,14 @@ export default function MovieDetailsHeader({ id }) {
           }
 
           <div className="line-6">
+            {
+              state.creditsFormatted&&state.creditsFormatted.map(item=>(
             <div>
-              <h4>Kenji Kamiyama</h4>
-              <p>Creator</p>
+              <h4>{item.name}</h4>
+              <p>{item.job}</p>
             </div>
-            <div>
-              <h4>Shinji Aramaki</h4>
-              <p>Creator</p>
-            </div>
-            <div>
-              <h4>Kenji Kamiyama</h4>
-              <p>Creator</p>
-            </div>
-            <div>
-              <h4>Kenji Kamiyama</h4>
-              <p>Creator</p>
-            </div>
+              ))
+            }
           </div>
         </div>
       </div>

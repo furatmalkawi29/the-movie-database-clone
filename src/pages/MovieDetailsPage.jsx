@@ -9,6 +9,7 @@ import RecommendationCard from "../components/RecommendationCard";
 import ReviewCard from "../components/ReviewCard";
 import playIcon from '../assets/images/playIcon.svg'
 import { useLocation, useParams, useNavigate } from 'react-router-dom'
+import getRequest from '../assets/helpers/useGetRequest.jsx'
 
 
 export default function MovieDetailsPage() {
@@ -16,34 +17,177 @@ export default function MovieDetailsPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   let location = useLocation();
+  const [isLoading, setIsLoading] = useState(true);
+  const [dynamicRoute, setDynamicRoute] = useState(null);
+  const [movieData, setMovieData] = useState({});
+  const [movieCast, setMovieCast] = useState([]);
+  const [movieReviews, setMovieReviews] = useState([5]);
+  const [movieMediaImages, setMovieMediaImages] = useState([])
+  const [movieMediaVedio, setMovieMediaVedio] = useState(null)
+  const [movieRecommendations, setMovieRecommendations] = useState([])
+
+  useEffect(async () => {
+    setIsLoading(true);
+    if(dynamicRoute) {
+      const response = await getRequest(dynamicRoute);
+
+      if(!(response&&response.success===false)){
+        setMovieData(response||[]);
+      }
+    }
+    setIsLoading(false);  
+  }, [dynamicRoute])
+
+  const getMovieCredits = async ()=>{
+    
+    if(movieData.id) {
+      setIsLoading(true);
+      if(location&&location.pathname){
+        if(location.pathname.includes('movie')){
+      const response = await getRequest(`/movie/${movieData.id}/credits`);
+
+      if(!(response&&response.success===false)){
+        setMovieCast(response.cast||[]);
+      }
+    }else {
+      const response = await getRequest(`/tv/${movieData.id}/credits`);
+
+      if(!(response&&response.success===false)){
+        setMovieCast(response.cast||[]);
+      }
+    }
+    }
+    setIsLoading(false);  
+  }
+  }
+  const getMovieMediaImages = async ()=>{
+    setIsLoading(true);
+
+    if(movieData.id) {
+      if(location&&location.pathname){
+        if(location.pathname.includes('movie')){
+      const response = await getRequest(`/movie/${movieData.id}/images`);
+
+      if(!(response&&response.success===false)){
+        setMovieMediaImages(response.posters||[]);
+      }
+    }else {
+      const response = await getRequest(`/tv/${movieData.id}/images`);
+
+      if(!(response&&response.success===false)){
+        setMovieMediaImages(response.posters||[]);
+      }
+    }
+    }
+    setIsLoading(false);  
+  }
+  }
+  const getMovieMediaVideos = async ()=>{
+    setIsLoading(true);
+
+    if(movieData.id) {
+      if(location&&location.pathname){
+        if(location.pathname.includes('movie')){
+      const response = await getRequest(`/movie/${movieData.id}/videos`);
+
+      if(!(response&&response.success===false)){
+        setMovieMediaVedio((response.length>0&&response[0])||null);
+      }
+    }else {
+      const response = await getRequest(`/tv/${movieData.id}/videos`);
+
+      if(!(response&&response.success===false)){
+        setMovieMediaVedio((response.length>0&&response[0])||null);
+      }
+    }
+    }
+    setIsLoading(false);  
+  }
+  }
+  const getMovieRecommendations = async ()=>{
+    setIsLoading(true);
+
+    if(movieData.id) {
+      if(location&&location.pathname){
+        if(location.pathname.includes('movie')){
+      const response = await getRequest(`/movie/${movieData.id}/recommendations`);
+
+      if(!(response&&response.success===false)){
+        setMovieRecommendations(response.length>0&&response||null);
+      }
+    }else {
+      const response = await getRequest(`/tv/${movieData.id}/recommendations`);
+
+      if(!(response&&response.success===false)){
+        setMovieRecommendations(response.length>0&&response||null);
+      }
+    }
+    }
+    setIsLoading(false);  
+  }
+  }
+  const getMovieReviews = async ()=>{
+    setIsLoading(true);
+
+    if(movieData.id) {
+      if(location&&location.pathname){
+        if(location.pathname.includes('movie')){
+      const response = await getRequest(`/movie/${movieData.id}/reviews`);
+
+      if(!(response&&response.success===false)){
+        setMovieReviews(response.length>0&&response||null);
+      }
+    }else {
+      const response = await getRequest(`/tv/${movieData.id}/reviews`);
+
+      if(!(response&&response.success===false)){
+        setMovieReviews(response.length>0&&response||null);
+      }
+    }
+    }
+    setIsLoading(false);  
+  }
+  }
+
+  useEffect(() => {
+
+  getMovieCredits();
+  getMovieMediaImages();
+  getMovieMediaVideos();
+  getMovieRecommendations();
+  getMovieReviews();
+}, [movieData])
 
   useEffect(()=>{
     if(location&&location.pathname){
       if(location.pathname.includes('movie')){
         navigate(`/movie/${id}`);
+        setDynamicRoute(`/movie/${id}`)
       }else {
         navigate(`/tv/${id}`);
+        setDynamicRoute(`/tv/${id}`)
       }
     }
   },[id])
+
+
   return (
     <>
       <TopMenu />
-      <MovieDetailsHeader id={id}/>
+      <MovieDetailsHeader 
+      id={id}
+      movieData={movieData}
+      />
       <section className="info-content">
         <div>
           <section className="cards-wrapper">
             <h3>Series Cast</h3>
             {/* <h3>Top Billed Cast</h3> */}
             <div className="cast-cards-container">
-              <CastCard />
-              <CastCard />
-              <CastCard />
-              <CastCard />
-              <CastCard />
-              <CastCard />
-              <CastCard />
-              <CastCard />
+              { movieCast&&movieCast.map(item=>(
+                <CastCard castData={item} />
+              ))
+              }
               <div className="view-more"><span>View More</span><img src={rightArrow}/></div>
             </div>
             <p className="wrapper-link">Full Cast & Crew</p>
@@ -55,7 +199,7 @@ export default function MovieDetailsPage() {
             <div className="tabs-menu">
               <div className="active-tab-underline">
                 <p>Reviews</p>
-                <span>0</span>
+                <span>{movieReviews&&movieReviews.length}</span>
               </div>
               <div>
                 <p> Discussions</p>
@@ -64,10 +208,15 @@ export default function MovieDetailsPage() {
             </div>
             </div>
             <div>
-              <ReviewCard/>
-              <p>We don't have any reviews for The Night House.</p>
+              {
+                (movieReviews&&movieReviews.length>0&&<>
+                  <ReviewCard 
+                  data={movieReviews&&movieReviews.length>0&&movieReviews[0]}/>
+                  <p className="wrapper-link">Read All Reviews</p>
+                </>
+                )||<p>{`We don't have any reviews for ${movieData?.name}.`}</p>
+              }
             </div>
-            <p className="wrapper-link">Read All Reviews</p>
           </section>
 
 
@@ -93,33 +242,34 @@ export default function MovieDetailsPage() {
             </div>
             </div>
             <div className="media-cards-container">
-              <div className="thumbnail">
-                <img className="thumbnail-img" src={"https://img.youtube.com/vi/mKB57L2MfXY/sddefault.jpg"} alt="" />
+              {movieMediaVedio&&movieMediaVedio.site==="YouTube"&&
+              (<div className="thumbnail">
+                <img className="thumbnail-img" src={`https://img.youtube.com/vi/${movieMediaVedio.key}/sddefault.jpg`} alt="" />
                 <div className="thumbnail-btn">
-                  <img src={playIcon} alt="" />
+                  <img src={playIcon} alt="play-button" />
                 </div>
-              </div>
-              <img className="media-img" src="https://www.themoviedb.org/t/p/w533_and_h300_bestv2/3SRGKDVUmZ98Ak3zCvmwq3QGxfS.jpg" alt="" />
-              <img className="media-img" src="https://www.themoviedb.org/t/p/w220_and_h330_face/wlsivaJuU6HScCFKcgv1cgtdmQt.jpg" alt="" />
+              </div>)
+              }
+              {
+                movieMediaImages&&movieMediaImages.map(item=><img className="media-img" src={`https://www.themoviedb.org/t/p/w533_and_h300_bestv2/${item.file_path}`} alt="" />)
+              }
             </div>
           </section>
 
           <section className="cards-wrapper recommendation">
             <h3>Recommendations</h3>
             <div className="cast-cards-container">
-             <RecommendationCard/>
-             <RecommendationCard/>
-             <RecommendationCard/>
-             <RecommendationCard/>
-             <RecommendationCard/>
-            </div>
-            <p>We don't have enough data to suggest any TV shows based on People Puzzler. You can help by rating TV shows you've seen.</p>
+              {
+                movieRecommendations&&(movieRecommendations.map(item=><RecommendationCard data={item}/>))||(
+                <p>We don't have enough data to suggest any TV shows based on People Puzzler. You can help by rating TV shows you've seen.</p>)
+              }
+              </div>
           </section>
 
 
         </div>
         <div>
-          <MovieFacts />
+          <MovieFacts movieData={movieData}/>
         </div>
       </section>
       <BottomMenu />

@@ -5,6 +5,9 @@ import SearchResultsPage from '../pages/SearchResultsPage'
 import { Route, Routes } from 'react-router-dom';
 
 export default function Main () {
+  // package.json
+  // "homepage" :"https://furatmalkawi29.github.io/the-movie-database-clone",
+// "private": true,
   return (
     <main>
       <Routes>
