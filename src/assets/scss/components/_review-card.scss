@@ -42,7 +42,6 @@ p{
   span{
     font-size: .85rem;
     margin-left: 3px;
-    margin-top:2px;
   }
 }
 
@@ -57,6 +56,7 @@ p{
   font-size: .9rem;
   font-weight: 300;
   line-height: 1.4;
+  margin-top: 10px;
 
   span{
     font-weight: 400;
@@ -104,8 +104,5 @@ color: inherit;
 
 .author-info div p{
   margin-bottom: 8px;
-}
-.review-date{
-  margin-top: 10px;
 }
 }

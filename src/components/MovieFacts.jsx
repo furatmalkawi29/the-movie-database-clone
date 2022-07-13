@@ -18,7 +18,6 @@ export default function MovieFacts({movieData}) {
   const initialState = {
     productionCompanies: [],
     type: '-',
-    movieKeywords:[],
     status: '-',
     originalName: '-',
     originalLanguage: '-',
@@ -30,17 +29,17 @@ export default function MovieFacts({movieData}) {
   const getMovieKeywords = async () =>{
 
     if(location&&location.pathname){
-      if(location.pathname.includes('movie')){
+      if(movieData.id&&location.pathname.includes('movie')){
        
         const response = await getRequest(`/movie/${movieData.id}/keywords`)
     
         if(!(response&&response.status)){
           setState({
             id:'movieKeywords',
-            value: response
+            value: response.keywords
           })
         }
-      }else {
+      }else if(movieData.id&&location.pathname.includes('tv')){
         const response = await getRequest(`/tv/${movieData.id}/keywords`)
     
         if(!(response&&response.status)){
@@ -126,7 +125,7 @@ export default function MovieFacts({movieData}) {
 <div className="network-img">
   {
 state.productionCompanies&&state.productionCompanies.map(item=>(
-  <img src={`https://www.themoviedb.org/t/p/h30/${item.logo_path}`}/>
+  item.logo_path?<img src={`https://www.themoviedb.org/t/p/h30/${item.logo_path}`}/>:null
 ))
   }
 </div>

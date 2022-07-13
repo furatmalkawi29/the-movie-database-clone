@@ -229,7 +229,7 @@ export default function MovieDetailsPage() {
               </div>
               <div>
                 <p>Videos</p>
-                <span>2</span>
+                <span>1</span>
               </div>
               <div>
                 <p>Backdrops</p>
@@ -237,7 +237,7 @@ export default function MovieDetailsPage() {
               </div>
               <div>
                 <p>Posters</p>
-                <span>10</span>
+                <span>{movieMediaImages&&movieMediaImages.length}</span>
               </div>
             </div>
             </div>

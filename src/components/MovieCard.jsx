@@ -21,6 +21,9 @@ export default function MovieCard({
     votes:null,
   }
 
+  const roundRatingNumber = (number) =>{
+    return Math.round(number)
+  }
   const reducer = (state, action) => {
     return { ...state, [action.id]: action.value };
   };
@@ -44,9 +47,11 @@ setState({
   id:"date",
   value:movieData.first_air_date||movieData.release_date||null
 })
+
 setState({
   id:"votes",
-  value:(movieData.vote_average&&movieData.vote_average*10)||null
+  value:(movieData.vote_average&&roundRatingNumber(movieData.vote_average*10)
+  )||null
 })
 setState({
   id:"imageUrl",

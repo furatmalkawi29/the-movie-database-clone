@@ -41,7 +41,9 @@ export default function MovieDetailsHeader({ id, movieData }) {
   const [state, setState] = useReducer(reducer, initialState)
 
 
-  console.log(movieData);
+  const roundRatingNumber = (number) =>{
+    return Math.round(number)
+  }
 
   useEffect(() => {
     if (movieData) {
@@ -64,7 +66,7 @@ export default function MovieDetailsHeader({ id, movieData }) {
       })
       setState({
         id: "votes",
-        value: (movieData.vote_average && movieData.vote_average * 10) || null
+        value: (movieData.vote_average && roundRatingNumber(movieData.vote_average * 10)) || null
       })
       setState({
         id: "posetrUrl",

@@ -62,7 +62,6 @@ export default function ToggleButton({
     let selection = e.target?e.target.innerText:'';
     getActiveSelection(selection);
 
-    console.log('changeActiveSelection',selection);
           }
           
 
