@@ -4,10 +4,10 @@ require('dotenv').config();
 
 
 export default async function getRequest(route,params) {
+
   // const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
   const apiKey = '12bc6ecb9c283f7d949b6d6c91e417ac';
-  const paramsList = addSymbolBeforeParam(params);
-  const url =`https://api.themoviedb.org/3${route}?api_key=${apiKey}${paramsList}`;
+  const url =`https://api.themoviedb.org/3${route}?api_key=${apiKey}&${params}`;
     
   const response= await fetch(url);
 
@@ -20,15 +20,7 @@ export default async function getRequest(route,params) {
   
 }
 
-function addSymbolBeforeParam(params) {
-  let str = '';
-  if(params){
-    params.forEach(element => {
-      str=str+`&${element}`;
-    });
-  }
-  return str;
-}
+
 // import {useState,useEffect} from 'react'
 // require('dotenv').config();
 

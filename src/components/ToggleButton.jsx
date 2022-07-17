@@ -12,8 +12,8 @@ export default function ToggleButton({
   const [isValuesSet, setisValuesSet] = useState(false);
   const [indexOne, setIndexOne] = useState(0);
   const [indexTwo, setIndexTwo] = useState(1);
-  let choiceOneWidth="95px";
-  let choiceTwoWidth="112px";
+  let choiceOneWidth="100px";
+  let choiceTwoWidth="90px";
   let smChoiceTwoWidth="138px";
 
   (function setReelValues() {
@@ -23,14 +23,14 @@ export default function ToggleButton({
       switch (reelId) {
         case "1":{
           // setHeading("What's Popular");
-        setSelectorChoicesText(["On TV", "In Theaters"]);
+        setSelectorChoicesText(["In Theaters", "On TV"]);
         setisValuesSet(true);
       }
         break;
 
       case "3":{
         // setHeading("Latest Trailers");
-        setSelectorChoicesText(["On TV", "In Theaters"]);
+        setSelectorChoicesText(["In Theaters", "On TV"]);
         setisValuesSet(true);
       }
       break;

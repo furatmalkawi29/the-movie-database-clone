@@ -95,6 +95,7 @@ $(`#trailer-play-btn-${id}`).on('click',function(){
 });
 
 return (
+  state.trailerUrl&&
     <div id={`trailer-container-${id}`} className="trailer-container">
       {/* hide dropdown when it detects clicks outside dropdown component*/}
 
@@ -121,6 +122,6 @@ return (
       {/* <p>Preview - Best Christmas Party Ever</p> */}
     </div>
    </div>
-   </div>
+   </div>||null
   )
 }

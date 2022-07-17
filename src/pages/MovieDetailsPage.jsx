@@ -16,7 +16,7 @@ export default function MovieDetailsPage() {
 
   const { id } = useParams();
   const navigate = useNavigate();
-  let location = useLocation();
+  const {pathname} = useLocation();
   const [isLoading, setIsLoading] = useState(true);
   const [dynamicRoute, setDynamicRoute] = useState(null);
   const [movieData, setMovieData] = useState({});
@@ -42,8 +42,8 @@ export default function MovieDetailsPage() {
     
     if(movieData.id) {
       setIsLoading(true);
-      if(location&&location.pathname){
-        if(location.pathname.includes('movie')){
+      if(pathname){
+        if(pathname.includes('movie')){
       const response = await getRequest(`/movie/${movieData.id}/credits`);
 
       if(!(response&&response.success===false)){
@@ -64,8 +64,8 @@ export default function MovieDetailsPage() {
     setIsLoading(true);
 
     if(movieData.id) {
-      if(location&&location.pathname){
-        if(location.pathname.includes('movie')){
+      if(pathname){
+        if(pathname.includes('movie')){
       const response = await getRequest(`/movie/${movieData.id}/images`);
 
       if(!(response&&response.success===false)){
@@ -86,8 +86,8 @@ export default function MovieDetailsPage() {
     setIsLoading(true);
 
     if(movieData.id) {
-      if(location&&location.pathname){
-        if(location.pathname.includes('movie')){
+      if(pathname){
+        if(pathname.includes('movie')){
       const response = await getRequest(`/movie/${movieData.id}/videos`);
 
       if(!(response&&response.success===false)){
@@ -108,8 +108,8 @@ export default function MovieDetailsPage() {
     setIsLoading(true);
 
     if(movieData.id) {
-      if(location&&location.pathname){
-        if(location.pathname.includes('movie')){
+      if(pathname){
+        if(pathname.includes('movie')){
       const response = await getRequest(`/movie/${movieData.id}/recommendations`);
 
       if(!(response&&response.success===false)){
@@ -130,8 +130,8 @@ export default function MovieDetailsPage() {
     setIsLoading(true);
 
     if(movieData.id) {
-      if(location&&location.pathname){
-        if(location.pathname.includes('movie')){
+      if(pathname){
+        if(pathname.includes('movie')){
       const response = await getRequest(`/movie/${movieData.id}/reviews`);
 
       if(!(response&&response.success===false)){
@@ -159,8 +159,8 @@ export default function MovieDetailsPage() {
 }, [movieData])
 
   useEffect(()=>{
-    if(location&&location.pathname){
-      if(location.pathname.includes('movie')){
+    if(pathname){
+      if(pathname.includes('movie')){
         navigate(`/movie/${id}`);
         setDynamicRoute(`/movie/${id}`)
       }else {

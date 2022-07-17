@@ -3,6 +3,7 @@ import MovieCardDropdown from "./MovieCardDropdown";
 import RateCircle from "./RateCircle";
 import { ClickAwayListener } from "@mui/material";
 import circleDotted from "../assets/images/circle-dotted.svg";
+import movieImagePlaceholder from '../assets/images/movie-image-placeholder.svg';
 import moment from 'moment';
 // import { useSelector } from 'react-redux';
 import {Skeleton} from './SkeletonComponents';
@@ -66,17 +67,14 @@ setState({
   return (
     (movieData&&
     <div id={id} className="movie-card">
+    <div className='movie-card-img-container'>
       <a href="">
         <img
-          className="movie-poster"
-          src={state.imageUrl||''}
+          src={state.imageUrl||movieImagePlaceholder} alt="" 
+          className={(!state.imageUrl&&'search-default-image')||'movie-poster'}
         />
       </a>
-      <div className="movie-info">
-        <a href="">
-          <h3>{state.name}</h3>
-        </a>
-        <p>{(state.date&&moment(state.date).format('LL'))}</p></div>
+    </div>
 
       {/* hide dropdown when it detects clicks outside dropdown component*/}
       <ClickAwayListener onClickAway={handleClickAway}>
@@ -85,10 +83,15 @@ setState({
             className="dotted-circle"
             src={circleDotted}
             onClick={handleClick}
-          />
+            />
           {open ? <MovieCardDropdown /> : null}
         </div>
       </ClickAwayListener>
+      <div className="movie-info">
+        <a href="">
+          <h3>{state.name}</h3>
+        </a>
+        <p>{(state.date&&moment(state.date).format('LL'))}</p></div>
 
       <RateCircle percentage={state.votes} size={"small"} />
     </div>)||<Skeleton/>

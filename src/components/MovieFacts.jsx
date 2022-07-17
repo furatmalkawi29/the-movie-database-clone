@@ -9,7 +9,7 @@ import { useLocation} from 'react-router-dom'
 
 
 export default function MovieFacts({movieData}) {
-  let location = useLocation();
+  let {pathname} = useLocation();
 
   const reducer = (state, action) => {
     return { ...state, [action.id]: action.value };
@@ -28,8 +28,8 @@ export default function MovieFacts({movieData}) {
 
   const getMovieKeywords = async () =>{
 
-    if(location&&location.pathname){
-      if(movieData.id&&location.pathname.includes('movie')){
+    if(pathname){
+      if(movieData.id&&pathname.includes('movie')){
        
         const response = await getRequest(`/movie/${movieData.id}/keywords`)
     
@@ -39,7 +39,7 @@ export default function MovieFacts({movieData}) {
             value: response.keywords
           })
         }
-      }else if(movieData.id&&location.pathname.includes('tv')){
+      }else if(movieData.id&&pathname.includes('tv')){
         const response = await getRequest(`/tv/${movieData.id}/keywords`)
     
         if(!(response&&response.status)){

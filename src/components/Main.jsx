@@ -12,9 +12,9 @@ export default function Main () {
     <main>
       <Routes>
         <Route exact path={"/"} element={<Home/>}/>
-        <Route path={'/search'} element={<SearchResultsPage/>}/>
         <Route path={'/movie/:id'} element={<MovieDetailsPage/>}/>
         <Route path={'/tv/:id'} element={<MovieDetailsPage/>}/>
+        <Route path={'/search'} element={<SearchResultsPage/>}/>
         {/* <Route path="*" element={<NotFound/>}/> */}
       </Routes>
     </main>

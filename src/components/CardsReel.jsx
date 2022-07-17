@@ -19,7 +19,7 @@ changeModalUrl})=> {
   // let data = useGetRequest(dynamicRoute);
   const [reelData, setReelData] = useState(null)
   const [isLoading, setIsLoading]= useState(true);
-  const [activeScreenType,setActiveScreenType] = useState('tv');
+  const [activeScreenType,setActiveScreenType] = useState('movie');
   const [activeTimeWindow,setActiveTimeWindow] = useState(reelType==='trending'?'day':null);
   const [moviesAndSeiresTrailers,setMoviesAndSeiresTrailers] = useState({});
 
