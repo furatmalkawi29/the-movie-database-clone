@@ -16,7 +16,6 @@ changeModalVisibility,
 changeModalUrl})=> { 
   const defaultRoute= `/tv/popular`;
   const [dynamicRoute, setDynamicRoute] = useState(defaultRoute);
-  // let data = useGetRequest(dynamicRoute);
   const [reelData, setReelData] = useState(null)
   const [isLoading, setIsLoading]= useState(true);
   const [activeScreenType,setActiveScreenType] = useState('movie');

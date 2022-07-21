@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer } from "react";
+import React, { useEffect, useState, useReducer, useCallback } from "react";
 import BottomMenu from "../components/BottomMenu";
 import MovieDetailsHeader from "../components/MovieDetailsHeader";
 import MovieFacts from "../components/MovieFacts";
@@ -9,166 +9,131 @@ import RecommendationCard from "../components/RecommendationCard";
 import ReviewCard from "../components/ReviewCard";
 import playIcon from '../assets/images/playIcon.svg'
 import { useLocation, useParams, useNavigate } from 'react-router-dom'
-import getRequest from '../assets/helpers/useGetRequest.jsx'
-
+import {GetMovieCredits, GetTvShowCredits ,GetMovieImages,
+  GetMovieVideos, GetMovieRecommendations, GetMovieReviews,GetTvShowImages,
+  GetTvShowVideos, GetTvShowRecommendations, GetTvShowReviews,
+   GetMovieDetails, GetTvShowDetails} from '../Services'
 
 export default function MovieDetailsPage() {
 
   const { id } = useParams();
+  const { mediaType } = useParams();
   const navigate = useNavigate();
   const {pathname} = useLocation();
   const [isLoading, setIsLoading] = useState(true);
-  const [dynamicRoute, setDynamicRoute] = useState(null);
   const [movieData, setMovieData] = useState({});
   const [movieCast, setMovieCast] = useState([]);
-  const [movieReviews, setMovieReviews] = useState([5]);
+  const [movieReviews, setMediaReviews] = useState([5]);
   const [movieMediaImages, setMovieMediaImages] = useState([])
   const [movieMediaVedio, setMovieMediaVedio] = useState(null)
-  const [movieRecommendations, setMovieRecommendations] = useState([])
-
-  useEffect(async () => {
-    setIsLoading(true);
-    if(dynamicRoute) {
-      const response = await getRequest(dynamicRoute);
-
-      if(!(response&&response.success===false)){
-        setMovieData(response||[]);
-      }
-    }
-    setIsLoading(false);  
-  }, [dynamicRoute])
+  const [mediaRecommendations, setMediaRecommendations] = useState([])
+  // const [mediaType, setMediaType] = useState('movie')
 
   const getMovieCredits = async ()=>{
-    
+    console.log('mediaType',mediaType);
     if(movieData.id) {
-      setIsLoading(true);
-      if(pathname){
+        if(pathname){
         if(pathname.includes('movie')){
-      const response = await getRequest(`/movie/${movieData.id}/credits`);
+    const response = await GetMovieCredits(movieData.id);
 
-      if(!(response&&response.success===false)){
+    if (!(response && response.status && response.status !== 200)) {
         setMovieCast(response.cast||[]);
+        console.log('response',response);
       }
     }else {
-      const response = await getRequest(`/tv/${movieData.id}/credits`);
+      const response = await GetTvShowCredits(movieData.id);
 
       if(!(response&&response.success===false)){
         setMovieCast(response.cast||[]);
       }
     }
     }
-    setIsLoading(false);  
   }
   }
   const getMovieMediaImages = async ()=>{
-    setIsLoading(true);
 
     if(movieData.id) {
       if(pathname){
         if(pathname.includes('movie')){
-      const response = await getRequest(`/movie/${movieData.id}/images`);
+      const response = await GetMovieImages(movieData.id);
 
       if(!(response&&response.success===false)){
         setMovieMediaImages(response.posters||[]);
       }
     }else {
-      const response = await getRequest(`/tv/${movieData.id}/images`);
+      const response = await GetTvShowImages(movieData.id);
 
       if(!(response&&response.success===false)){
         setMovieMediaImages(response.posters||[]);
       }
     }
     }
-    setIsLoading(false);  
   }
   }
   const getMovieMediaVideos = async ()=>{
-    setIsLoading(true);
 
     if(movieData.id) {
       if(pathname){
         if(pathname.includes('movie')){
-      const response = await getRequest(`/movie/${movieData.id}/videos`);
+          const response = await GetMovieVideos(movieData.id);
 
       if(!(response&&response.success===false)){
         setMovieMediaVedio((response.length>0&&response[0])||null);
       }
     }else {
-      const response = await getRequest(`/tv/${movieData.id}/videos`);
+      const response = await GetTvShowVideos(movieData.id);
 
       if(!(response&&response.success===false)){
         setMovieMediaVedio((response.length>0&&response[0])||null);
       }
     }
     }
-    setIsLoading(false);  
   }
   }
-  const getMovieRecommendations = async ()=>{
-    setIsLoading(true);
+  
+  const getMediaRecommendations = async ()=>{
 
-    if(movieData.id) {
-      if(pathname){
-        if(pathname.includes('movie')){
-      const response = await getRequest(`/movie/${movieData.id}/recommendations`);
-
-      if(!(response&&response.success===false)){
-        setMovieRecommendations(response.length>0&&response||null);
+    const response = mediaType==="movie"? await GetMovieRecommendations(id):await GetTvShowRecommendations(id);
+    
+    if (!(response && response.status &&response.status !== 200)) {
+        setMediaRecommendations(response.length>0&&response||null);
       }
-    }else {
-      const response = await getRequest(`/tv/${movieData.id}/recommendations`);
-
-      if(!(response&&response.success===false)){
-        setMovieRecommendations(response.length>0&&response||null);
-      }
-    }
-    }
-    setIsLoading(false);  
   }
-  }
-  const getMovieReviews = async ()=>{
-    setIsLoading(true);
 
-    if(movieData.id) {
-      if(pathname){
-        if(pathname.includes('movie')){
-      const response = await getRequest(`/movie/${movieData.id}/reviews`);
+  const getMediaReviews = async ()=>{
 
-      if(!(response&&response.success===false)){
-        setMovieReviews(response.length>0&&response||null);
-      }
-    }else {
-      const response = await getRequest(`/tv/${movieData.id}/reviews`);
+      const response = mediaType==="movie"? await GetMovieReviews(id):await GetTvShowReviews(id);
+    
+      if (!(response && response.status &&response.status !== 200)) {
+          setMediaReviews(response||[]);
+          }
+  }
 
-      if(!(response&&response.success===false)){
-        setMovieReviews(response.length>0&&response||null);
-      }
-    }
-    }
-    setIsLoading(false);  
-  }
-  }
+  const getMediaDetails =  useCallback(async ()=>{
+
+    const response = mediaType==="movie"? await GetMovieDetails(id):await GetTvShowDetails(id);
+    
+         if (!(response && response.status &&response.status !== 200 && typeof response.status === 'number')) {
+          setMovieData(response||{});
+          }
+  })
+
+    useEffect(()=>{
+      navigate(`/${mediaType}/${id}`);
+      getMediaDetails();
+    },[id])
 
   useEffect(() => {
-
   getMovieCredits();
   getMovieMediaImages();
   getMovieMediaVideos();
-  getMovieRecommendations();
-  getMovieReviews();
-}, [movieData])
+  getMediaRecommendations();
+  getMediaReviews();
+  }, [movieData])
 
-  useEffect(()=>{
-    if(pathname){
-      if(pathname.includes('movie')){
-        navigate(`/movie/${id}`);
-        setDynamicRoute(`/movie/${id}`)
-      }else {
-        navigate(`/tv/${id}`);
-        setDynamicRoute(`/tv/${id}`)
-      }
-    }
-  },[id])
+
+
+
 
 
   return (
@@ -214,7 +179,7 @@ export default function MovieDetailsPage() {
                   data={movieReviews&&movieReviews.length>0&&movieReviews[0]}/>
                   <p className="wrapper-link">Read All Reviews</p>
                 </>
-                )||<p>{`We don't have any reviews for ${movieData?.name}.`}</p>
+                )||<p>{`We don't have any reviews for ${(movieData?.name||movieData?.title)}.`}</p>
               }
             </div>
           </section>
@@ -260,7 +225,7 @@ export default function MovieDetailsPage() {
             <h3>Recommendations</h3>
             <div className="cast-cards-container">
               {
-                movieRecommendations&&(movieRecommendations.map(item=><RecommendationCard data={item}/>))||(
+                mediaRecommendations&&(mediaRecommendations.map(item=><RecommendationCard data={item}/>))||(
                 <p>We don't have enough data to suggest any TV shows based on People Puzzler. You can help by rating TV shows you've seen.</p>)
               }
               </div>

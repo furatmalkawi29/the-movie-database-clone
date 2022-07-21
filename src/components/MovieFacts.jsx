@@ -6,7 +6,7 @@ import link from '../assets/images/link.svg'
 import justwatch from '../assets/images/justwatch.svg'
 import getRequest from '../assets/helpers/useGetRequest.jsx'
 import { useLocation} from 'react-router-dom'
-
+import {GetMovieKeywords, GetTvShowKeywords} from '../Services'
 
 export default function MovieFacts({movieData}) {
   let {pathname} = useLocation();
@@ -31,7 +31,7 @@ export default function MovieFacts({movieData}) {
     if(pathname){
       if(movieData.id&&pathname.includes('movie')){
        
-        const response = await getRequest(`/movie/${movieData.id}/keywords`)
+        const response = await GetMovieKeywords(movieData.id)
     
         if(!(response&&response.status)){
           setState({
@@ -40,7 +40,7 @@ export default function MovieFacts({movieData}) {
           })
         }
       }else if(movieData.id&&pathname.includes('tv')){
-        const response = await getRequest(`/tv/${movieData.id}/keywords`)
+        const response = await GetTvShowKeywords(movieData.id)
     
         if(!(response&&response.status)){
           setState({

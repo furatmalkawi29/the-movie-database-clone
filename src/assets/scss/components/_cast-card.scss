@@ -59,4 +59,14 @@ color: $text-dark-gray;
       object-fit: cover;
       object-position: top;    }
   }
+
+  .cast-card .cast-card-img-container{
+    min-height: 135px;
+    width: 120px
+  }
+
+  .cast-card-default-img{
+    width: 70px !important;
+    height: 80px !important;
+  }
 }

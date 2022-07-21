@@ -1,5 +1,7 @@
 import React from 'react'
 import calender from '../assets/images/calender.svg'
+import {Link} from 'react-router-dom'
+import movieImagePlaceholder from '../assets/images/movie-image-placeholder.svg';
 export default function RecommendationCard({
   data
 }) {
@@ -9,9 +11,10 @@ export default function RecommendationCard({
   }
 
   return (
+    <Link to={`/${data.media_type}/${data.id}`}>
     <div className="recommendation-card">
       <div className="poster-container" title={data&&data.name || data&&data.title||null}>
-        <img className="poster" src={`https://www.themoviedb.org/t/p/w250_and_h141_face/${data&&data.poster_path}`} alt="" />
+        <img className="poster" src={(data&&data.poster_path&&`https://www.themoviedb.org/t/p/w250_and_h141_face/${data&&data.poster_path}`)||movieImagePlaceholder} alt="" />
         <div className="date-box">
           <img src={calender} alt="" />
           <span>{data&&data.first_air_date||data&&data.release_date||null}</span>
@@ -20,8 +23,9 @@ export default function RecommendationCard({
       <div className="bottom-info">
         <p>{data&&data.name || data&&data.title||null}
           </p>
-        <p>{data&&data.vote_average&&`${roundRatingNumber(data.vote_average*10)}%`}</p>
+        <p>{data&&data.vote_average!==null&&`${roundRatingNumber(data.vote_average*10)}%`}</p>
       </div>
     </div>
+    </Link>
   )
 }

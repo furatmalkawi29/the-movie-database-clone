@@ -8,8 +8,7 @@ import { AiFillStar } from 'react-icons/ai'
 import { FaPlay } from 'react-icons/fa'
 import { HiArrowsExpand } from 'react-icons/hi'
 import { useColor } from "color-thief-react";
-import getRequest from '../assets/helpers/useGetRequest.jsx'
-
+import {GetCreditsDetails} from '../Services/PeopleServices'
 
 
 
@@ -108,7 +107,7 @@ export default function MovieDetailsHeader({ id, movieData }) {
 
       for(const credit of state.credits){
 
-          let response = await getRequest(`/credit/${credit.credit_id}`);
+          let response = await GetCreditsDetails(credit.credit_id);
           
           
           if(!(response&&response.success===false)){

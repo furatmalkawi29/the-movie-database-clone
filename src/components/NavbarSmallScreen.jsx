@@ -32,15 +32,15 @@ export default function NavbarSmallScreen() {
     <nav className="sm-nav">
      <div className="sm-nav-container">
       <div className="menu-icon-container">
-        <Link to="">
         <svg viewBox="0 0 100 80" width="15" height="15" fill="white">
           <rect width="100" height="16" rx="5"></rect>
           <rect y="35" width="100" height="16" rx="5"></rect>
           <rect y="70" width="100" height="16" rx="5"></rect>
         </svg>
-        </Link>
       </div>
+      <Link to="/">
       <img className="sm-nav-logo" src={mobileNavLogo} />
+      </Link>
       <div className="sm-icons-container">
         <img className="sm-magnifier" src={maleUser} />
         <img className="sm-magnifier" src={magnifier} />

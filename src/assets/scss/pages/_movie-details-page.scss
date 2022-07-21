@@ -26,6 +26,11 @@
   padding: 20px 0px;
   overflow-y: scroll;
   padding-left: 10px;
+
+  a{
+    text-decoration: none;
+    color: inherit;
+  }
 }
 
 .wrapper-link {

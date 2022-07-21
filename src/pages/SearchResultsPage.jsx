@@ -1,37 +1,46 @@
 import React, {useEffect, useState} from 'react'
 import ResultMovieCard from '../components/ResultMovieCard'
-import { useLocation, Link } from 'react-router-dom'
-import getRequest from '../assets/helpers/useGetRequest.jsx'
+import { useSearchParams, Link } from 'react-router-dom'
+import {MultiSearch, CategorySearch} from '../Services/SearchServices'
 
 export default function SearchResultsPage() {
 
-  const [searchData, setSearchData] = useState([])
-  const [searchResultsFilter, setSearchResultsFilter] = useState(null)
+  const [searchResult, setSearchResult] = useState([])
+  const [searchCategory, setSearchCategory] = useState(null)
+  const [searchParams] = useSearchParams();
 
-  const UseSearchQuery = ()=>{
-    const {search} = useLocation();
-   return new URLSearchParams(search).toString("query")
-  }
 
-  const searchQuery = UseSearchQuery();
 
-  const getSearchResults = async ()=>{
+  const getSearchResults = async (searchQuery)=>{
 
-    const response = searchResultsFilter?await getRequest(`/search/${searchResultsFilter}`, searchQuery):await getRequest(`/search/multi`, searchQuery)
-    if(!(response&&response.success===false)){
-      setSearchData(response||[]);
+    const response = searchCategory?await CategorySearch({searchQuery,searchCategory}):await MultiSearch(searchQuery)
+    if (!(response && response.status && response.status !== 200)) {
+      setSearchResult(response.results||[]);
     }
-
   }
 
   const searchFilterCLickHandler = (event)=>{
     const filterValue = event.target.id;
-    setSearchResultsFilter(filterValue)
+    setSearchCategory(filterValue)
   }
     
+  const getMoviePageUrl = (item) =>{
+    let pageUrl = ''
+    if(item.media_type){
+      pageUrl = `/${item.media_type}/${item.id}`;
+    }else if (item.release_date){
+      pageUrl = `/movie/${item.id}`;
+    }else if (item.first_air_date){
+      pageUrl = `/tv/${item.id}`;
+    }
+
+    return pageUrl
+  }
+
   useEffect(()=>{
-    getSearchResults();
-  },[searchResultsFilter])
+    const searchQuery = searchParams.get('query');
+    getSearchResults(searchQuery);
+  },[searchCategory])
   
   return (
     <div className='search-result'>
@@ -40,24 +49,24 @@ export default function SearchResultsPage() {
           <h3>Search Results</h3>
         </div>
         <div className='aside-content'>
-          <div className={!searchResultsFilter?'aside-item active-aside-item':'aside-item'}>
+          <div className={!searchCategory?'aside-item active-aside-item':'aside-item'}>
             <p onClick={searchFilterCLickHandler}>All</p>
-            {!searchResultsFilter&&<span>{searchData.length}</span>}
+            {!searchCategory&&<span>{searchResult.length}</span>}
           </div>
 
-          <div className={searchResultsFilter==='movie'?'aside-item active-aside-item':'aside-item'}>
+          <div className={searchCategory==='movie'?'aside-item active-aside-item':'aside-item'}>
             <p id='movie' onClick={searchFilterCLickHandler}>Movies</p>
-            {searchResultsFilter==='movie'&&<span>{searchData.length}</span>}
+            {searchCategory==='movie'&&<span>{searchResult.length}</span>}
           </div>
 
-          <div className={searchResultsFilter==='tv'?'aside-item active-aside-item':'aside-item'}>
+          <div className={searchCategory==='tv'?'aside-item active-aside-item':'aside-item'}>
             <p id='tv' onClick={searchFilterCLickHandler}>TV Shows</p>
-            {searchResultsFilter==='tv'&&<span>{searchData.length}</span>}
+            {searchCategory==='tv'&&<span>{searchResult.length}</span>}
           </div>
 
-          <div className={searchResultsFilter==='person'?'aside-item active-aside-item':'aside-item'}>
+          <div className={searchCategory==='person'?'aside-item active-aside-item':'aside-item'}>
             <p id='person' onClick={searchFilterCLickHandler}>People</p>
-            {searchResultsFilter==='person'&&<span>{searchData.length}</span>}
+            {searchCategory==='person'&&<span>{searchResult.length}</span>}
           </div>
         </div>
       </aside>
@@ -67,18 +76,30 @@ export default function SearchResultsPage() {
         <h3>Search Results</h3>
         </div>
         <div className='menu-content'>
-        <div className='results-menu-item active-item'><p>Movies</p><span>27</span></div>
-        <div className='results-menu-item'><p>TV Shows</p><span>27</span></div>
-          <div className='results-menu-item'><p>Keywords</p><span>0</span></div>
-          <div className='results-menu-item'><p>Collections</p><span>0</span></div>
-          <div className='results-menu-item'><p>People</p><span>2</span></div>
-          <div className='results-menu-item'><p>Companies</p><span>6</span></div>
-          <div className='results-menu-item'><p>Networks</p><span>0</span></div>
+          <div className={!searchCategory?'results-menu-item active-item':'results-menu-item'}>
+            <p onClick={searchFilterCLickHandler}>All</p>
+            {!searchCategory&&<span>{searchResult.length}</span>}
+          </div>
+
+        <div className={searchCategory==='movie'?'results-menu-item active-item':'results-menu-item'}>
+          <p id='movie' onClick={searchFilterCLickHandler}>Movies</p>
+          {searchCategory==='movie'&&<span>{searchResult.length}</span>}
+          </div>
+
+        <div className={searchCategory==='tv'?'results-menu-item active-item':'results-menu-item'}>
+          <p id='tv' onClick={searchFilterCLickHandler}>TV Shows</p>
+          {searchCategory==='tv'&&<span>{searchResult.length}</span>}
+          </div>
+
+          <div className={searchCategory==='person'?'results-menu-item active-item':'results-menu-item'}>
+            <p id='person' onClick={searchFilterCLickHandler}>People</p>
+            {searchCategory==='person'&&<span>{searchResult.length}</span>}
+            </div>
         </div>
       </div>
 
       <div className='results-container'>
-        {(searchData&&searchData.length>0&&searchData.map(item=>((item.media_type==="tv"||item.media_type==="movie")&&<Link to={`/${item.media_type}/${item.id}`}> <ResultMovieCard 
+        {(searchResult&&searchResult.length>0&&searchResult.map(item=>((item.media_type==="tv"||item.media_type==="movie"||!item.known_for)&&<Link to={getMoviePageUrl(item)}><ResultMovieCard
         data={item}/></Link>)||<ResultMovieCard 
         data={item}/>))||<p>There are no results that matched your query.</p>}
       </div>
