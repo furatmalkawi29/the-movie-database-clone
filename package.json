@@ -1,7 +1,7 @@
 {
   "name": "the-mdb2",
   "version": "0.1.0",
-  "homepage" :".",
+  "homepage": ".",
   "dependencies": {
     "@emotion/react": "^11.6.0",
     "@emotion/styled": "^11.6.0",
