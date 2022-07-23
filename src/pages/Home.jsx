@@ -1,6 +1,14 @@
 import React, {useState, useEffect} from 'react'
 import {CardsReel,Header,TrailerModal} from "../components";
+import {MediaCardsContainer} from '../components/MediaCardsContainer'
 import { useTitle } from '../assets/Hookes';
+import {GetWeekTrendingMovies,
+  GetPopularMovies,
+  GetNowPlayingMovies,
+  GetTodayTrendingTvShows,
+  GetOnAirTvShows,
+  GetPopularTvShows,} from '../Services'
+import {MediaCardsEnums} from '../Enums'
 
 export default function Home() {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -14,16 +22,22 @@ export default function Home() {
     setTrailerUrl(newUrl);
   }
 
+
+
   useTitle("TMDB")
 
   return (
     <>
 
     <Header/>
-      <CardsReel 
-       reelType="popular"
-        heading="What's Popular"
-        reelId="1"/>
+
+    <MediaCardsContainer 
+    containerTitleText={MediaCardsEnums.PopularContainer.title}
+    optionOneText={MediaCardsEnums.PopularContainer.optionOneText}
+    optionTwoText={MediaCardsEnums.PopularContainer.optionTwoText}
+    optionOneServiceFunction={GetPopularMovies}
+    optionTwoServiceFunction={GetPopularTvShows}
+    />
 
       <CardsReel 
         reelType="now_playing"
@@ -31,12 +45,21 @@ export default function Home() {
         reelId="3"
         changeModalVisibility={changeModalVisibility}
         changeModalUrl={changeModalUrl}
-        trailers="true" />
+        trailers="true" 
+        containerTitleText={MediaCardsEnums.TrailersContainer.title}
+        optionOneText={MediaCardsEnums.TrailersContainer.optionOneText}
+        optionTwoText={MediaCardsEnums.TrailersContainer.optionTwoText}
+        optionOneServiceFunction={GetNowPlayingMovies}
+        optionTwoServiceFunction={GetOnAirTvShows}
+        />
 
-      <CardsReel 
-       reelType="trending"
-        heading="Trending"
-        reelId="4"/>
+    <MediaCardsContainer 
+    containerTitleText={MediaCardsEnums.PlayingContainer.title}
+    optionOneText={MediaCardsEnums.PlayingContainer.optionOneText}
+    optionTwoText={MediaCardsEnums.PlayingContainer.optionTwoText}
+    optionOneServiceFunction={GetTodayTrendingTvShows}
+    optionTwoServiceFunction={GetWeekTrendingMovies}
+    />
 
       {isModalVisible&&(
       <TrailerModal 

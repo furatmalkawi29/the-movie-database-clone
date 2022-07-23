@@ -25,10 +25,12 @@ import {
 } from "../Services";
 
 export default function MovieDetailsPage() {
-  const { id } = useParams();
-  const { mediaType } = useParams();
+  const { id, mediaType} = useParams();
+  // const { mediaType } = useParams();
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
+
+  //convert to state + reducer 
   const [movieData, setMovieData] = useState({});
   const [mediaCast, setMediaCast] = useState([]);
   const [movieReviews, setMediaReviews] = useState([5]);
@@ -43,7 +45,7 @@ export default function MovieDetailsPage() {
         : await GetTvShowCredits(id);
 
     if (!(response && response.status && response.status !== 200)) {
-      setMediaCast(response.cast || []);
+      setMediaCast((response&&response.cast) || []);
     }
   };
 
@@ -54,18 +56,18 @@ export default function MovieDetailsPage() {
         : await GetTvShowImages(id);
 
     if (!(response && response.status && response.status !== 200)) {
-      setMovieMediaImages(response.posters || []);
+      setMovieMediaImages((response&&response.posters) || []);
     }
   };
 
-  const getMovieMediaVideos = async () => {
+  const getMediaVideos = async () => {
     const response =
       mediaType === "movie"
         ? await GetMovieVideos(id)
         : await GetTvShowVideos(id);
 
     if (!(response && response.status && response.status !== 200)) {
-      setMediaVideo((response.length > 0 && response[0]) || null);
+      setMediaVideo((response&&response.length > 0 && response[0]) || null);
     }
   };
 
@@ -76,7 +78,7 @@ export default function MovieDetailsPage() {
         : await GetTvShowRecommendations(id);
 
     if (!(response && response.status && response.status !== 200)) {
-      setMediaRecommendations((response.length > 0 && response) || null);
+      setMediaRecommendations((response&&response.length > 0 && response) || null);
     }
   };
 
@@ -117,7 +119,7 @@ export default function MovieDetailsPage() {
   useEffect(() => {
     getMediaCredits();
     getMediaImages();
-    getMovieMediaVideos();
+    getMediaVideos();
     getMediaRecommendations();
     getMediaReviews();
   }, [movieData]);

@@ -28,10 +28,13 @@
 
 .selector{
 position: relative;
+display: flex;
 border: solid 1px $tmdb-dark-blue;
-width: 190px;
 border-radius: 50px;
 cursor: pointer;
+height: 30px;
+width:200px;
+
 
 div{
   display: inline-block;
@@ -41,13 +44,6 @@ div{
   box-sizing: border-box;
 }
 
-span{
-  font-size: 1rem;
-  font-weight: 600;
-  color: $tmdb-dark-blue;
-  position: relative;
-    z-index: 5;
-}
 }
 
 
@@ -57,7 +53,10 @@ span{
   box-sizing: border-box;
   background-color: $tmdb-dark-blue;
   border-radius: 50px;
-  height: 29px;
+  height: 30px;
+  width: 100px;
+  transition: left 500ms;
+  z-index: -1;
 }
 
 
@@ -69,6 +68,13 @@ span{
     font-weight: 700;
 }
 
+.regular-toggler-text{
+  font-size: 1rem;
+  font-weight: 600;
+  color: $tmdb-dark-blue;
+  position: relative;
+    z-index: 5;
+}
 
 .cards-container{
   display: flex;
@@ -85,6 +91,22 @@ span{
 }
 
 
+.firstChoice{
+  width:100px;
+  text-align: center;
+}
+
+.secondChoice{
+  width:100px;
+  text-align: center;
+}
+.slide-left{
+  left:0;
+}
+
+.slide-right{
+  left:100px;
+}
 
 .sm-selector{
 position: relative;
@@ -177,9 +199,6 @@ svg {
 }
 
 @media (max-width:850px){
-// .selector{
-//   display: none;
-// }
 
 .sm-selector{
   display: block;

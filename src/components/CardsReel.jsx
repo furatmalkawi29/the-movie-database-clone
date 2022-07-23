@@ -1,153 +1,109 @@
 import React, {useEffect, useState} from 'react'
-import $ from 'jquery'
-import MovieCard from './MovieCard';
 import TrailerCard from './TrailerCard';
-// import useGetRequest from '../assets/helpers/useGetRequest.jsx'
-import getRequest from '../assets/helpers/useGetRequest.jsx'
-import ToggleButton from './ToggleButton'
-import axios from 'axios'
+import ToggleButton2 from './ToggleButton2'
 import {Link} from 'react-router-dom'
+import {GetMovieVideos, GetTvShowVideos} from '../Services'
 
 const CardsReel = ({reelId,
-  heading,
-  reelType,
-trailers,
 changeModalVisibility,
-changeModalUrl})=> { 
-  const defaultRoute= `/tv/popular`;
-  const [dynamicRoute, setDynamicRoute] = useState(defaultRoute);
-  const [reelData, setReelData] = useState(null)
-  const [isLoading, setIsLoading]= useState(true);
-  const [activeScreenType,setActiveScreenType] = useState('movie');
-  const [activeTimeWindow,setActiveTimeWindow] = useState(reelType==='trending'?'day':null);
-  const [moviesAndSeiresTrailers,setMoviesAndSeiresTrailers] = useState({});
+changeModalUrl,
+containerTitleText,
+optionOneServiceFunction,
+optionTwoServiceFunction,
+optionOneText,
+optionTwoText,
+})=> { 
+  const [data, setData] = useState(null)
+  const [moviesAndSeiresTrailers,setMoviesAndSeiresTrailers] = useState([]);
 
+  const [activeOption, setActiveOption] = useState(1);
+  const [mediaType, setMediaType] = useState("movie");
+ 
 
-  useEffect(async () => {
-    setIsLoading(true);
-    let data = await getRequest(dynamicRoute);
-    setReelData(data)
-    setIsLoading(false);
+  const getMediaCardsData = async () => {
+    if (activeOption && optionOneServiceFunction && optionOneServiceFunction) {
+      const response =
+        activeOption === 1
+          ? await optionOneServiceFunction()
+          : await optionTwoServiceFunction();
 
-  }, [dynamicRoute])
-  
-
-  const getActiveSelection = (selection)=>{
-switch (selection) {
-  case 'On TV':
-      setActiveScreenType('tv')
-    break;
-  case 'In Theaters':
-      setActiveScreenType('movie')
-      break;
-  case 'This Week':
-    setActiveTimeWindow('week')
-    break;
-  case  'Today':
-    setActiveTimeWindow('day')
-    break;
-
-}
-  }
-
-
-  const getMoviesAndSeiresVedios = async (id,isMovie) =>{
-    try{
-      const res = await axios.get(`https://api.themoviedb.org/3/${(isMovie&&'movie')||'tv'}/${id}/videos?api_key=12bc6ecb9c283f7d949b6d6c91e417ac&language=en-US`)
-
-
-      if (res&&res.data&&res.data.results){
-        res.data.results.length&&res.data.results.forEach(item=>{
-          if (item.site === 'YouTube'&&(item.type=="Trailer"||item.type=="Clip"))
-          setMoviesAndSeiresTrailers(prevState => ({...prevState,[`${id}`]:item}))
-        })
+      if (!(response && response.status && response.status !== 200)) {
+        setData((response && response.results) || []);
       }
-      
-    } catch(error){
-      return null;
     }
+  };
 
-  }
+  const getMediaType = () => {
+    const tvMediaType = data&&data.find((item) => item.first_air_date);
+    const movieMediaType = data&&data.find((item) => item.release_date);
+
+    if (tvMediaType) {
+      setMediaType("tv");
+    } else if (movieMediaType) {
+      setMediaType("movie");
+    }
+  };
+
+
+  const getMoviesAndSeiresVedios = async (id) => {
+    if (activeOption && optionOneServiceFunction && optionOneServiceFunction) {
+      const response =
+        activeOption === 1
+          ? await GetMovieVideos(id)
+          : await GetTvShowVideos(id);
+
+      if (!(response && response.status && response.status !== 200)) {
+        const test =  response.results.find(item=>item.site === 'YouTube'&&(item.type==="Trailer"||item.type==="Clip"))
+  console.log(test);
+        test.id = id;
+        // test.name = data.name;
+    setMoviesAndSeiresTrailers(prevState => ([...prevState,test]))   
+      }
+    }
+  };
 
   
   const getMoviesAndSeiresTrailers = async () =>{
-    reelData&&reelData.forEach(item=>{
-  getMoviesAndSeiresVedios(item.id,!item.first_air_date)
+    data&&data.forEach(item=>{
+  getMoviesAndSeiresVedios(item.id)
     })
   }
 
-  //replace this with services function
-  useEffect(()=>{
-    if (reelType&&(activeScreenType|| activeTimeWindow)) {
-      switch(reelType){
-        case 'trending':{setDynamicRoute(activeTimeWindow?`/trending/${activeScreenType}/${activeTimeWindow}`:defaultRoute)
-      }
-        break;
-        case 'popular' : {setDynamicRoute(`/${activeScreenType}/popular`)
-    }
-        break;
-        case 'now_playing' : {
-          if(activeScreenType==="tv"){
-            setDynamicRoute(`/${activeScreenType}/on_the_air`)
-          }else if(activeScreenType==="movie"){
-        
-          setDynamicRoute(`/${activeScreenType}/now_playing`)
-        }
-      }
-        break;
-}
-    }
-  }, [activeScreenType, activeTimeWindow])
+  useEffect(() => {
+    getMediaCardsData();
+  }, [activeOption, optionOneServiceFunction, optionOneServiceFunction]);
+
+
     
   useEffect(()=>{
-    if(trailers){
       getMoviesAndSeiresTrailers();
-    }
-  },[reelData])
-
+      getMediaType();
+  },[data])
+console.log(moviesAndSeiresTrailers);
 
   return (
     <section id={`cards-reel-${reelId}`} className='cards-reel' >
 
       <div className="reel-top-container">
-      <h2>{heading}</h2>
+      <h2>{containerTitleText}</h2>
 
-       {/* large screen selector*/}
-      <ToggleButton reelId={reelId} 
-      getActiveSelection={getActiveSelection}/>
-
-       {/* small screen selector */}
-      {/* <ToggleButton
-      reelId={reelId}
-      size="small" /> */}
+      <ToggleButton2 reelId={reelId} 
+      optionOneText={optionOneText}
+      optionTwoText={optionTwoText}
+      setActiveOption={setActiveOption}
+      />
       </div>
 
 
       <div className='cards-container'>
-{
-  isLoading?<p>loading..</p>:(
-
-    (reelData&&reelData.map((movieData, index)=>{
-      return ((trailers&&<TrailerCard
-      id={`${movieData.id}`}
-      // cover={movieData.cover}
-      // trailerUrl={movieData.trailer_url}
-      // thumbnailPath={movieData.poster_path}
-      movieData={movieData}
+{data&&data.map(item=><TrailerCard
+      id={`${item.id}`}
+      movieData={item}
       moviesAndSeiresTrailers={moviesAndSeiresTrailers}
       changeModalUrl={changeModalUrl}
-      changeModalVisibility={changeModalVisibility}/>)||
-      <Link to={`/${activeScreenType}/${movieData.id}`}>
-      <MovieCard
-       key={`${movieData.id}`} 
-       movieData={movieData}
-       id={`${movieData.id}`}
-       />
-       </Link>
-    )})
+      changeModalVisibility={changeModalVisibility}
+      />
     )
-    ||null
-  )
 }
       </div>
     </section>

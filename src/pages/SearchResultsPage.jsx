@@ -15,7 +15,7 @@ export default function SearchResultsPage() {
 
     const response = searchCategory?await CategorySearch({searchQuery,searchCategory}):await MultiSearch(searchQuery)
     if (!(response && response.status && response.status !== 200)) {
-      setSearchResult(response.results||[]);
+      setSearchResult((response&&response.results)||[]);
     }
   }
 

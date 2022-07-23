@@ -4,7 +4,6 @@ import insta from '../assets/images/insta.svg'
 import twitter from '../assets/images/twitter.svg'
 import link from '../assets/images/link.svg'
 import justwatch from '../assets/images/justwatch.svg'
-import getRequest from '../assets/helpers/useGetRequest.jsx'
 import { useLocation} from 'react-router-dom'
 import {GetMovieKeywords, GetTvShowKeywords} from '../Services'
 
