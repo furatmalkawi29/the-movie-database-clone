@@ -1,13 +1,11 @@
 import './App.scss';
-import Main from './components/Main';
-import Footer from './components/Footer';
-import Navbar from './components/Navbar';
-import NavbarSmallScreen from './components/NavbarSmallScreen';
+import {Main, Footer, Navbar, NavbarSmallScreen} from './components';
 import { BrowserRouter } from 'react-router-dom';
 
 
 function App() {
 
+  // const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
   return (
     <div>
       <BrowserRouter>
