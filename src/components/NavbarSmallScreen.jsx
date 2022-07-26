@@ -2,11 +2,11 @@ import React from "react";
 import mobileNavLogo from "../assets/images/mobile-logo.svg";
 import magnifier from "../assets/images/magnifier.svg";
 import maleUser from "../assets/images/male-user.png";
-import SideMenu from "./SideMenu";
+import {SideMenu} from "../components";
 import { Link } from "react-router-dom";
 import $ from 'jquery';
 
-export default function NavbarSmallScreen() {
+export const NavbarSmallScreen =() => {
 
   /*side menu toggle*/
   $('.menu-icon-container').off('click').on("click",function(){

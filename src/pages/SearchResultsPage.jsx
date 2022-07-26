@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react'
-import ResultMovieCard from '../components/ResultMovieCard'
+import {ResultMovieCard} from '../components'
 import { useSearchParams, Link } from 'react-router-dom'
 import {MultiSearch, CategorySearch} from '../Services/SearchServices'
 
-export default function SearchResultsPage() {
+export const SearchResultsPage = () =>{
 
   const [searchResult, setSearchResult] = useState([])
   const [searchCategory, setSearchCategory] = useState(null)

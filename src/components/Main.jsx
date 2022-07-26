@@ -1,10 +1,8 @@
 import React from 'react'
-import Home from '../pages/Home'
-import MovieDetailsPage from '../pages/MovieDetailsPage'
-import SearchResultsPage from '../pages/SearchResultsPage'
+import {Home, MovieDetailsPage, SearchResultsPage} from '../pages'
 import { Route, Routes } from 'react-router-dom';
 
-export default function Main () {
+export const Main = () => {
   // package.json
   // "homepage" :"https://furatmalkawi29.github.io/the-movie-database-clone",
 // "private": true,

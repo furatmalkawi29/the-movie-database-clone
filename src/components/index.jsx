@@ -20,4 +20,5 @@ export * from './ToggleButton'
 export * from './TopMenu'
 export * from './TrailerCard'
 export * from './TrailerModal'
-export * from './SkeletonComponents'
+export * from './BottomMenu'
+

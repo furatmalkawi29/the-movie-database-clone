@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from 'react-router-dom'
 import $ from 'jquery'
 
-export default function SideMenu() {
+export const SideMenu = () => {
 
   
 /*off method removes all events from element*/

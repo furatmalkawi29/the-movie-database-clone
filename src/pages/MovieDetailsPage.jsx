@@ -1,12 +1,9 @@
 import React, { useEffect, useState, useReducer, useCallback } from "react";
-import BottomMenu from "../components/BottomMenu";
-import MovieDetailsHeader from "../components/MovieDetailsHeader";
-import MediaFacts from "../components/MediaFacts";
-import TopMenu from "../components/TopMenu";
-import CastCard from "../components/CastCard";
+import {
+  BottomMenu, MovieDetailsHeader, MediaFacts,
+  TopMenu, CastCard, RecommendationCard, ReviewCard
+} from "../components";
 import rightArrow from "../assets/images/right-arrow.svg";
-import RecommendationCard from "../components/RecommendationCard";
-import ReviewCard from "../components/ReviewCard";
 import playIcon from "../assets/images/playIcon.svg";
 import { useParams, useNavigate } from "react-router-dom";
 import {
@@ -23,18 +20,16 @@ import {
   GetMovieDetails,
   GetTvShowDetails,
 } from "../Services";
-import {ImagesPathEnum} from '../Enums'
+import { ImagesPathEnum } from '../Enums'
 
-export default function MovieDetailsPage() {
-  const { id, mediaType} = useParams();
-  // const { mediaType } = useParams();
+export const MovieDetailsPage = () => {
+  const { id, mediaType } = useParams();
   const navigate = useNavigate();
-  // const [isLoading, setIsLoading] = useState(true);
 
   //convert to state + reducer 
   const [movieData, setMovieData] = useState(null);
   const [mediaCast, setMediaCast] = useState([]);
-  const [movieReviews, setMediaReviews] = useState([5]);
+  const [movieReviews, setMediaReviews] = useState([]);
   const [movieMediaImages, setMovieMediaImages] = useState([]);
   const [mediaVideo, setMediaVideo] = useState(null);
   const [mediaRecommendations, setMediaRecommendations] = useState([]);
@@ -46,7 +41,7 @@ export default function MovieDetailsPage() {
         : await GetTvShowCredits(id);
 
     if (!(response && response.status && response.status !== 200)) {
-      setMediaCast((response&&response.cast) || []);
+      setMediaCast((response && response.cast) || []);
     }
   };
 
@@ -57,7 +52,7 @@ export default function MovieDetailsPage() {
         : await GetTvShowImages(id);
 
     if (!(response && response.status && response.status !== 200)) {
-      setMovieMediaImages((response&&response.posters) || []);
+      setMovieMediaImages((response && response.posters) || []);
     }
   };
 
@@ -68,7 +63,7 @@ export default function MovieDetailsPage() {
         : await GetTvShowVideos(id);
 
     if (!(response && response.status && response.status !== 200)) {
-      setMediaVideo((response&&response.results&&response.results.length > 0 && response.results[0]) || null);
+      setMediaVideo((response && response.results && response.results.length > 0 && response.results[0]) || null);
     }
   };
 
@@ -79,7 +74,7 @@ export default function MovieDetailsPage() {
         : await GetTvShowRecommendations(id);
 
     if (!(response && response.status && response.status !== 200)) {
-      setMediaRecommendations((response&&response.results&&response.results.length > 0 && response.results) || null);
+      setMediaRecommendations((response && response.results && response.results.length > 0 && response.results) || null);
     }
   };
 
@@ -123,12 +118,13 @@ export default function MovieDetailsPage() {
     getMediaVideos();
     getMediaRecommendations();
     getMediaReviews();
-  }, [movieData, id]);
+  }, [movieData]);
 
   return (
     <>
       <TopMenu />
-      <MovieDetailsHeader id={id} movieData={movieData} />
+      <MovieDetailsHeader id={id}
+        movieData={movieData} />
       <section className="info-content">
         <div>
           <section className="cards-wrapper">
@@ -183,11 +179,11 @@ export default function MovieDetailsPage() {
                 </div>
                 <div>
                   <p>Videos</p>
-                  <span>1</span>
+                  <span></span>
                 </div>
                 <div>
                   <p>Backdrops</p>
-                  <span>9</span>
+                  <span></span>
                 </div>
                 <div>
                   <p>Posters</p>
@@ -195,7 +191,6 @@ export default function MovieDetailsPage() {
                 </div>
               </div>
             </div>
-            {console.log('mediaVideo',mediaVideo)}
             <div className="media-cards-container">
               {mediaVideo && mediaVideo.site === "YouTube" && (
                 <div className="thumbnail">
@@ -236,9 +231,9 @@ export default function MovieDetailsPage() {
           </section>
         </div>
         <div>
-          <MediaFacts 
-          mediaData={movieData}
-          mediaType={mediaType}
+          <MediaFacts
+            mediaData={movieData}
+            mediaType={mediaType}
           />
         </div>
       </section>

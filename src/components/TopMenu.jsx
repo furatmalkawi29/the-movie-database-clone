@@ -2,7 +2,7 @@ import React from 'react'
 import {IoMdArrowDropdown} from 'react-icons/io'
 
 
-export default function TopMenu() {
+export function TopMenu() {
   return (
 
     <div className="top-menu">

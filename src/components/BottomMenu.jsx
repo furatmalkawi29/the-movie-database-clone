@@ -5,7 +5,7 @@ import {IoBookmark} from 'react-icons/io5';
 import {AiFillStar} from 'react-icons/ai';
 import $ from 'jquery';
 
-export default function BottomMenu() {
+export const BottomMenu = () => {
 
   useEffect(()=>{
     var previousScroll = 0;

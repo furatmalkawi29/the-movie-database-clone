@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import blueShortLogo from "../assets/images/blue_short-logo.svg";
 import plus from "../assets/images/plus.svg";
 import magnifier from "../assets/images/magnifier.svg";
-import DropdownMenu from "./DropdownMenu";
+import {DropdownMenu} from "../components";
 import $ from 'jquery'
 
-export default function Navbar() {
+export const Navbar = () => {
 
 
 /*stop() used to clear animation queue to prevent delay */

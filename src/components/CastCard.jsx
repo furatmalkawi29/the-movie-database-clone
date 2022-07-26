@@ -1,7 +1,7 @@
 import React from 'react'
 import {ImagesPathEnum} from '../Enums'
 
-export default function CastCard({castData}) {
+export const CastCard = ({castData}) => {
 
   const getCharacterName = (originalCharacterList) =>{
     const splittedCharactersList = originalCharacterList&&originalCharacterList.split(' / ');

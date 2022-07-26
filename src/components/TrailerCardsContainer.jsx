@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import TrailerCard from './TrailerCard';
-import ToggleButton from './ToggleButton'
-import { Link } from 'react-router-dom'
+import {TrailerCard, ToggleButton} from '../components';
 
 export const TrailerCardsContainer = ({ reelId,
   changeModalVisibility,
@@ -14,7 +12,7 @@ export const TrailerCardsContainer = ({ reelId,
 }) => {
   const [data, setData] = useState(null)
   const [activeOption, setActiveOption] = useState(1);
-  const [mediaType, setMediaType] = useState("movie");
+  const [mediaType,setMediaType] = useState("movie");
 
 
   const getMediaCardsData = async () => {

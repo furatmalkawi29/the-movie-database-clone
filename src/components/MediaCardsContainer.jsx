@@ -1,8 +1,8 @@
 // import React from "react"
 
 import React, { useEffect, useState } from "react";
-import MovieCard from "./MovieCard";
-import ToggleButton from "./ToggleButton";
+import {MovieCard} from "./MovieCard";
+import {ToggleButton} from "./ToggleButton";
 import { Link } from "react-router-dom";
 
 export const MediaCardsContainer = ({

@@ -1,7 +1,7 @@
 import React from 'react'
 import leftArrow from '../assets/images/left-arrow.png'
 
-export default function MovieCardDropdown() {
+export const MovieCardDropdown =() => {
   return (
     <div className="movie-card-dropdown">
       <div className="first-box">

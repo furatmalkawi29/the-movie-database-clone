@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useReducer } from 'react'
 import $ from 'jquery'
-import RateCircle from "../components/RateCircle";
+import {RateCircle} from "../components";
 import { FaHeart } from 'react-icons/fa'
 import { ImList2 } from 'react-icons/im'
 import { IoBookmark } from 'react-icons/io5'
@@ -12,7 +12,7 @@ import {GetCreditsDetails} from '../Services/PeopleServices'
 import { ImagesPathEnum } from '../Enums';
 
 
-export default function MovieDetailsHeader({ id, movieData }) {
+export function MovieDetailsHeader({ id, movieData }) {
 
   const [rgbValue, setRgbValue] = useState([31, 36, 61])
 

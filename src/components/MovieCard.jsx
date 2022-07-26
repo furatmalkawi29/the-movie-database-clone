@@ -1,19 +1,17 @@
 import React, { useState, useReducer, useEffect } from "react";
-import MovieCardDropdown from "./MovieCardDropdown";
-import RateCircle from "./RateCircle";
+import {RateCircle, MovieCardDropdown} from "../components";
 import { ClickAwayListener } from "@mui/material";
 import circleDotted from "../assets/images/circle-dotted.svg";
 import movieImagePlaceholder from '../assets/images/movie-image-placeholder.svg';
 import moment from 'moment';
 // import { useSelector } from 'react-redux';
-import {Skeleton} from './SkeletonComponents';
 import {ImagesPathEnum} from '../Enums'
 
-export default function MovieCard({ 
+export const MovieCard = ({ 
   id,
   movieData,
   activeScreenType
-  }) {
+  }) => {
 
   const [open, setOpen] = useState(false);
   const initialState={
@@ -56,7 +54,6 @@ setState({
   )||null
 })
 
-console.log();
 setState({
   id:"imageUrl",
   value:(movieData.backdrop_path&&`${ImagesPathEnum.face.w220_and_h330.value}/${movieData.backdrop_path}`)||null
@@ -68,7 +65,6 @@ setState({
     // const birds = useSelector(state => state.birds);
 
   return (
-    (movieData&&
     <div id={id} className="movie-card">
     <div className='movie-card-img-container'>
       <a href="">
@@ -97,6 +93,6 @@ setState({
         <p>{(state.date&&moment(state.date).format('LL'))}</p></div>
 
       <RateCircle percentage={state.votes} size={"small"} />
-    </div>)||<Skeleton/>
+    </div>
   );
 }

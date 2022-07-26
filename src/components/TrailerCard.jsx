@@ -2,18 +2,18 @@ import React, {useState, useEffect, useReducer} from 'react'
 import { ClickAwayListener } from "@mui/material";
 import circleDotted from "../assets/images/circle-dotted.svg";
 import playIcon from "../assets/images/playIcon.svg";
-import MovieCardDropdown from "./MovieCardDropdown";
+import {MovieCardDropdown} from "./MovieCardDropdown";
 import {Link} from 'react-router-dom';
 import $ from 'jquery'
 import {GetMovieVideos, GetTvShowVideos} from '../Services'
 import {ImagesPathEnum} from '../Enums'
 
-export default function TrailerCard({
+export const TrailerCard = ({
   changeModalUrl,
   changeModalVisibility,
   mediaData,
   activeOption
-}) {
+}) => {
 
   const initialState = {
     backdrop:'',

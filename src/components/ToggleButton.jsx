@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 
-export default function ToggleButton({
+export const ToggleButton = ({
   setActiveOption,
   optionOneText,
   optionTwoText
-}) {
+}) => {
 
   const [buttonPosition, setButtonPosition] = useState("slide-left");
   const [firstChoiceText, setFirstChoiceText] = useState('gradient-text');

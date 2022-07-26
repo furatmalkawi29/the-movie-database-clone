@@ -8,7 +8,7 @@ import { useLocation} from 'react-router-dom'
 import {GetMovieKeywords, GetTvShowKeywords} from '../Services'
 import {ImagesPathEnum} from '../Enums'
 
-export default function MediaFacts({mediaData,
+export function MediaFacts({mediaData,
   mediaType}) {
 
   const reducer = (state, action) => {
@@ -145,7 +145,6 @@ state.productionCompanies&&state.productionCompanies.map(item=>(
 
 <div className="keywords">
 <h2>Keywords</h2>
-{console.log('state.mediaKeywords',state.mediaKeywords)}
 {
   state.mediaKeywords&&state.mediaKeywords.map(item=>(
 <div><span>{item.name}</span></div>

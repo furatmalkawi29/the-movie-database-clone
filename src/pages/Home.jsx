@@ -10,7 +10,7 @@ import {GetWeekTrendingMovies,
   GetPopularTvShows,} from '../Services'
 import {MediaCardsEnums} from '../Enums'
 
-export default function Home() {
+export const Home = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [trailerUrl, setTrailerUrl] = useState('');
 

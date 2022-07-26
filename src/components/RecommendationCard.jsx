@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 import movieImagePlaceholder from '../assets/images/movie-image-placeholder.svg';
 import {ImagesPathEnum} from '../Enums'
 
-export default function RecommendationCard({
+export function RecommendationCard({
   data
 }) {
 

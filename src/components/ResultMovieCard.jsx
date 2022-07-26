@@ -2,13 +2,12 @@ import React from 'react'
 import movieImagePlaceholder from '../assets/images/movie-image-placeholder.svg';
 import {ImagesPathEnum} from '../Enums'
 
-export default function ResultMovieCard({data}) {
+export const ResultMovieCard = ({data}) => {
 
   return (
     data&&!data.adult&&((data.media_type=='person'||data.known_for)&&
     <div className='search-person-container'>
       <div className='search-person-img-container'>
-        {console.log((data.profile_path&&`${ImagesPathEnum.face.w90_and_h90.value}${data.profile_path}`))}
         <img src={(data.profile_path&&`${ImagesPathEnum.face.w90_and_h90.value}${data.profile_path}`)||movieImagePlaceholder} className={(!data.profile_path&&'search-person-default-image')}/>
       </div>
       <div className='search-person-info'>

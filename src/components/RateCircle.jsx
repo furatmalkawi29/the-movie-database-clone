@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import $ from "jquery";
 
-export default function RateCircle({ percentage, size }) {
+export const RateCircle = ({ percentage, size }) => {
   const [dimentions, setDimentions] = useState({});
 
   const [fontStyle, setFontStyle] = useState({});

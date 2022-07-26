@@ -1,7 +1,7 @@
 import React from "react";
 import tmdLogo from '../assets/images/mobile-logo.svg'
 
-export default function Footer() {
+export const Footer =() => {
   return (
     <footer>
 
