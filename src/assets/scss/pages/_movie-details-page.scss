@@ -53,7 +53,6 @@
   z-index: 20;
   margin-left: 16px;
   margin-right: 30px;
-  cursor: pointer;
 
   span {
     width: max-content;
@@ -69,7 +68,7 @@
 .wrapper-link:hover,
 .cast-card h4:hover,
 .view-more span:hover {
-  cursor: pointer;
+   
   opacity: 0.5;
 }
 
@@ -118,7 +117,7 @@
 
 .tabs-menu {
   div {
-    cursor: pointer;
+     
   }
 }
 
@@ -172,7 +171,7 @@
   border-radius: 50%;
   top: 39%;
   left: 43%;
-  cursor: pointer;
+   
 
   img {
     position: relative;

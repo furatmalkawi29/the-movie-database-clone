@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useReducer, useCallback } from "react";
 import BottomMenu from "../components/BottomMenu";
 import MovieDetailsHeader from "../components/MovieDetailsHeader";
-import MovieFacts from "../components/MovieFacts";
+import MediaFacts from "../components/MediaFacts";
 import TopMenu from "../components/TopMenu";
 import CastCard from "../components/CastCard";
 import rightArrow from "../assets/images/right-arrow.svg";
@@ -32,7 +32,7 @@ export default function MovieDetailsPage() {
   // const [isLoading, setIsLoading] = useState(true);
 
   //convert to state + reducer 
-  const [movieData, setMovieData] = useState({});
+  const [movieData, setMovieData] = useState(null);
   const [mediaCast, setMediaCast] = useState([]);
   const [movieReviews, setMediaReviews] = useState([5]);
   const [movieMediaImages, setMovieMediaImages] = useState([]);
@@ -68,7 +68,7 @@ export default function MovieDetailsPage() {
         : await GetTvShowVideos(id);
 
     if (!(response && response.status && response.status !== 200)) {
-      setMediaVideo((response&&response.length > 0 && response[0]) || null);
+      setMediaVideo((response&&response.results&&response.results.length > 0 && response.results[0]) || null);
     }
   };
 
@@ -79,7 +79,7 @@ export default function MovieDetailsPage() {
         : await GetTvShowRecommendations(id);
 
     if (!(response && response.status && response.status !== 200)) {
-      setMediaRecommendations((response&&response.length > 0 && response) || null);
+      setMediaRecommendations((response&&response.results&&response.results.length > 0 && response.results) || null);
     }
   };
 
@@ -90,7 +90,7 @@ export default function MovieDetailsPage() {
         : await GetTvShowReviews(id);
 
     if (!(response && response.status && response.status !== 200)) {
-      setMediaReviews(response || []);
+      setMediaReviews(response.results || []);
     }
   };
 
@@ -115,7 +115,7 @@ export default function MovieDetailsPage() {
   useEffect(() => {
     navigate(`/${mediaType}/${id}`);
     getMediaDetails();
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     getMediaCredits();
@@ -123,7 +123,7 @@ export default function MovieDetailsPage() {
     getMediaVideos();
     getMediaRecommendations();
     getMediaReviews();
-  }, [movieData]);
+  }, [movieData, id]);
 
   return (
     <>
@@ -163,9 +163,7 @@ export default function MovieDetailsPage() {
               {(movieReviews && movieReviews.length > 0 && (
                 <>
                   <ReviewCard
-                    data={
-                      movieReviews && movieReviews.length > 0 && movieReviews[0]
-                    }
+                    data={movieReviews.find((item) => item)}
                   />
                   <p className="wrapper-link">Read All Reviews</p>
                 </>
@@ -197,12 +195,13 @@ export default function MovieDetailsPage() {
                 </div>
               </div>
             </div>
+            {console.log('mediaVideo',mediaVideo)}
             <div className="media-cards-container">
               {mediaVideo && mediaVideo.site === "YouTube" && (
                 <div className="thumbnail">
                   <img
                     className="thumbnail-img"
-                    src={`https://img.youtube.com/vi/${mediaVideo.key}/sddefault.jpg`}
+                    src={`https://i.ytimg.com/vi/${mediaVideo.key}/sddefault.jpg`}
                     alt=""
                   />
                   <div className="thumbnail-btn">
@@ -237,7 +236,10 @@ export default function MovieDetailsPage() {
           </section>
         </div>
         <div>
-          <MovieFacts movieData={movieData} />
+          <MediaFacts 
+          mediaData={movieData}
+          mediaType={mediaType}
+          />
         </div>
       </section>
       <BottomMenu />

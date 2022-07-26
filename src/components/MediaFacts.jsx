@@ -8,8 +8,8 @@ import { useLocation} from 'react-router-dom'
 import {GetMovieKeywords, GetTvShowKeywords} from '../Services'
 import {ImagesPathEnum} from '../Enums'
 
-export default function MovieFacts({movieData}) {
-  let {pathname} = useLocation();
+export default function MediaFacts({mediaData,
+  mediaType}) {
 
   const reducer = (state, action) => {
     return { ...state, [action.id]: action.value };
@@ -21,73 +21,59 @@ export default function MovieFacts({movieData}) {
     status: '-',
     originalName: '-',
     originalLanguage: '-',
-    movieKeywords: [],
-    movieHomePageLink: ''
+    mediaKeywords: [],
+    homePageLink: ''
   }
   const [state,setState] = useReducer(reducer,initialState);
 
-  const getMovieKeywords = async () =>{
 
-    if(pathname){
-      if(movieData.id&&pathname.includes('movie')){
-       
-        const response = await GetMovieKeywords(movieData.id)
-    
-        if(!(response&&response.status)){
-          setState({
-            id:'movieKeywords',
-            value: response.keywords
-          })
-        }
-      }else if(movieData.id&&pathname.includes('tv')){
-        const response = await GetTvShowKeywords(movieData.id)
-    
-        if(!(response&&response.status)){
-          setState({
-            id:'movieKeywords',
-            value: response
-          })
-        }
+  const getMediaKeywords = async () => {
+    const response =
+      mediaType === "movie"
+        ? await GetMovieKeywords(mediaData.id)
+        : await GetTvShowKeywords(mediaData.id);
 
-      }
+    if (!(response && response.status && response.status !== 200)) {
+      setState({
+        id:'mediaKeywords',
+        value: response.results
+      })
     }
-
-  }
+  };
 
   useEffect(()=>{
-
-    getMovieKeywords()
-  },[movieData])
+    if(mediaData) getMediaKeywords()
+  },[mediaData])
 
   useEffect(()=>{
 
     setState({
       id:'productionCompanies',
-      value: movieData.production_companies || []
+      value: mediaData?.production_companies || []
     });
     setState({
       id:'type',
-      value: movieData.type || '-'
+      value: mediaData?.type || '-'
     });
     setState({
       id:'status',
-      value: movieData.status || '-'
+      value: mediaData?.status || '-'
     });
     setState({
       id:'originalName',
-      value: movieData.original_name || '-'
+      value: mediaData?.original_name || '-'
     });
     setState({
       id:'originalLanguage',
-      value: movieData.original_language || '-'
+      value: mediaData?.original_language || '-'
     });
     setState({
-      id:'movieHomePageLink',
-      value: movieData.homepage || '#'
+      id:'homePageLink',
+      value: mediaData?.homepage || '#'
     });
 
 
-  },[movieData])
+  },[mediaData])
   return (
     <div className="info-column">
 
@@ -101,7 +87,7 @@ export default function MovieFacts({movieData}) {
   <span/>
 <img src={justwatch} className="justwatch-icon"/>
   <span/>
-  <a href={state.movieHomePageLink} target="_blank">
+  <a href={state.homePageLink} target="_blank">
 <img src={link}/>
   </a>
     
@@ -159,8 +145,9 @@ state.productionCompanies&&state.productionCompanies.map(item=>(
 
 <div className="keywords">
 <h2>Keywords</h2>
+{console.log('state.mediaKeywords',state.mediaKeywords)}
 {
-  state.movieKeywords&&state.movieKeywords.map(item=>(
+  state.mediaKeywords&&state.mediaKeywords.map(item=>(
 <div><span>{item.name}</span></div>
   ))
 }

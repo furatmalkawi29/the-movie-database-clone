@@ -85,7 +85,7 @@ h2{
 display: none;
 
 span{
-  cursor: pointer;
+   
 
 }
 }
@@ -134,7 +134,7 @@ div{
   height: 46px;
   width: 46px;
   margin: 0 10px;
-  cursor: pointer;
+   
 }
 
 svg{
@@ -221,7 +221,7 @@ transition: .3s;
   left: 135px;
     opacity: 0;
     color: white;
-    cursor: pointer;
+     
     transition: .3s;
 
     span{
@@ -234,12 +234,12 @@ transition: .3s;
 
   .play-btn:hover, .line-1 h2:hover ,  .movie-category span:hover, .line-6 h4:hover {
     opacity: .7;
-    cursor: pointer;
+     
   }
   
   .rate-circle-container:hover{
   transform: scale(1.07);
-  cursor: pointer;
+   
   }
 
 
@@ -247,7 +247,7 @@ transition: .3s;
 
   .poster-wrapper:hover .poster-glass-cover, .poster-wrapper:hover .poster-overlay {
 opacity:1;
-cursor: pointer;
+ 
   }
 
      

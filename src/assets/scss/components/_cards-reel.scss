@@ -31,7 +31,7 @@ position: relative;
 display: flex;
 border: solid 1px $tmdb-dark-blue;
 border-radius: 50px;
-cursor: pointer;
+ 
 height: 30px;
 width:200px;
 
@@ -85,7 +85,7 @@ div{
 
   a{
     color: inherit;
-    cursor: pointer;
+     
     text-decoration: none;
   }
 }
@@ -122,7 +122,7 @@ flex-direction: column;
 background-color: $tmdb-dark-blue;
 width: max-content;
 border-radius: 50px;
-cursor: pointer;
+ 
 padding: 6px 20px;
 box-sizing: border-box;
 
@@ -150,7 +150,7 @@ svg {
   background:linear-gradient(to right, #c0fecf 0%, #1ed5a9 100%);
   width: 120px;
   height: 57px;
-  cursor: pointer;
+   
   color: $tmdb-dark-blue;
   padding: 8px 20px;
   padding-top: 32px;

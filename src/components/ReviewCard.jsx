@@ -16,17 +16,17 @@ export default function ReviewCard({
 
         <div className="author-info">
           <div>
-            <p>A review by {data&&data.author}</p>
+            <p>A review by {data?.author}</p>
             <div className="star-rate">
               <img src={star} alt=""/>
               <span>{data&&data.author_details&&data.author_details.rating}</span></div>
           </div>
-          <p className="review-date">Written by <span>{data&&data.author}</span> on {data&&data.created_at&&moment(data.created_at).format('LL')}</p>
+          <p className="review-date">Written by <span>{data?.author}</span> on {data?.created_at&&moment(data?.created_at).format('LL')}</p>
         </div>
       </div>
 
       <div className="review-body">
-        {<p>{data&&data.content}</p>}
+        {<p>{data?.content}</p>}
       </div>
     </div>
   )

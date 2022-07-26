@@ -104,7 +104,7 @@ const GetTvShowDetails = async (id)=>{
   const queryList = [];
   queryList.push(`api_key=${config.api_key}`);
 
-    const result = await axios.get(`${config.server_address}/tv/${id}/Reviews?${queryList.join('&')}`)
+    const result = await axios.get(`${config.server_address}/tv/${id}/reviews?${queryList.join('&')}`)
         .then((response) => response.data)
         .catch((error) => error.response);
 
@@ -115,7 +115,7 @@ const GetTvShowDetails = async (id)=>{
   const queryList = [];
   queryList.push(`api_key=${config.api_key}`);
 
-    const result = await axios.get(`${config.server_address}/tv/${id}/Keywords?${queryList.join('&')}`)
+    const result = await axios.get(`${config.server_address}/tv/${id}/keywords?${queryList.join('&')}`)
         .then((response) => response.data)
         .catch((error) => error.response);
 

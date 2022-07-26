@@ -46,8 +46,10 @@ export default function TrailerCard({
 
       if (!(response && response.status && response.status !== 200)) {
         const trailerData =  response.results.find(item=>item.site === 'YouTube'&&(item.type==="Trailer"||item.type==="Clip"))
-        trailerData.id = mediaData.id;
-        setTrailerDetails(trailerData)  
+        if(trailerData) {
+          trailerData.id = mediaData.id;
+          setTrailerDetails(trailerData)  
+        }
     }
   };
 
@@ -138,7 +140,7 @@ return (
 
     <div className="trailer-info">
       <h3><Link to="">{state.name}</Link></h3>
-      <p>Preview - Best Christmas Party Ever</p>
+      {/* <p>Preview - Best Christmas Party Ever</p> */}
     </div>
    </div>
    </div>||null
