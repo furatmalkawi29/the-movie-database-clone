@@ -1,6 +1,7 @@
 import React from 'react'
 import star from '../assets/images/star.svg'
 import moment from 'moment';
+import {ImagesPathEnum} from '../Enums'
 
 export default function ReviewCard({
   data

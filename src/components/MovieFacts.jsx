@@ -6,6 +6,7 @@ import link from '../assets/images/link.svg'
 import justwatch from '../assets/images/justwatch.svg'
 import { useLocation} from 'react-router-dom'
 import {GetMovieKeywords, GetTvShowKeywords} from '../Services'
+import {ImagesPathEnum} from '../Enums'
 
 export default function MovieFacts({movieData}) {
   let {pathname} = useLocation();
@@ -124,7 +125,7 @@ export default function MovieFacts({movieData}) {
 <div className="network-img">
   {
 state.productionCompanies&&state.productionCompanies.map(item=>(
-  item.logo_path?<img src={`https://www.themoviedb.org/t/p/h30/${item.logo_path}`}/>:null
+  item.logo_path?<img src={`${ImagesPathEnum.logo.h30.value}/${item.logo_path}`}/>:null
 ))
   }
 </div>

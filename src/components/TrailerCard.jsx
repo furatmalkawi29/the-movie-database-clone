@@ -5,14 +5,15 @@ import playIcon from "../assets/images/playIcon.svg";
 import MovieCardDropdown from "./MovieCardDropdown";
 import {Link} from 'react-router-dom';
 import $ from 'jquery'
+import {GetMovieVideos, GetTvShowVideos} from '../Services'
+import {ImagesPathEnum} from '../Enums'
 
 export default function TrailerCard({
   id,
   changeModalUrl,
   changeModalVisibility,
-  moviesAndSeiresTrailers,
-  movieData
-
+  mediaData,
+  activeOption
 }) {
 
   const initialState ={
@@ -27,6 +28,8 @@ export default function TrailerCard({
   const [open, setOpen] = useState(false);
   const [state, setState] = useReducer(reducer,initialState);
 
+  const [trailerData,setTrailerData] = useState([]);
+
   const handleClick = () => {
     setOpen((prev) => !prev);
   };
@@ -35,27 +38,47 @@ export default function TrailerCard({
     setOpen(false);
   };
 
-  // https://www.themoviedb.org/t/p/w355_and_h200_multi_faces/o56X5GUWgzkGJ90QDWn6NNkGEN7.jpg
+  console.log('trailerData',trailerData);
+
+  const getMoviesAndSeiresVedios = async (id) => {
+
+      const response =
+        activeOption === 1
+          ? await GetMovieVideos(id)
+          : await GetTvShowVideos(id);
+
+      if (!(response && response.status && response.status !== 200)) {
+        const test =  response.results.find(item=>item.site === 'YouTube'&&(item.type==="Trailer"||item.type==="Clip"))
+        console.log('test',test);
+        test.id = id;
+    setTrailerData(test)  
+    }
+  };
+
   useEffect(()=>{
-    if(moviesAndSeiresTrailers&&movieData){
+    getMoviesAndSeiresVedios();
+},[mediaData])
+
+  useEffect(()=>{
+    if(trailerData&&mediaData){
       setState({
         id:"trailerUrl",
-        value:(moviesAndSeiresTrailers[id]&&moviesAndSeiresTrailers[id].key&& `https://www.youtube.com/embed/${moviesAndSeiresTrailers[id]&&moviesAndSeiresTrailers[id].key}`)
+        value:(trailerData&&trailerData.key&& `https://www.youtube.com/embed/${trailerData.key}`)
       })
       setState({
         id:"thumbnailUrl",
-        value:(movieData&&movieData.poster_path&& `https://www.themoviedb.org/t/p/w355_and_h200_multi_faces/${movieData.poster_path}`)
+        value:(mediaData&&mediaData.poster_path&& `${ImagesPathEnum.multi_faces.w355_and_h200.value}/${mediaData.poster_path}`)
       })
       setState({
         id:"backdrop",
-        value:(movieData&&movieData.backdrop_path&& `https://www.themoviedb.org/t/p/w780/${movieData.backdrop_path}`)
+        value:(mediaData&&mediaData.backdrop_path&& `${ImagesPathEnum.backdrop.w780.value}/${mediaData.backdrop_path}`)
       })
       setState({
         id:"name",
-        value:movieData.original_title||movieData.name||''
+        value:mediaData.original_title||mediaData.name||''
       })
     }
-  },[moviesAndSeiresTrailers,movieData,id])
+  },[trailerData,mediaData,id])
   
   useEffect(()=>{
     
@@ -119,7 +142,7 @@ return (
 
     <div className="trailer-info">
       <h3><Link to="">{state.name}</Link></h3>
-      {/* <p>Preview - Best Christmas Party Ever</p> */}
+      <p>Preview - Best Christmas Party Ever</p>
     </div>
    </div>
    </div>||null

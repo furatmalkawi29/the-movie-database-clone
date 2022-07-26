@@ -23,6 +23,7 @@ import {
   GetMovieDetails,
   GetTvShowDetails,
 } from "../Services";
+import {ImagesPathEnum} from '../Enums'
 
 export default function MovieDetailsPage() {
   const { id, mediaType} = useParams();
@@ -213,7 +214,7 @@ export default function MovieDetailsPage() {
                 movieMediaImages.map((item) => (
                   <img
                     className="media-img"
-                    src={`https://www.themoviedb.org/t/p/w533_and_h300_bestv2/${item.file_path}`}
+                    src={`${ImagesPathEnum.bestv2.w533_and_h300.value}/${item.file_path}`}
                     alt=""
                   />
                 ))}

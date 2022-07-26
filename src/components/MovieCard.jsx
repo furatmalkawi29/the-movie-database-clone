@@ -7,6 +7,7 @@ import movieImagePlaceholder from '../assets/images/movie-image-placeholder.svg'
 import moment from 'moment';
 // import { useSelector } from 'react-redux';
 import {Skeleton} from './SkeletonComponents';
+import {ImagesPathEnum} from '../Enums'
 
 export default function MovieCard({ 
   id,
@@ -54,9 +55,11 @@ setState({
   value:(movieData.vote_average&&roundRatingNumber(movieData.vote_average*10)
   )||null
 })
+
+console.log();
 setState({
   id:"imageUrl",
-  value:(movieData.backdrop_path&&`https://www.themoviedb.org/t/p/w220_and_h330_face/${movieData.backdrop_path}`)||null
+  value:(movieData.backdrop_path&&`${ImagesPathEnum.face.w220_and_h330.value}/${movieData.backdrop_path}`)||null
 })
 
   }

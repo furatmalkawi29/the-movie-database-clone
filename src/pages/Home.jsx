@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {CardsReel,Header,TrailerModal} from "../components";
+import {TrailerCardsContainer,Header,TrailerModal} from "../components";
 import {MediaCardsContainer} from '../components/MediaCardsContainer'
 import { useTitle } from '../assets/Hookes';
 import {GetWeekTrendingMovies,
@@ -39,7 +39,7 @@ export default function Home() {
     optionTwoServiceFunction={GetPopularTvShows}
     />
 
-      <CardsReel 
+      <TrailerCardsContainer 
         reelType="now_playing"
         heading="Latest Trailers"
         reelId="3"

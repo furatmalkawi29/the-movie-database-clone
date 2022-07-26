@@ -1,5 +1,6 @@
 import React from 'react'
 import movieImagePlaceholder from '../assets/images/movie-image-placeholder.svg';
+import {ImagesPathEnum} from '../Enums'
 
 export default function ResultMovieCard({data}) {
 
@@ -7,8 +8,8 @@ export default function ResultMovieCard({data}) {
     data&&!data.adult&&((data.media_type=='person'||data.known_for)&&
     <div className='search-person-container'>
       <div className='search-person-img-container'>
-        {console.log((data.profile_path&&`https://www.themoviedb.org/t/p/w90_and_h90_face${data.profile_path}`))}
-        <img src={(data.profile_path&&`https://www.themoviedb.org/t/p/w90_and_h90_face${data.profile_path}`)||movieImagePlaceholder} className={(!data.profile_path&&'search-person-default-image')}/>
+        {console.log((data.profile_path&&`${ImagesPathEnum.face.w90_and_h90.value}${data.profile_path}`))}
+        <img src={(data.profile_path&&`${ImagesPathEnum.face.w90_and_h90.value}${data.profile_path}`)||movieImagePlaceholder} className={(!data.profile_path&&'search-person-default-image')}/>
       </div>
       <div className='search-person-info'>
       <p className='search-person-name'>{data.name}</p>
@@ -17,7 +18,7 @@ export default function ResultMovieCard({data}) {
     </div> ||(
     <div className='result-movie-card'>
       <div className='search-card-img-container'>
-      <img src={(data.backdrop_path&&`https://www.themoviedb.org/t/p/w94_and_h141_bestv2/${data.backdrop_path}`)||movieImagePlaceholder} alt="" className={(!data.backdrop_path&&'search-default-image')} />
+      <img src={(data.backdrop_path&&`${ImagesPathEnum.bestv2.w94_and_h141.value}/${data.backdrop_path}`)||movieImagePlaceholder} alt="" className={(!data.backdrop_path&&'search-default-image')} />
       </div>
       <div className='card-info'>
         <div className='top-info'>

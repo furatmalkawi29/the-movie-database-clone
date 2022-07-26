@@ -9,7 +9,7 @@ import { FaPlay } from 'react-icons/fa'
 import { HiArrowsExpand } from 'react-icons/hi'
 import { useColor } from "color-thief-react";
 import {GetCreditsDetails} from '../Services/PeopleServices'
-
+import { ImagesPathEnum } from '../Enums';
 
 
 export default function MovieDetailsHeader({ id, movieData }) {
@@ -69,11 +69,11 @@ export default function MovieDetailsHeader({ id, movieData }) {
       })
       setState({
         id: "posetrUrl",
-        value: ((movieData.poster_path || movieData.backdrop_path) && `https://www.themoviedb.org/t/p/w220_and_h330_face/${movieData.poster_path || movieData.backdrop_path}`) || null
+        value: ((movieData.poster_path || movieData.backdrop_path) && `${ImagesPathEnum.face.w220_and_h330.value}/${movieData.poster_path || movieData.backdrop_path}`) || null
       })
       setState({
         id: "backdropUrl",
-        value: ( movieData.backdrop_path && `https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/${movieData.backdrop_path}`) || null
+        value: ( movieData.backdrop_path && `${ImagesPathEnum.multi_faces.w1920_and_h800.value}/${movieData.backdrop_path}`) || null
       })
       setState({
         id: "overview",

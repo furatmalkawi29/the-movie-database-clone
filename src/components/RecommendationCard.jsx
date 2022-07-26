@@ -2,6 +2,8 @@ import React from 'react'
 import calender from '../assets/images/calender.svg'
 import {Link} from 'react-router-dom'
 import movieImagePlaceholder from '../assets/images/movie-image-placeholder.svg';
+import {ImagesPathEnum} from '../Enums'
+
 export default function RecommendationCard({
   data
 }) {
@@ -14,7 +16,7 @@ export default function RecommendationCard({
     <Link to={`/${data.media_type}/${data.id}`}>
     <div className="recommendation-card">
       <div className="poster-container" title={data&&data.name || data&&data.title||null}>
-        <img className="poster" src={(data&&data.poster_path&&`https://www.themoviedb.org/t/p/w250_and_h141_face/${data&&data.poster_path}`)||movieImagePlaceholder} alt="" />
+        <img className="poster" src={(data&&data.poster_path&&`${ImagesPathEnum.face.w250_and_h141.value}/${data&&data.poster_path}`)||movieImagePlaceholder} alt="" />
         <div className="date-box">
           <img src={calender} alt="" />
           <span>{data&&data.first_air_date||data&&data.release_date||null}</span>

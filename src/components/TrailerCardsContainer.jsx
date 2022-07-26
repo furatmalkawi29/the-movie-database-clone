@@ -1,20 +1,21 @@
-// import React from "react"
+import React, { useEffect, useState } from 'react'
+import TrailerCard from './TrailerCard';
+import ToggleButton from './ToggleButton'
+import { Link } from 'react-router-dom'
 
-import React, { useEffect, useState } from "react";
-import MovieCard from "./MovieCard";
-import ToggleButton from "./ToggleButton";
-import { Link } from "react-router-dom";
-
-export const MediaCardsContainer = ({
+export const TrailerCardsContainer = ({ reelId,
+  changeModalVisibility,
+  changeModalUrl,
   containerTitleText,
   optionOneServiceFunction,
   optionTwoServiceFunction,
   optionOneText,
   optionTwoText,
 }) => {
-  const [data, setData] = useState([]);
-  const [mediaType, setMediaType] = useState("movie");
+  const [data, setData] = useState(null)
   const [activeOption, setActiveOption] = useState(1);
+  const [mediaType, setMediaType] = useState("movie");
+
 
   const getMediaCardsData = async () => {
     if (activeOption && optionOneServiceFunction && optionOneServiceFunction) {
@@ -30,8 +31,8 @@ export const MediaCardsContainer = ({
   };
 
   const getMediaType = () => {
-    const tvMediaType = data&&data.find((item) => item.first_air_date);
-    const movieMediaType = data&&data.find((item) => item.release_date);
+    const tvMediaType = data && data.find((item) => item.first_air_date);
+    const movieMediaType = data && data.find((item) => item.release_date);
 
     if (tvMediaType) {
       setMediaType("tv");
@@ -40,16 +41,20 @@ export const MediaCardsContainer = ({
     }
   };
 
+
   useEffect(() => {
     getMediaCardsData();
   }, [activeOption, optionOneServiceFunction, optionOneServiceFunction]);
-  
+
+
+
   useEffect(() => {
     getMediaType();
-  }, [data]);
+  }, [data])
 
   return (
-    <section id={`cards-reel-${4}`} className="cards-reel">
+    <section id={`cards-reel-${reelId}`} className='cards-reel' >
+
       <div className="reel-top-container">
         <h2>{containerTitleText}</h2>
 
@@ -60,20 +65,19 @@ export const MediaCardsContainer = ({
         />
       </div>
 
-      <div className="cards-container">
-        {data &&
-          data.map((item) => {
-            return (
-              <Link to={`/${mediaType}/${item.id}`}>
-                <MovieCard
-                  key={`${item.id}`}
-                  movieData={item}
-                  id={`${item.id}`}
-                />
-              </Link>
-            );
-          })}
+
+      <div className='cards-container'>
+        {data && data.map(item => <TrailerCard
+          id={`${item.id}`}
+          mediaData={item}
+          changeModalUrl={changeModalUrl}
+          changeModalVisibility={changeModalVisibility}
+          activeOption={activeOption}
+        />
+        )
+        }
       </div>
     </section>
-  );
-};
+  )
+}
+

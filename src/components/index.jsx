@@ -1,5 +1,5 @@
 export * from './BottomMenu'
-export * from './CardsReel'
+export * from './TrailerCardsContainer'
 export * from './CastCard'
 export * from './DropdownMenu'
 export * from './Footer'

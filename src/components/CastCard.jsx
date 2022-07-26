@@ -1,4 +1,5 @@
 import React from 'react'
+import {ImagesPathEnum} from '../Enums'
 
 export default function CastCard({castData}) {
 
@@ -13,7 +14,7 @@ export default function CastCard({castData}) {
     <div className="cast-card">
       {
         castData.profile_path&&
-      <img src={`https://www.themoviedb.org/t/p/w138_and_h175_face/${castData.profile_path}`}/>||
+      <img src={`${ImagesPathEnum.face.w138_and_h175.value}/${castData.profile_path}`}/>||
       <div className='cast-card-img-container'>
       <img className="cast-card-default-img" src={`https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg`}/>
       </div>
