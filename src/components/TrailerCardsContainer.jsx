@@ -68,7 +68,6 @@ export const TrailerCardsContainer = ({ reelId,
 
       <div className='cards-container'>
         {data && data.map(item => <TrailerCard
-          id={`${item.id}`}
           mediaData={item}
           changeModalUrl={changeModalUrl}
           changeModalVisibility={changeModalVisibility}

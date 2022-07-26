@@ -9,14 +9,13 @@ import {GetMovieVideos, GetTvShowVideos} from '../Services'
 import {ImagesPathEnum} from '../Enums'
 
 export default function TrailerCard({
-  id,
   changeModalUrl,
   changeModalVisibility,
   mediaData,
   activeOption
 }) {
 
-  const initialState ={
+  const initialState = {
     backdrop:'',
     trailerUrl:'',
     thumbnailUrl:'',
@@ -27,8 +26,7 @@ export default function TrailerCard({
   };
   const [open, setOpen] = useState(false);
   const [state, setState] = useReducer(reducer,initialState);
-
-  const [trailerData,setTrailerData] = useState([]);
+  const [trailerDetails,setTrailerDetails] = useState([]);
 
   const handleClick = () => {
     setOpen((prev) => !prev);
@@ -38,32 +36,30 @@ export default function TrailerCard({
     setOpen(false);
   };
 
-  console.log('trailerData',trailerData);
 
-  const getMoviesAndSeiresVedios = async (id) => {
+  const getTrailerDetails = async () => {
 
       const response =
         activeOption === 1
-          ? await GetMovieVideos(id)
-          : await GetTvShowVideos(id);
+          ? await GetMovieVideos(mediaData.id)
+          : await GetTvShowVideos(mediaData.id);
 
       if (!(response && response.status && response.status !== 200)) {
-        const test =  response.results.find(item=>item.site === 'YouTube'&&(item.type==="Trailer"||item.type==="Clip"))
-        console.log('test',test);
-        test.id = id;
-    setTrailerData(test)  
+        const trailerData =  response.results.find(item=>item.site === 'YouTube'&&(item.type==="Trailer"||item.type==="Clip"))
+        trailerData.id = mediaData.id;
+        setTrailerDetails(trailerData)  
     }
   };
 
   useEffect(()=>{
-    getMoviesAndSeiresVedios();
+    getTrailerDetails();
 },[mediaData])
 
   useEffect(()=>{
-    if(trailerData&&mediaData){
+    if(trailerDetails&&mediaData){
       setState({
         id:"trailerUrl",
-        value:(trailerData&&trailerData.key&& `https://www.youtube.com/embed/${trailerData.key}`)
+        value:(trailerDetails&&trailerDetails.key&& `https://www.youtube.com/embed/${trailerDetails.key}`)
       })
       setState({
         id:"thumbnailUrl",
@@ -78,7 +74,7 @@ export default function TrailerCard({
         value:mediaData.original_title||mediaData.name||''
       })
     }
-  },[trailerData,mediaData,id])
+  },[trailerDetails,mediaData])
   
   useEffect(()=>{
     
@@ -92,7 +88,7 @@ export default function TrailerCard({
   
   
   /*change background to the trailer thumbnail when hovering over the card  */
-  $(`#trailer-card-${id}`).off().on("mouseenter",function(){
+  $(`#trailer-card-${mediaData.id}`).off().on("mouseenter",function(){
 
     $('#cards-reel-3').css({backgroundImage:`linear-gradient(to right, rgba(3, 37, 65, 0.8) 0%, rgba(3, 37, 65, .75) 100%), url(${state.backdrop})`,backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
@@ -102,7 +98,7 @@ export default function TrailerCard({
 
 
 
-$(`#trailer-play-btn-${id}`).on('click',function(){
+$(`#trailer-play-btn-${mediaData.id}`).on('click',function(){
 
   /* render trailer modal */
   changeModalVisibility();
@@ -119,10 +115,10 @@ $(`#trailer-play-btn-${id}`).on('click',function(){
 
 return (
   state.trailerUrl&&
-    <div id={`trailer-container-${id}`} className="trailer-container">
+    <div id={`trailer-container-${mediaData.id}`} className="trailer-container">
       {/* hide dropdown when it detects clicks outside dropdown component*/}
 
-    <div id={`trailer-card-${id}`} className="trailer-card" >
+    <div id={`trailer-card-${mediaData.id}`} className="trailer-card" >
     <div className="movie-trailer">
       <ClickAwayListener onClickAway={handleClickAway}>
         <div>
@@ -137,7 +133,7 @@ return (
           <Link to="/">
       <img className="trailer-thumbnail" src={state.thumbnailUrl}/>
        </Link>
-      <img id={`trailer-play-btn-${id}`} className="play-icon" src={playIcon}/>
+      <img id={`trailer-play-btn-${mediaData.id}`} className="play-icon" src={playIcon}/>
     </div>
 
     <div className="trailer-info">
