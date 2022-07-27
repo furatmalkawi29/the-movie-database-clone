@@ -1,8 +1,7 @@
 import React from 'react'
-import calender from '../assets/images/calender.svg'
 import {Link} from 'react-router-dom'
 import movieImagePlaceholder from '../assets/images/movie-image-placeholder.svg';
-import {ImagesPathEnum} from '../Enums'
+import {ImagesPathEnum, AssetImagesEnums} from '../Enums'
 
 export function RecommendationCard({
   data
@@ -18,7 +17,7 @@ export function RecommendationCard({
       <div className="poster-container" title={data&&data.name || data&&data.title||null}>
         <img className="poster" src={(data&&data.poster_path&&`${ImagesPathEnum.face.w250_and_h141.value}/${data&&data.poster_path}`)||movieImagePlaceholder} alt="" />
         <div className="date-box">
-          <img src={calender} alt="" />
+          <img src={AssetImagesEnums.calender.Img} alt="" />
           <span>{data&&data.first_air_date||data&&data.release_date||null}</span>
         </div>
       </div>

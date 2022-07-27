@@ -1,9 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import blueShortLogo from "../assets/images/blue_short-logo.svg";
-import plus from "../assets/images/plus.svg";
-import magnifier from "../assets/images/magnifier.svg";
 import {DropdownMenu} from "../components";
+import { LogosEnums, AssetImagesEnums } from '../Enums';
 import $ from 'jquery'
 
 export const Navbar = () => {
@@ -23,7 +21,7 @@ export const Navbar = () => {
     <div className="lg-nav-container">
       <div className="nav-left-part">
       <Link to="">
-        <img className="nav-logo" src={blueShortLogo} />
+        <img className="nav-logo" src={LogosEnums.blueShortLogo.Img} />
       </Link>
         <div className="nav-items-container">
           <div className="menu-1">
@@ -75,7 +73,7 @@ export const Navbar = () => {
       <div className="nav-right-part">
         <div>
           <Link to="">
-            <img className="plus" src={plus} />
+            <img className="plus" src={AssetImagesEnums.plus.Img} />
           </Link>
         </div>
         <div>
@@ -88,7 +86,7 @@ export const Navbar = () => {
           <Link to="">Join TMDB</Link>
         </div>
         <div>
-          <img className="magnifier" src={magnifier} />
+          <img className="magnifier" src={AssetImagesEnums.magnifier.Img} />
         </div>
       </div>
     </div>

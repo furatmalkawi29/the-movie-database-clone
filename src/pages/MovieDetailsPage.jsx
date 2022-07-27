@@ -3,8 +3,7 @@ import {
   BottomMenu, MovieDetailsHeader, MediaFacts,
   TopMenu, CastCard, RecommendationCard, ReviewCard
 } from "../components";
-import rightArrow from "../assets/images/right-arrow.svg";
-import playIcon from "../assets/images/playIcon.svg";
+import {ImagesPathEnum, AssetImagesEnums, IconsEnums} from '../Enums';
 import { useParams, useNavigate } from "react-router-dom";
 import {
   GetMovieCredits,
@@ -20,7 +19,6 @@ import {
   GetMovieDetails,
   GetTvShowDetails,
 } from "../Services";
-import { ImagesPathEnum } from '../Enums'
 
 export const MovieDetailsPage = () => {
   const { id, mediaType } = useParams();
@@ -135,7 +133,7 @@ export const MovieDetailsPage = () => {
                 mediaCast.map((item) => <CastCard castData={item} />)}
               <div className="view-more">
                 <span>View More</span>
-                <img src={rightArrow} />
+                <img src={AssetImagesEnums.rightArrow.Img} />
               </div>
             </div>
             <p className="wrapper-link">Full Cast & Crew</p>
@@ -200,7 +198,7 @@ export const MovieDetailsPage = () => {
                     alt=""
                   />
                   <div className="thumbnail-btn">
-                    <img src={playIcon} alt="play-button" />
+                    <img src={IconsEnums.playIcon.Img} alt="play-button" />
                   </div>
                 </div>
               )}

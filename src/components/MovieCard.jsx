@@ -1,11 +1,10 @@
 import React, { useState, useReducer, useEffect } from "react";
 import {RateCircle, MovieCardDropdown} from "../components";
 import { ClickAwayListener } from "@mui/material";
-import circleDotted from "../assets/images/circle-dotted.svg";
 import movieImagePlaceholder from '../assets/images/movie-image-placeholder.svg';
 import moment from 'moment';
 // import { useSelector } from 'react-redux';
-import {ImagesPathEnum} from '../Enums'
+import {ImagesPathEnum, AssetImagesEnums} from '../Enums'
 
 export const MovieCard = ({ 
   id,
@@ -80,7 +79,7 @@ setState({
         <div>
           <img
             className="dotted-circle"
-            src={circleDotted}
+            src={AssetImagesEnums.circleDotted.Img}
             onClick={handleClick}
             />
           {open ? <MovieCardDropdown /> : null}

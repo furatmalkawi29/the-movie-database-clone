@@ -1,12 +1,10 @@
 import React, {useState, useEffect, useReducer} from 'react'
 import { ClickAwayListener } from "@mui/material";
-import circleDotted from "../assets/images/circle-dotted.svg";
-import playIcon from "../assets/images/playIcon.svg";
 import {MovieCardDropdown} from "./MovieCardDropdown";
 import {Link} from 'react-router-dom';
 import $ from 'jquery'
 import {GetMovieVideos, GetTvShowVideos} from '../Services'
-import {ImagesPathEnum} from '../Enums'
+import {ImagesPathEnum, AssetImagesEnums, IconsEnums} from '../Enums'
 
 export const TrailerCard = ({
   changeModalUrl,
@@ -126,7 +124,7 @@ return (
         <div>
           <img
             className="dotted-circle"
-            src={circleDotted}
+            src={AssetImagesEnums.circleDotted.Img}
             onClick={handleClick}
             />
           {open ? <MovieCardDropdown /> : null}
@@ -135,7 +133,7 @@ return (
           <Link to="/">
       <img className="trailer-thumbnail" src={state.thumbnailUrl}/>
        </Link>
-      <img id={`trailer-play-btn-${mediaData.id}`} className="play-icon" src={playIcon}/>
+      <img id={`trailer-play-btn-${mediaData.id}`} className="play-icon" src={IconsEnums.playIcon.Img}/>
     </div>
 
     <div className="trailer-info">

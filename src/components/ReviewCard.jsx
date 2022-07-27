@@ -1,7 +1,6 @@
 import React from 'react'
-import star from '../assets/images/star.svg'
 import moment from 'moment';
-import {ImagesPathEnum} from '../Enums'
+import {ImagesPathEnum, IconsEnums} from '../Enums'
 
 export function ReviewCard({
   data
@@ -18,7 +17,7 @@ export function ReviewCard({
           <div>
             <p>A review by {data?.author}</p>
             <div className="star-rate">
-              <img src={star} alt=""/>
+              <img src={IconsEnums.star.Img} alt=""/>
               <span>{data&&data.author_details&&data.author_details.rating}</span></div>
           </div>
           <p className="review-date">Written by <span>{data?.author}</span> on {data?.created_at&&moment(data?.created_at).format('LL')}</p>

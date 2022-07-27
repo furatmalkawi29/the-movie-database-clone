@@ -1,13 +1,12 @@
 import React from "react";
-import tmdLogo from '../assets/images/mobile-logo.svg'
-
+import { LogosEnums, } from "../Enums";
 export const Footer =() => {
   return (
     <footer>
 
       <div className='footer-wrapper'>
       <div className="image-part">
-        <img src={tmdLogo}/>
+        <img src={LogosEnums.tmdLogo.Img}/>
         <button>JOIN THE COMMUNITY</button>
       </div>
 

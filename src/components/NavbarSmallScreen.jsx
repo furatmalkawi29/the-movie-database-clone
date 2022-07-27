@@ -1,9 +1,7 @@
 import React from "react";
-import mobileNavLogo from "../assets/images/mobile-logo.svg";
-import magnifier from "../assets/images/magnifier.svg";
-import maleUser from "../assets/images/male-user.png";
 import {SideMenu} from "../components";
 import { Link } from "react-router-dom";
+import { AssetImagesEnums, LogosEnums } from '../Enums';
 import $ from 'jquery';
 
 export const NavbarSmallScreen =() => {
@@ -39,11 +37,11 @@ export const NavbarSmallScreen =() => {
         </svg>
       </div>
       <Link to="/">
-      <img className="sm-nav-logo" src={mobileNavLogo} />
+      <img className="sm-nav-logo" src={LogosEnums.mobileNavLogo.Img} />
       </Link>
       <div className="sm-icons-container">
-        <img className="sm-magnifier" src={maleUser} />
-        <img className="sm-magnifier" src={magnifier} />
+        <img className="sm-magnifier" src={AssetImagesEnums.maleUser.Img} />
+        <img className="sm-magnifier" src={AssetImagesEnums.magnifier.Img} />
       </div>
 
       <SideMenu/>

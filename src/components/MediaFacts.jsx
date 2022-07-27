@@ -1,12 +1,6 @@
 import React, {useEffect, useReducer} from 'react'
-import facebook from '../assets/images/facebook.svg'
-import insta from '../assets/images/insta.svg'
-import twitter from '../assets/images/twitter.svg'
-import link from '../assets/images/link.svg'
-import justwatch from '../assets/images/justwatch.svg'
-import { useLocation} from 'react-router-dom'
 import {GetMovieKeywords, GetTvShowKeywords} from '../Services'
-import {ImagesPathEnum} from '../Enums'
+import {ImagesPathEnum, IconsEnums} from '../Enums'
 
 export function MediaFacts({mediaData,
   mediaType}) {
@@ -79,16 +73,16 @@ export function MediaFacts({mediaData,
 
 <div className="links-icons">
   <div>
-  <img src={facebook}/>
-  <img src={twitter}/>
-  <img src={insta}/>
+  <img src={IconsEnums.facebook.Img}/>
+  <img src={IconsEnums.twitter.Img}/>
+  <img src={IconsEnums.insta.Img}/>
   </div>
 
   <span/>
-<img src={justwatch} className="justwatch-icon"/>
+<img src={IconsEnums.justwatch.Img} className="justwatch-icon"/>
   <span/>
   <a href={state.homePageLink} target="_blank">
-<img src={link}/>
+<img src={IconsEnums.link.Img}/>
   </a>
     
 </div>
