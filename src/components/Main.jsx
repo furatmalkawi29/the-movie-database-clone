@@ -1,5 +1,5 @@
 import React from 'react'
-import {Home, MovieDetailsPage, SearchResultsPage} from '../pages'
+import {Home, MovieDetailsPage, SearchResultsPage, LoginPage} from '../pages'
 import { Route, Routes } from 'react-router-dom';
 
 export const Main = () => {
@@ -9,9 +9,8 @@ export const Main = () => {
   return (
     <main>
       <Routes>
-        <Route exact path={"/"} element={<Home/>}/>
-        {/* <Route path={'/movie/:id'} element={<MovieDetailsPage/>}/>
-        <Route path={'/tv/:id'} element={<MovieDetailsPage/>}/> */}
+        {/* <Route exact path={"/"} element={<Home/>}/> */}
+        <Route exact path={"/"} element={<LoginPage/>}/>
         <Route path={'/:mediaType/:id'} element={<MovieDetailsPage/>}/>
         <Route path={'/search'} element={<SearchResultsPage/>}/>
         {/* <Route path="*" element={<NotFound/>}/> */}
