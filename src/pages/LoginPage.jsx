@@ -68,7 +68,6 @@ export const LoginPage = ({ }) => {
 
         if(password&&username){
             getRequestToken();
-
         }
     }
 
