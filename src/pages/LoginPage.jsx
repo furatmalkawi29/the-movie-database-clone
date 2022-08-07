@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { GetRequestToken, CreateSession, ValidateWithLogin } from '../Services';
+import { useDispatch, useSelector } from 'react-redux';
+import { userLogin} from '../Redux/Actions/LoginAction'
+import { userLogout} from '../Redux/Actions/LogoutAction'
+import { rememberMe} from '../Redux/Actions/RrememberMeAction'
+
 
 export const LoginPage = ({ }) => {
 
@@ -7,19 +12,23 @@ export const LoginPage = ({ }) => {
     const [password, setPassword] = useState(null)
     const [requestTokenInfo, setRequestTokenInfo] = useState(null)
     const [isValidated, setIsValidated] = useState(null)
+    
+    const loginInfo = useSelector((state) => state.logIn);
+    const rememberMeValue = useSelector((state) => state.rememberMe);
+    const dispatch = useDispatch();
 
-
+    console.log('loginInfo',loginInfo);
+    
     const getRequestToken = async () => {
 
         const response = await GetRequestToken();
-
+        
         if (!(response && response.status && response.status !== 200)) {
             setRequestTokenInfo({
                 request_token: response.request_token,
-                expires_at: response.expires_at
+                created_at: response.expires_at
             })
         }
-
     }
 
     const validateWithLogin = async () => {
@@ -48,7 +57,8 @@ export const LoginPage = ({ }) => {
             const response = await CreateSession(body);
 
             if (!(response && response.status && response.status !== 200)) {
-                localStorageHandler(response.session_id)
+                if(rememberMeValue) localStorageHandler(true, response.session_id)
+                else sessionStorageHandler(true, response.session_id)
             }
         }
     }
@@ -58,16 +68,56 @@ export const LoginPage = ({ }) => {
 
         if(password&&username){
             getRequestToken();
+
         }
     }
 
-    const localStorageHandler = (sessionId) =>{
-        const item = {
-            session_id: sessionId,
-            expires_at: requestTokenInfo.expires_at,
-            request_token: requestTokenInfo.request_token
+
+    const sessionStorageHandler = (isLogin,sessionId) =>{
+        if(isLogin){
+            const item = {
+                session_id: sessionId,
+                created_at: requestTokenInfo.created_at,
+                request_token: requestTokenInfo.request_token
+            }
+            sessionStorage.setItem('session_id', JSON.stringify(item) )
+            localStorage.setItem('session_id', null) 
+        }else {
+            sessionStorage.setItem('session_id', null) 
         }
-        localStorage.setItem('session_id', JSON.stringify(item) )
+        }
+
+    const localStorageHandler = (isLogin,sessionId) =>{
+        if(isLogin){
+            const item = {
+                session_id: sessionId,
+                created_at: requestTokenInfo.created_at,
+                request_token: requestTokenInfo.request_token
+            }
+            localStorage.setItem('session_id', JSON.stringify(item) )
+            sessionStorage.setItem('session_id', null) 
+        }else {
+            localStorage.setItem('session_id', null) 
+        }
+    }
+    const logoutClickHandler = ()=>{
+        dispatch(
+            userLogout({
+                sessionId: null,
+        }))
+
+        localStorageHandler(false)
+        sessionStorageHandler(false)
+        console.log('loginInfo',loginInfo);
+
+    }
+
+    const rememberClickHandler = ()=>{
+        dispatch(
+            rememberMe({
+                rememberMe: !rememberMeValue,
+        }))
+
     }
 
     useEffect(() => {
@@ -76,9 +126,17 @@ export const LoginPage = ({ }) => {
 
     useEffect(() => {
         createSession();
-    }, [isValidated])
+
+        if(isValidated){
+            dispatch(
+                userLogin({
+                    sessionId: requestTokenInfo.request_token,
+                }))
+        }
+    }, [isValidated, requestTokenInfo])
 
 
+    console.log('rememberMeValue',rememberMeValue);
 
     return (
         <>
@@ -99,6 +157,12 @@ export const LoginPage = ({ }) => {
                 <input type="submit" onClick={loginFormHandler}
                 />
             </form>
+            <input type="button" value= "logout" onClick={logoutClickHandler}
+                />
+           <label for="html">Remember Me</label> 
+            <input type="checkbox" 
+            onClick={rememberClickHandler}
+                />
         </>
     )
 }

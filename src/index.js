@@ -4,12 +4,8 @@ import './index.css';
 import './assets/scss/main.scss'
 import App from './App';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import {store} from './Redux/store'
 
-
-const store = createStore(()=>{
-  return {birds:'furat',}
-})
 
 ReactDOM.render(
   <React.StrictMode>
