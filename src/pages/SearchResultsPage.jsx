@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {ResultMovieCard} from '../components'
+import {ResultMediaCard} from '../components'
 import { useSearchParams, Link } from 'react-router-dom'
 import {MultiSearch, CategorySearch} from '../Services/SearchServices'
 
@@ -99,8 +99,8 @@ export const SearchResultsPage = () =>{
       </div>
 
       <div className='results-container'>
-        {(searchResult&&searchResult.length>0&&searchResult.map(item=>((item.media_type==="tv"||item.media_type==="movie"||!item.known_for)&&<Link to={getMoviePageUrl(item)}><ResultMovieCard
-        data={item}/></Link>)||<ResultMovieCard 
+        {(searchResult&&searchResult.length>0&&searchResult.map(item=>((item.media_type==="tv"||item.media_type==="movie"||!item.known_for)&&<Link to={getMoviePageUrl(item)}><ResultMediaCard
+        data={item}/></Link>)||<ResultMediaCard 
         data={item}/>))||<p>There are no results that matched your query.</p>}
       </div>
     </div>

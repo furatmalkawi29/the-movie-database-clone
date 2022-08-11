@@ -1,9 +1,8 @@
 // import React from "react"
 
 import React, { useEffect, useState } from "react";
-import {MovieCard} from "./MovieCard";
+import {MediaCard} from "./MediaCard";
 import {ToggleButton} from "./ToggleButton";
-import { Link } from "react-router-dom";
 
 export const MediaCardsContainer = ({
   containerTitleText,
@@ -64,13 +63,12 @@ export const MediaCardsContainer = ({
         {data &&
           data.map((item) => {
             return (
-              <Link to={`/${mediaType}/${item.id}`}>
-                <MovieCard
+                <MediaCard
                   key={`${item.id}`}
                   movieData={item}
-                  id={`${item.id}`}
+                  mediaId={`${item.id}`}
+                  mediaType={mediaType}
                 />
-              </Link>
             );
           })}
       </div>

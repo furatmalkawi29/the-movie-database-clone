@@ -31,7 +31,7 @@ position: relative;
 display: flex;
 border: solid 1px $tmdb-dark-blue;
 border-radius: 50px;
- 
+cursor: pointer;
 height: 30px;
 width:200px;
 
@@ -49,6 +49,7 @@ div{
 
 
 .selector-btn{
+  cursor: pointer;
   position: absolute;
   box-sizing: border-box;
   background-color: $tmdb-dark-blue;

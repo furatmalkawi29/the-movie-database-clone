@@ -40,7 +40,9 @@ export const NavbarSmallScreen =() => {
       <img className="sm-nav-logo" src={LogosEnums.mobileNavLogo.Img} />
       </Link>
       <div className="sm-icons-container">
+        <Link to="/login">
         <img className="sm-magnifier" src={AssetImagesEnums.maleUser.Img} />
+        </Link>
         <img className="sm-magnifier" src={AssetImagesEnums.magnifier.Img} />
       </div>
 

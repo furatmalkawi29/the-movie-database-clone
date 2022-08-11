@@ -1,18 +1,18 @@
 import React, { useState, useReducer, useEffect } from "react";
-import {RateCircle, MovieCardDropdown} from "../components";
+import {RateCircle, MediaCardDropdown} from ".";
 import { ClickAwayListener } from "@mui/material";
 import movieImagePlaceholder from '../assets/images/movie-image-placeholder.svg';
 import moment from 'moment';
-// import { useSelector } from 'react-redux';
 import {ImagesPathEnum, AssetImagesEnums} from '../Enums'
+import { Link } from "react-router-dom";
 
-export const MovieCard = ({ 
-  id,
+export const MediaCard = ({ 
+  mediaId,
   movieData,
-  activeScreenType
+  mediaType
   }) => {
 
-  const [open, setOpen] = useState(false);
+  const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const initialState={
     name:null,
     imageUrl:null,
@@ -29,11 +29,11 @@ export const MovieCard = ({
 
   const [state,setState]=useReducer(reducer,initialState)
   const handleClick = () => {
-    setOpen((prev) => !prev);
+    setIsDropDownOpen((prevState) => !prevState);
   };
 
   const handleClickAway = () => {
-    setOpen(false);
+    setIsDropDownOpen(false);
   };
 
 useEffect(()=>{
@@ -60,18 +60,16 @@ setState({
 
   }
 },[movieData])
-//redux
-    // const birds = useSelector(state => state.birds);
 
   return (
-    <div id={id} className="movie-card">
+    <div id={mediaId} className="movie-card">
     <div className='movie-card-img-container'>
-      <a href="">
+    <Link to={`/${mediaType}/${mediaId}`}>
         <img
           src={state.imageUrl||movieImagePlaceholder} alt="" 
           className={(!state.imageUrl&&'search-default-image')||'movie-poster'}
         />
-      </a>
+      </Link>
     </div>
 
       {/* hide dropdown when it detects clicks outside dropdown component*/}
@@ -82,7 +80,10 @@ setState({
             src={AssetImagesEnums.circleDotted.Img}
             onClick={handleClick}
             />
-          {open ? <MovieCardDropdown /> : null}
+          {isDropDownOpen&&<MediaCardDropdown 
+            mediaId={mediaId}
+            mediaType={mediaType}
+          />}
         </div>
       </ClickAwayListener>
       <div className="movie-info">

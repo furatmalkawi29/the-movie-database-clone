@@ -2,7 +2,7 @@ import React from 'react'
 import movieImagePlaceholder from '../assets/images/movie-image-placeholder.svg';
 import {ImagesPathEnum} from '../Enums'
 
-export const ResultMovieCard = ({data}) => {
+export const ResultMediaCard = ({data}) => {
 
   return (
     data&&!data.adult&&((data.media_type=='person'||data.known_for)&&

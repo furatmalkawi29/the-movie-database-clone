@@ -53,6 +53,7 @@ margin-top: 3px;
 
 .dotted-circle:hover{
   opacity: 1;
+  cursor: pointer;
   filter: brightness(0) saturate(100%) invert(53%) sepia(33%) saturate(3054%) hue-rotate(
 156deg) brightness(98%) contrast(99%);
 }

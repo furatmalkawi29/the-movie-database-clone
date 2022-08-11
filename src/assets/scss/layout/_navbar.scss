@@ -18,11 +18,12 @@
   background: $tmdb-dark-blue;
   z-index: 100;
   
-  a{
+  a, span{
     color: white;
     text-decoration: none;
     font-weight: 600;
     font-size: 1rem;
+    cursor: pointer;
   }
 }
 
@@ -73,12 +74,12 @@
 }
 
 
-.menu-1:hover .movies-menu,
-.menu-2:hover .tv-shows-menu,
-.menu-3:hover .people-menu,
-.menu-4:hover .more-menu{
-display: block;
-}
+// .menu-1:hover .movies-menu,
+// .menu-2:hover .tv-shows-menu,
+// .menu-3:hover .people-menu,
+// .menu-4:hover .more-menu{
+// display: block;
+// }
 
 
 

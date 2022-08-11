@@ -5,8 +5,8 @@ export const DropdownMenu = ({menuClass, content }) => {
 
   return (
     <div className={menuClass}>
-  {content.map(element => {
-    return <div key={element}><Link to={element.split(',')[1]}>{element.split(',')[0]}</Link></div>
+  {content.map(item => {
+    return <div key={item}><Link to={`/${item}`}></Link>{item}</div>
   })
 }
     </div>

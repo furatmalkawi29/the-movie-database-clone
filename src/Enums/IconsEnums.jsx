@@ -5,6 +5,9 @@ import link from '../assets/images/link.svg'
 import justwatch from '../assets/images/justwatch.svg'
 import star from '../assets/images/star.svg'
 import playIcon from '../assets/images/playIcon.svg'
+import heartIcon from '../assets/images/heart-fav.svg'
+import pinkHeartIcon from '../assets/images/pink-heart-fav.svg'
+import bookmarkIcon from '../assets/images/bookmark-icon.svg'
 
 export const IconsEnums = {
     facebook: {
@@ -27,5 +30,14 @@ export const IconsEnums = {
     },
     playIcon: {
         Img: playIcon
+    },
+    heartIcon: {
+        Img: heartIcon
+    },
+    pinkHeartIcon: {
+        Img: pinkHeartIcon
+    },
+    bookmarkIcon: {
+        Img: bookmarkIcon
     },
 }

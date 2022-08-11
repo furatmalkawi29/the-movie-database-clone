@@ -14,8 +14,10 @@
   /*large screen selector*/
   .selector{
     border: solid 1px #2bd8ac;
+    cursor: pointer;
   }
   .selector-btn{
+    cursor: pointer;
     background:linear-gradient(to right, #c0fecf 0%, #1ed5a9 100%);
   }
 

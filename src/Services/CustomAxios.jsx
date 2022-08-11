@@ -3,11 +3,8 @@ import config from './config'
 
 axios.interceptors.request.use( configurations => {
     const localConfigurations = configurations;
-
-    // add : configurationsLocal.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('token' ....
     // configurationsLocal.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('token'))
     return localConfigurations;
-
 },
 (error) => {
     Promise.reject(error);

@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useReducer} from 'react'
 import { ClickAwayListener } from "@mui/material";
-import {MovieCardDropdown} from "./MovieCardDropdown";
+import {MediaCardDropdown} from "./MediaCardDropdown";
 import {Link} from 'react-router-dom';
 import $ from 'jquery'
 import {GetMovieVideos, GetTvShowVideos} from '../Services'
@@ -127,7 +127,7 @@ return (
             src={AssetImagesEnums.circleDotted.Img}
             onClick={handleClick}
             />
-          {open ? <MovieCardDropdown /> : null}
+          {open ? <MediaCardDropdown /> : null}
         </div>
       </ClickAwayListener>
           <Link to="/">

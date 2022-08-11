@@ -8,7 +8,8 @@ export const authReducer = (state = initialState, action) =>{
             logIn: {
                 isLoggedIn: true,
                 sessionId : action.payload.sessionId,
-              }
+              },
+            userAccount: action.payload.userAccount
             }
         case 'USER_LOGOUT' : return {
               ...state,
