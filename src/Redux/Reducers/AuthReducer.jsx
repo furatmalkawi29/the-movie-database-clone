@@ -1,7 +1,6 @@
 import {initialState} from '../InitialState'
 
 export const authReducer = (state = initialState, action) =>{
-  console.log('action',action);
     switch(action.type){
         case 'USER_LOGIN' : return {
             ...state,

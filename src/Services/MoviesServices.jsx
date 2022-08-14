@@ -125,6 +125,47 @@ import {config} from './config'
     return result;
 }
 
+ const RateMovie = async ({movieId,sessionId, body})=>{
+
+  const queryList = [];
+  queryList.push(`api_key=${config.api_key}`);
+  if(sessionId)
+  queryList.push(`session_id=${sessionId}`);
+
+    const result = await axios.post(`${config.server_address}/movie/${movieId}/rating?${queryList.join('&')}`, body)
+        .then((response) => response.data)
+        .catch((error) => error.response);
+
+    return result;
+}
+
+const RemoveMovieRating = async ({movieId,sessionId})=>{
+    
+    const queryList = [];
+  queryList.push(`api_key=${config.api_key}`);
+  if(sessionId)
+  queryList.push(`session_id=${sessionId}`);
+  
+  const result = await axios.delete(`${config.server_address}/movie/${movieId}/rating?${queryList.join('&')}`)
+  .then((response) => response.data)
+  .catch((error) => error.response);
+  
+  return result;
+}
+
+const GetMovieAccountState = async ({movieId,sessionId})=>{
+
+ const queryList = [];
+ queryList.push(`api_key=${config.api_key}`);
+ if(sessionId)
+ queryList.push(`session_id=${sessionId}`);
+
+   const result = await axios.get(`${config.server_address}/movie/${movieId}/account_states?${queryList.join('&')}`)
+       .then((response) => response.data)
+       .catch((error) => error.response);
+
+   return result;
+}
 
 export {
   GetMovieDetails,
@@ -137,4 +178,7 @@ export {
   GetMovieRecommendations,
   GetMovieReviews,
   GetMovieKeywords,
+  RateMovie,
+  RemoveMovieRating,
+  GetMovieAccountState
 }

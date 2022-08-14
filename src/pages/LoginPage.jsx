@@ -6,7 +6,10 @@ import { userLogin} from '../Redux/Actions/LoginAction'
 import { userLogout} from '../Redux/Actions/LogoutAction'
 import { rememberMe} from '../Redux/Actions/RrememberMeAction'
 import {GetAccountDetails} from '../Services'
-//USE react-cookies to set token expiration after one day 
+//TODO::USE react-cookies to set token expiration after one day 
+
+//TODO::use DELETE session api !! for logout!! please
+
 export const LoginPage = ({ }) => {
 
     const [username, setUsername] = useState(null)

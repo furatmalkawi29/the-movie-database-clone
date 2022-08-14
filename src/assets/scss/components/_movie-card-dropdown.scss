@@ -126,8 +126,10 @@
 .rating-panel{
   display: flex;
   justify-content: center;
+  align-items: center;
+  cursor: pointer;
   background: $tmdb-dark-blue;
-  width: 170px;
+  width: 180px;
   height: 45px;
   border-radius: 5px;
   div{
@@ -156,4 +158,29 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+}
+
+
+.rating-panel-remove-btn{
+  filter: invert(95%);
+  margin-right: 5px;
+  width: 16px;
+  height: 16px;
+}
+
+
+.red-bookmark-icon{
+  filter: invert(32%) sepia(50%) saturate(1353%) hue-rotate(324deg) brightness(92%) contrast(97%);
+}
+
+.black-bookmark-icon{
+  filter: unset;
+}
+
+.yellow-star-icon {
+  filter: invert(95%) sepia(50%) saturate(1353%) hue-rotate(324deg) brightness(92%) contrast(97%)
+}
+
+.black-star-icon {
+   filter: unset;
 }

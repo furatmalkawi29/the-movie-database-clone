@@ -122,6 +122,48 @@ const GetTvShowDetails = async (id)=>{
     return result;
 }
 
+const RateTvShow = async ({tvShowId,sessionId, body})=>{
+
+    const queryList = [];
+    queryList.push(`api_key=${config.api_key}`);
+    if(sessionId)
+    queryList.push(`session_id=${sessionId}`);
+  
+      const result = await axios.post(`${config.server_address}/tv/${tvShowId}/rating?${queryList.join('&')}`, body)
+          .then((response) => response.data)
+          .catch((error) => error.response);
+  
+      return result;
+  }
+
+  const RemoveTvShowRating = async ({tvShowId,sessionId})=>{
+
+    const queryList = [];
+    queryList.push(`api_key=${config.api_key}`);
+    if(sessionId)
+    queryList.push(`session_id=${sessionId}`);
+  
+      const result = await axios.delete(`${config.server_address}/tv/${tvShowId}/rating?${queryList.join('&')}`)
+          .then((response) => response.data)
+          .catch((error) => error.response);
+  
+      return result;
+  }
+  
+  const GetTvShowAccountState = async ({tvShowId,sessionId})=>{
+
+    const queryList = [];
+    queryList.push(`api_key=${config.api_key}`);
+    if(sessionId)
+    queryList.push(`session_id=${sessionId}`);
+   
+      const result = await axios.get(`${config.server_address}/tv/${tvShowId}/account_states?${queryList.join('&')}`)
+          .then((response) => response.data)
+          .catch((error) => error.response);
+   
+      return result;
+   }
+
 
 export {
   GetTvShowDetails,
@@ -134,4 +176,7 @@ export {
   GetTvShowRecommendations,
   GetTvShowReviews,
   GetTvShowKeywords,
+  RateTvShow,
+  RemoveTvShowRating,
+  GetTvShowAccountState
 }

@@ -8,6 +8,7 @@ import playIcon from '../assets/images/playIcon.svg'
 import heartIcon from '../assets/images/heart-fav.svg'
 import pinkHeartIcon from '../assets/images/pink-heart-fav.svg'
 import bookmarkIcon from '../assets/images/bookmark-icon.svg'
+import removeIcon from '../assets/images/remove-icon.svg'
 
 export const IconsEnums = {
     facebook: {
@@ -39,5 +40,8 @@ export const IconsEnums = {
     },
     bookmarkIcon: {
         Img: bookmarkIcon
+    },
+    removeIcon: {
+        Img: removeIcon
     },
 }
