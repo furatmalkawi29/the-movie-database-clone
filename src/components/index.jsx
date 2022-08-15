@@ -22,4 +22,5 @@ export * from './TrailerCard'
 export * from './TrailerModal'
 export * from './BottomMenu'
 export * from './RatingPanel'
+export * from './MediaAccountButtons'
 

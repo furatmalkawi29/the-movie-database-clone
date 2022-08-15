@@ -64,8 +64,7 @@ export const MediaCardsContainer = ({
           data.map((item) => {
             return (
                 <MediaCard
-                  key={`${item.id}`}
-                  movieData={item}
+                  mediaData={item}
                   mediaId={`${item.id}`}
                   mediaType={mediaType}
                 />

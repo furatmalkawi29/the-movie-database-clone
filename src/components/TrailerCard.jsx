@@ -10,7 +10,9 @@ export const TrailerCard = ({
   changeModalUrl,
   changeModalVisibility,
   mediaData,
-  activeOption
+  activeOption,
+  mediaId,
+  mediaType
 }) => {
 
   const initialState = {
@@ -22,16 +24,16 @@ export const TrailerCard = ({
   const reducer = (state, action) => {
     return { ...state, [action.id]: action.value };
   };
-  const [open, setOpen] = useState(false);
+  const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const [state, setState] = useReducer(reducer,initialState);
   const [trailerDetails,setTrailerDetails] = useState([]);
 
   const handleClick = () => {
-    setOpen((prev) => !prev);
+    setIsDropDownOpen((prevState) => !prevState);
   };
 
   const handleClickAway = () => {
-    setOpen(false);
+    setIsDropDownOpen(false);
   };
 
 
@@ -116,8 +118,6 @@ $(`#trailer-play-btn-${mediaData.id}`).on('click',function(){
 return (
   state.trailerUrl&&
     <div id={`trailer-container-${mediaData.id}`} className="trailer-container">
-      {/* hide dropdown when it detects clicks outside dropdown component*/}
-
     <div id={`trailer-card-${mediaData.id}`} className="trailer-card" >
     <div className="movie-trailer">
       <ClickAwayListener onClickAway={handleClickAway}>
@@ -127,7 +127,10 @@ return (
             src={AssetImagesEnums.circleDotted.Img}
             onClick={handleClick}
             />
-          {open ? <MediaCardDropdown /> : null}
+           {isDropDownOpen&&<MediaCardDropdown 
+            mediaId={mediaId}
+            mediaType={mediaType}
+          />}
         </div>
       </ClickAwayListener>
           <Link to="/">

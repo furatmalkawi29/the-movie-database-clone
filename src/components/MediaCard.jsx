@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 export const MediaCard = ({ 
   mediaId,
-  movieData,
+  mediaData,
   mediaType
   }) => {
 
@@ -37,30 +37,30 @@ export const MediaCard = ({
   };
 
 useEffect(()=>{
-  if(movieData){
+  if(mediaData){
 setState({
   id:"name",
-  value:movieData.name || movieData.title||null
+  value:mediaData.name || mediaData.title||null
 })
 setState({
   id:"date",
-  value:movieData.first_air_date||movieData.release_date||null
+  value:mediaData.first_air_date||mediaData.release_date||null
 })
 
 setState({
   id:"votes",
-  value:(movieData.vote_average&&roundRatingNumber(movieData.vote_average*10)
+  value:(mediaData.vote_average&&roundRatingNumber(mediaData.vote_average*10)
   )||null
 })
 
 setState({
   id:"imageUrl",
-  value:(movieData.backdrop_path&&`${ImagesPathEnum.face.w220_and_h330.value}/${movieData.backdrop_path}`)||null
+  value:(mediaData.backdrop_path&&`${ImagesPathEnum.face.w220_and_h330.value}/${mediaData.backdrop_path}`)||null
 })
 
   }
-},[movieData])
-
+},[mediaData])
+//TODO::check placeholders all over the project
   return (
     <div id={mediaId} className="movie-card">
     <div className='movie-card-img-container'>

@@ -6,26 +6,18 @@ import {
 import {ImagesPathEnum, AssetImagesEnums, IconsEnums} from '../Enums';
 import { useParams, useNavigate } from "react-router-dom";
 import {
-  GetMovieCredits,
-  GetTvShowCredits,
-  GetMovieImages,
-  GetMovieVideos,
-  GetMovieRecommendations,
-  GetMovieReviews,
-  GetTvShowImages,
-  GetTvShowVideos,
-  GetTvShowRecommendations,
-  GetTvShowReviews,
-  GetMovieDetails,
-  GetTvShowDetails,
+  GetMovieCredits,GetTvShowCredits,GetMovieImages,
+  GetMovieVideos, GetMovieRecommendations, GetMovieReviews,
+  GetTvShowImages, GetTvShowVideos, GetTvShowRecommendations,
+  GetTvShowReviews, GetMovieDetails, GetTvShowDetails,
 } from "../Services";
 
 export const MovieDetailsPage = () => {
   const { id, mediaType } = useParams();
   const navigate = useNavigate();
 
-  //convert to state + reducer 
-  const [movieData, setMovieData] = useState(null);
+  //TODO::convert to state + reducer 
+  const [mediaData, setmediaData] = useState(null);
   const [mediaCast, setMediaCast] = useState([]);
   const [movieReviews, setMediaReviews] = useState([]);
   const [movieMediaImages, setMovieMediaImages] = useState([]);
@@ -101,7 +93,7 @@ export const MovieDetailsPage = () => {
         typeof response.status === "number"
       )
     ) {
-      setMovieData(response || {});
+      setmediaData(response || {});
     }
   });
 
@@ -116,13 +108,15 @@ export const MovieDetailsPage = () => {
     getMediaVideos();
     getMediaRecommendations();
     getMediaReviews();
-  }, [movieData]);
+  }, [mediaData]);
 
   return (
     <>
       <TopMenu />
-      <MovieDetailsHeader id={id}
-        movieData={movieData} />
+      <MovieDetailsHeader 
+        mediaId={id}
+        mediaType={mediaType}
+        mediaData={mediaData} />
       <section className="info-content">
         <div>
           <section className="cards-wrapper">
@@ -162,7 +156,7 @@ export const MovieDetailsPage = () => {
                   <p className="wrapper-link">Read All Reviews</p>
                 </>
               )) || (
-                  <p>{`We don't have any reviews for ${movieData?.name || movieData?.title
+                  <p>{`We don't have any reviews for ${mediaData?.name || mediaData?.title
                     }.`}</p>
                 )}
             </div>
@@ -230,7 +224,7 @@ export const MovieDetailsPage = () => {
         </div>
         <div>
           <MediaFacts
-            mediaData={movieData}
+            mediaData={mediaData}
             mediaType={mediaType}
           />
         </div>

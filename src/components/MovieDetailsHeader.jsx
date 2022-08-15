@@ -1,18 +1,17 @@
 import React, { useState, useEffect, useReducer } from 'react'
 import $ from 'jquery'
 import {RateCircle} from "../components";
-import { FaHeart } from 'react-icons/fa'
-import { ImList2 } from 'react-icons/im'
-import { IoBookmark } from 'react-icons/io5'
-import { AiFillStar } from 'react-icons/ai'
 import { FaPlay } from 'react-icons/fa'
 import { HiArrowsExpand } from 'react-icons/hi'
 import { useColor } from "color-thief-react";
-import {GetCreditsDetails} from '../Services/PeopleServices'
+import {GetCreditsDetails} from '../Services'
 import { ImagesPathEnum } from '../Enums';
+import {MediaAccountButtons} from '../components'
 
-
-export function MovieDetailsHeader({ id, movieData }) {
+export function MovieDetailsHeader({ 
+  mediaId,
+  mediaType,
+  mediaData }) {
 
   const [rgbValue, setRgbValue] = useState([31, 36, 61])
 
@@ -45,58 +44,58 @@ export function MovieDetailsHeader({ id, movieData }) {
   }
 
   useEffect(() => {
-    if (movieData) {
+    if (mediaData) {
 
       setState({
         id: "name",
-        value: movieData.name || movieData.title || null
+        value: mediaData.name || mediaData.title || null
       })
       setState({
         id: "date",
-        value: ((movieData.first_air_date&&movieData.first_air_date.split('-').join('/')) || (movieData.release_date&&movieData.release_date.split('-').join('/'))) || null
+        value: ((mediaData.first_air_date&&mediaData.first_air_date.split('-').join('/')) || (mediaData.release_date&&mediaData.release_date.split('-').join('/'))) || null
       })
       setState({
         id: "year",
-        value: (movieData.first_air_date && movieData.first_air_date.split('-')[0]) || (movieData.release_date && movieData.release_date.split('-')[0]) || null
+        value: (mediaData.first_air_date && mediaData.first_air_date.split('-')[0]) || (mediaData.release_date && mediaData.release_date.split('-')[0]) || null
       })
       setState({
         id: "genres",
-        value: (movieData.genres && movieData.genres.map(item => item.name)) || []
+        value: (mediaData.genres && mediaData.genres.map(item => item.name)) || []
       })
       setState({
         id: "votes",
-        value: (movieData.vote_average && roundRatingNumber(movieData.vote_average * 10)) || null
+        value: (mediaData.vote_average && roundRatingNumber(mediaData.vote_average * 10)) || null
       })
       setState({
         id: "posetrUrl",
-        value: ((movieData.poster_path || movieData.backdrop_path) && `${ImagesPathEnum.face.w220_and_h330.value}/${movieData.poster_path || movieData.backdrop_path}`) || null
+        value: ((mediaData.poster_path || mediaData.backdrop_path) && `${ImagesPathEnum.face.w220_and_h330.value}/${mediaData.poster_path || mediaData.backdrop_path}`) || null
       })
       setState({
         id: "backdropUrl",
-        value: ( movieData.backdrop_path && `${ImagesPathEnum.multi_faces.w1920_and_h800.value}/${movieData.backdrop_path}`) || null
+        value: ( mediaData.backdrop_path && `${ImagesPathEnum.multi_faces.w1920_and_h800.value}/${mediaData.backdrop_path}`) || null
       })
       setState({
         id: "overview",
-        value: movieData.overview
+        value: mediaData.overview
       })
       setState({
         id: "tagline",
-        value: movieData.tagline
+        value: mediaData.tagline
       });
       setState({
         id: "runtime",
-        value: movieData.runtime && (`${Math.floor(movieData.runtime / 60)}h ${movieData.runtime % 60}m`)
+        value: mediaData.runtime && (`${Math.floor(mediaData.runtime / 60)}h ${mediaData.runtime % 60}m`)
       });
       setState({
         id: "episodeRuntime",
-        value: ((movieData.episode_run_time&&movieData.episode_run_time.length&&movieData.episode_run_time[0])&&(`${Math.floor(movieData.episode_run_time[0] / 60)}h ${movieData.episode_run_time[0] % 60}m`))
+        value: ((mediaData.episode_run_time&&mediaData.episode_run_time.length&&mediaData.episode_run_time[0])&&(`${Math.floor(mediaData.episode_run_time[0] / 60)}h ${mediaData.episode_run_time[0] % 60}m`))
       });
       setState({
         id: "credits",
-        value: movieData.created_by||[]
+        value: mediaData.created_by||[]
       })
     }
-  }, [movieData])
+  }, [mediaData])
 
 
 
@@ -248,7 +247,8 @@ export function MovieDetailsHeader({ id, movieData }) {
                     {
                       state.genres && state.genres.map(item =>
                         <>
-                          <span>{item}</span><span>,</span>
+                          <span>{item}</span>
+                          <span>{`,  `}</span>
                         </>
                       )
                     }
@@ -267,7 +267,8 @@ export function MovieDetailsHeader({ id, movieData }) {
                 {
                       state.genres && state.genres.map(item =>
                         <>
-                          <span>{item}</span><span>,</span>
+                          <span>{item}</span>
+                          <span>{`,  `}</span>
                         </>
                       )
                     }
@@ -288,12 +289,10 @@ export function MovieDetailsHeader({ id, movieData }) {
 
               <div className="separation-line" />
 
-              <div className="icons-block">
-                <div><ImList2 /></div>
-                <div><FaHeart /></div>
-                <div><IoBookmark /></div>
-                <div><AiFillStar /></div>
-              </div>
+              <MediaAccountButtons
+              mediaId={mediaId}
+              mediaType={mediaType}
+              />
 
               <div className="play-btn">
                 <FaPlay viewBox="0 0 600 512" />
