@@ -177,7 +177,7 @@ export const MediaCardDropdown = ({
         onClick={()=>{
           setMediaAccountState(state=>({
             ...state, 
-          favorite: !state.favorite
+          favorite: state&&(!state.favorite)
         }));
           markAsFavorite();
           setIsRatingPanelOpen(false)
@@ -193,7 +193,7 @@ export const MediaCardDropdown = ({
 
           setMediaAccountState(state=>({
             ...state, 
-          watchlist: !state.watchlist
+          watchlist: state&&(!state.watchlist)
         }));
           addToWatchList();
           setIsRatingPanelOpen(false)
