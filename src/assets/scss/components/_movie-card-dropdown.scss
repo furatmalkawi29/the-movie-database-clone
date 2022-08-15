@@ -137,6 +137,16 @@
   }
 }
 
+.mobile-rating-panel{
+  position: absolute;
+    bottom: 62px;
+    right: 10px;
+
+    .rating-panel{
+        background-color: rgba(13, 46, 72, 0.9);
+    }
+}
+
 :root {
   --star-size: 30px;
   --star-color: #fff;

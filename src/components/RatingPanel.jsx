@@ -7,6 +7,7 @@ export const RatingPanel = ({
   setMediaRating,
   removeMediaRating,
   mediaRating,
+  mobilePanel
 }) => {
   
   const [starsFillValues, setStarsFillValues] = useState({
@@ -65,6 +66,7 @@ export const RatingPanel = ({
   },[])
 
   return (
+    <div className={mobilePanel&&'mobile-rating-panel'}>
     <div className='rating-panel'>
       <img src={IconsEnums.removeIcon.Img}
         className="rating-panel-remove-btn"
@@ -106,5 +108,7 @@ export const RatingPanel = ({
         onClick={ratingStarsClickHandler}
       />
 
+    </div>
     </div>)
+
 }

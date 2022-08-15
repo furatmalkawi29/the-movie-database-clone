@@ -143,7 +143,7 @@ export const MovieDetailsPage = () => {
                 </div>
                 <div>
                   <p> Discussions</p>
-                  <span>2</span>
+                  <span></span>
                 </div>
               </div>
             </div>
@@ -229,7 +229,10 @@ export const MovieDetailsPage = () => {
           />
         </div>
       </section>
-      <BottomMenu />
+      <BottomMenu 
+      mediaId={id}
+      mediaType={mediaType}
+      />
     </>
   );
 }

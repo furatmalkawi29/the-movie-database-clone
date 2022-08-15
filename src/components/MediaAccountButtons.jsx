@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { AssetImagesEnums } from '../Enums';
-import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { IconsEnums } from '../Enums';
 import {

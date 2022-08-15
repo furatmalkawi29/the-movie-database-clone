@@ -19,6 +19,22 @@ transition:.4s;
   justify-content: space-around;
   width: 100%;
   color: white;
+
+  .bottom-menu-item{
+  width: 1.5em;
+  height: 1.5em;
+  cursor: pointer;
+
+  }
+}
+.white-bookmark-icon{
+  filter: invert(100%)
+}
+.white-star-icon {
+  filter: invert(100%)
+}
+.white-heart-icon {
+  filter: invert(100%)
 }
 
 .menu-padding{
