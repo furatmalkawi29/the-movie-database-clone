@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { GetRequestToken, CreateSession, ValidateWithLogin } from '../Services';
+import { GetRequestToken, CreateSession,DeleteSession, ValidateWithLogin } from '../Services';
 import { useDispatch, useSelector } from 'react-redux';
 //TODO::make file index for actions, reducers ..)
 import { userLogin} from '../Redux/Actions/LoginAction'
@@ -8,16 +8,13 @@ import { rememberMe} from '../Redux/Actions/RrememberMeAction'
 import {GetAccountDetails} from '../Services'
 //TODO::USE react-cookies to set token expiration after one day 
 
-//TODO::use DELETE session api !! for logout!! please
-
 export const LoginPage = ({ }) => {
 
     const [username, setUsername] = useState(null)
     const [password, setPassword] = useState(null)
-    // const [requestTokenInfo, setRequestTokenInfo] = useState(null)
-    const [isValidated,setIsValidated] = useState(null)
     const [accountDetails, setAccountDetails] = useState(null)
     const [sessionId, setSessionId] = useState(null)
+    const [sessionCreateDate, setSessionCreateDate] = useState(null)
 
     const loginInfo = useSelector((state) => state.logIn);
     const rememberMeValue = useSelector((state) => state.rememberMe);
@@ -29,10 +26,10 @@ export const LoginPage = ({ }) => {
         const response = await GetRequestToken();
         
         if (!(response && response.status && response.status !== 200)) {
-            // setRequestTokenInfo({
-            //     request_token: response.request_token,
-            //     created_at: response.expires_at
-            // })
+
+            console.log('response',response);
+
+            setSessionCreateDate(response.expires_at)
             validateWithLogin(response.request_token);
         }
     }
@@ -47,11 +44,8 @@ export const LoginPage = ({ }) => {
             const response = await ValidateWithLogin(body);
 
             if (!(response && response.status && response.status !== 200)) {
-                setIsValidated(true);
                 createSession(requestToken);
-            } else{
-                setIsValidated(false);
-            }
+            } 
         
     }
     const createSession = async (requestToken) => {
@@ -67,6 +61,21 @@ export const LoginPage = ({ }) => {
             }
         
     }
+    const deleteSession = async () => {
+
+        const body = {
+               data: { 
+                session_id: sessionId,
+               },
+            }
+            const response = await DeleteSession(body);
+
+            if (!(response && response.status && response.status !== 200)) {
+                localStorageHandler(false)
+                // sessionStorageHandler(false)
+            }
+        
+    }
 
 
     const getAccountDetails = async (sessionId) =>{
@@ -78,32 +87,30 @@ export const LoginPage = ({ }) => {
     }
 
 
-    const sessionStorageHandler = (isLogin,sessionId) =>{
-        if(isLogin){
-            const item = {
-                session_id: sessionId,
-                // created_at: requestTokenInfo.created_at,
-                // request_token: requestTokenInfo.request_token
-            }
-            sessionStorage.setItem('session_id', JSON.stringify(item) )
-            localStorage.setItem('session_id', null) 
-        }else {
-            sessionStorage.setItem('session_id', null) 
-        }
-        }
+    // const sessionStorageHandler = (isLogin,sessionId) =>{
+    //     if(isLogin){
+    //         const item = {
+    //             session_id: sessionId,
+    //             created_at: requestTokenInfo.created_at,
+    //         }
+    //         sessionStorage.setItem('app_session', JSON.stringify(item) )
+    //         localStorage.setItem('app_session', null) 
+    //     }else {
+    //         sessionStorage.setItem('app_session', null) 
+    //     }
+    //     }
 
 
     const localStorageHandler = (isLogin,sessionId) =>{
         if(isLogin){
             const item = {
                 session_id: sessionId,
-                // created_at: requestTokenInfo.created_at,
-                // request_token: sessionId
-            }
-            localStorage.setItem('session_id', JSON.stringify(item) )
-            sessionStorage.setItem('session_id', null) 
+                created_at: sessionCreateDate
+                        }
+            localStorage.setItem('app_session', JSON.stringify(item) )
+            // sessionStorage.setItem('app_session', null) 
         }else {
-            localStorage.setItem('session_id', null) 
+            localStorage.removeItem('app_session') 
         }
     }
 
@@ -122,9 +129,7 @@ export const LoginPage = ({ }) => {
                 sessionId: null,
         }))
 
-        localStorageHandler(false)
-        sessionStorageHandler(false)
-        console.log('loginInfo',loginInfo);
+        deleteSession();
 
     }
 
@@ -154,6 +159,15 @@ export const LoginPage = ({ }) => {
         }
     }, [accountDetails])
 
+    useEffect(()=>{
+        const appSession = JSON.parse(localStorage.getItem('app_session'));
+
+        if(appSession){
+            setSessionId(appSession.session_id)
+            setSessionCreateDate(appSession.created_at)
+        }
+
+    },[])
 
 
     return (

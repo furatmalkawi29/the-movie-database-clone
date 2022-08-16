@@ -39,10 +39,22 @@ const CreateSession = async (body)=>{
   
       return result;
   }
+const DeleteSession = async (body)=>{
+
+    const queryList = [];
+    queryList.push(`api_key=${config.api_key}`);
+
+      const result = await axios.delete(`${config.server_address}/authentication/session?${queryList.join('&')}`, body)
+          .then((response) => response.data)
+          .catch((error) => error.response);
+  
+      return result;
+  }
   
 
   export {
     GetRequestToken,
     CreateSession,
+    DeleteSession,
     ValidateWithLogin,
   }
