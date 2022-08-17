@@ -6,8 +6,10 @@ import { userLogin} from '../Redux/Actions/LoginAction'
 import { userLogout} from '../Redux/Actions/LogoutAction'
 import { rememberMe} from '../Redux/Actions/RrememberMeAction'
 import {GetAccountDetails} from '../Services'
-//TODO::USE react-cookies to set token expiration after one day 
-
+//TODO::USE react-cookies to set session expiration after 24 hours 
+//TODO:: redirect user to another page after login
+//TODO:: add remember me feature 
+//TODO: make guest session 
 export const LoginPage = ({ }) => {
 
     const [username, setUsername] = useState(null)
