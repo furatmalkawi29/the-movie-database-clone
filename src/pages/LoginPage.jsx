@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { GetRequestToken, CreateSession,DeleteSession, ValidateWithLogin } from '../Services';
+import { GetRequestToken, CreateSession,DeleteSession, ValidateWithLogin, GetAccountDetails } from '../Services';
 import { useDispatch, useSelector } from 'react-redux';
 //TODO::make file index for actions, reducers ..)
 import { userLogin} from '../Redux/Actions/LoginAction'
 import { userLogout} from '../Redux/Actions/LogoutAction'
 import { rememberMe} from '../Redux/Actions/RrememberMeAction'
-import {GetAccountDetails} from '../Services'
+import {InputComponent, FormComponent} from '../components'
 //TODO::USE react-cookies to set session expiration after 24 hours 
 //TODO:: redirect user to another page after login
 //TODO:: add remember me feature 
@@ -171,32 +171,53 @@ export const LoginPage = ({ }) => {
 
     },[])
 
-
+//make enum file for text
     return (
-        <>
-            <form onSubmit={loginFormHandler}>
-
-                <input type="text"
-                    value={username} onChange={(event)=>{
-                        const value = event.target.value;
-                        setUsername(value);
-                    }}
+        <div className='login-view-wrapper'>
+            <div className='login-top-part'>
+                <h4>Login to your account</h4>
+                <p>In order to use the editing and rating capabilities of 
+                TMDB, as well as get personal recommendations you will
+             need to login to your account. If you do not have an account,
+              registering for an account is free and simple. 
+              <a target="_blank"  href='https://www.themoviedb.org/signup'> Click here</a> to
+             get started. </p>
+             <p>You can also use TMDB features as <a>a guest</a>  . </p>
+            </div>
+            {/* TODO:: make form component */}
+            <FormComponent 
+            submitButtonText='Login'
+            classes='form-component-wrapper'
+            submitButtonClasses='basic-button'
+            onSubmitHandler={loginFormHandler}
+            >
+            <InputComponent
+                inputType='text'
+                labelText='Username'
+                classes='basic-input'
+                inputValue= {username}
+                onChangeHandler={(event)=>{
+                    const {value} = event.target;
+                    setUsername(value);
+                }}
                 />
-                <input type="password"
-                    value={password} onChange={(event)=>{
-                        const value = event.target.value;
-                        setPassword(value);
-                    }}
+            <InputComponent
+                inputType='password'
+                labelText='Password'
+                classes='basic-input'
+                inputValue= {password}
+                onChangeHandler={(event)=>{
+                    const {value} = event.target;
+                    setPassword(value);
+                }}
                 />
-                <input type="submit" onClick={loginFormHandler}
-                />
-            </form>
+            </FormComponent>
             <input type="button" value= "logout" onClick={logoutClickHandler}
                 />
            {/* <label for="html">Remember Me</label> 
             <input type="checkbox" 
             onClick={rememberClickHandler}
-                /> */}
-        </>
+        /> */}
+            </div>
     )
 }

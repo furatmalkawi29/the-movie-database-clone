@@ -2,10 +2,13 @@ import React from "react";
 import {SideMenu} from "../components";
 import { Link } from "react-router-dom";
 import { AssetImagesEnums, LogosEnums } from '../Enums';
+import { useSelector } from 'react-redux';
 import $ from 'jquery';
 
-export const NavbarSmallScreen =() => {
 
+export const NavbarSmallScreen =() => {
+  
+  const { logIn } = useSelector(state => state);
   /*side menu toggle*/
   $('.menu-icon-container').off('click').on("click",function(){
     if($('.side-menu').css("left")==="0px"){
@@ -40,9 +43,11 @@ export const NavbarSmallScreen =() => {
       <img className="sm-nav-logo" src={LogosEnums.mobileNavLogo.Img} />
       </Link>
       <div className="sm-icons-container">
+      {/* {logIn && !logIn.isLoggedIn && ( */}
         <Link to="/login">
         <img className="sm-magnifier" src={AssetImagesEnums.maleUser.Img} />
         </Link>
+      {/* } */}
         <img className="sm-magnifier" src={AssetImagesEnums.magnifier.Img} />
       </div>
 

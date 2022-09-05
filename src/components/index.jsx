@@ -23,4 +23,6 @@ export * from './TrailerModal'
 export * from './BottomMenu'
 export * from './RatingPanel'
 export * from './MediaAccountButtons'
+export * from './InputComponent'
+export * from './FormComponent'
 

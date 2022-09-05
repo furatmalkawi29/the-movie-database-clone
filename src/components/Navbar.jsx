@@ -3,11 +3,14 @@ import { Link } from "react-router-dom";
 import { DropdownMenu } from "../components";
 import { LogosEnums, AssetImagesEnums } from '../Enums';
 import { ClickAwayListener } from "@mui/material";
+import { useSelector } from 'react-redux';
 import $ from 'jquery'
+
 
 export const Navbar = () => {
 
   const [activeNavItem, setActiveNavItem] = useState(null)
+  const { logIn } = useSelector(state => state);
   /*stop() used to clear animation queue to prevent delay */
   $(window).on("scroll", function () {
     if ($(window).scrollTop() > 80 && $('.lg-nav-container').css("top") === "0px") {
@@ -100,9 +103,11 @@ export const Navbar = () => {
           <div>
             <span>EN</span>
           </div>
+          {logIn && !logIn.isLoggedIn && (
           <div>
             <Link to="/login">Login</Link>
           </div>
+          )}
           <div>
             <a>Join TMDB</a>
             {/* <Link to="">Join TMDB</Link> */}

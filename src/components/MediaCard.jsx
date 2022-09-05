@@ -87,9 +87,9 @@ setState({
         </div>
       </ClickAwayListener>
       <div className="movie-info">
-        <a href="">
+      <Link to={`/${mediaType}/${mediaId}`}>
           <h3>{state.name}</h3>
-        </a>
+        </Link>
         <p>{(state.date&&moment(state.date).format('LL'))}</p></div>
 
       <RateCircle percentage={state.votes} size={"small"} />

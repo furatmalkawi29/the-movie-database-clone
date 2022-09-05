@@ -1,0 +1,29 @@
+
+.form-component-wrapper{
+
+    .basic-button{
+        width: 80px;
+        border-radius: 7px;
+        padding: 8px 5px;
+        background-color: #01b4e4;
+        border: unset;
+        color: white;
+        font-size: .9rem;
+        font-weight: 700;
+    }
+}
+
+
+@media (max-width:820px){
+    .form-component-wrapper{
+            margin: auto;
+            width: 75%;
+            
+     .basic-button{
+        margin: 30px auto;
+        display: block;
+        }
+        }
+        
+        
+    }
