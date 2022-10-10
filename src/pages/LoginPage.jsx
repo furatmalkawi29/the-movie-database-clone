@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { GetRequestToken, CreateSession,DeleteSession, ValidateWithLogin, GetAccountDetails } from '../Services';
+import { GetRequestToken, CreateSession,DeleteSession,
+     ValidateWithLogin, GetAccountDetails, GetGuestSession } from '../Services';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+
 //TODO::make file index for actions, reducers ..)
 import { userLogin} from '../Redux/Actions/LoginAction'
 import { userLogout} from '../Redux/Actions/LogoutAction'
@@ -10,6 +13,8 @@ import {InputComponent, FormComponent} from '../components'
 //TODO:: redirect user to another page after login
 //TODO:: add remember me feature 
 //TODO: make guest session 
+
+//TODO:: add session type to redux : guest or not 
 export const LoginPage = ({ }) => {
 
     const [username, setUsername] = useState(null)
@@ -21,7 +26,7 @@ export const LoginPage = ({ }) => {
     const loginInfo = useSelector((state) => state.logIn);
     const rememberMeValue = useSelector((state) => state.rememberMe);
     const dispatch = useDispatch();
-
+    const navigate = useNavigate()
     
     const getRequestToken = async () => {
 
@@ -59,7 +64,20 @@ export const LoginPage = ({ }) => {
 
             if (!(response && response.status && response.status !== 200)) {
                 setSessionId(response.session_id);
+                navigate('/')
                 getAccountDetails(response.session_id)
+            }
+        
+    }
+    const createGuestSession = async () => {
+
+            const response = await GetGuestSession();
+
+            if (!(response && response.status && response.status !== 200)) {
+                console.log('response',response);
+                // setSessionId(response.session_id);
+                // navigate('/')
+                // getAccountDetails(response.session_id)
             }
         
     }
@@ -85,6 +103,7 @@ export const LoginPage = ({ }) => {
 
         if (!(response && response.status && response.status !== 200)) {
             setAccountDetails(response);
+            
         } 
     }
 
@@ -162,6 +181,8 @@ export const LoginPage = ({ }) => {
     }, [accountDetails])
 
     useEffect(()=>{
+
+        createGuestSession();
         const appSession = JSON.parse(localStorage.getItem('app_session'));
 
         if(appSession){

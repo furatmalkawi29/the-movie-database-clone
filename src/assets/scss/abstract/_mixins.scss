@@ -21,7 +21,7 @@ background: linear-gradient(to right, rgba(255,255,255,0) 0%, #fff 100%);
 }
 
 
-@mixin flex-content{
+@mixin flex-vertical-center{
   display: flex;
   align-items: center;
 }

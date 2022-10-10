@@ -1,0 +1,51 @@
+@use '../abstract/colors' as *;
+@use '../abstract/mixins' as *;
+
+.profile-page-wrapper{
+    .profile-cover-wrapper{
+        height: 250px;
+        background-color: $tmdb-base-navy;
+
+
+    }
+    .profile-cover-content{
+        display: flex;
+        align-items: center;
+        color: white;
+        padding-right: 3%;
+        padding-left: 3%;
+        height: 250px;
+        background-image: url('https://www.themoviedb.org/assets/2/v4/account_pipes/green-79a9507a08a7e5a9b8c643a69026fe46191c45972cb45b944ab4b5f8a9110b03.svg');
+        background-position: 95% 40%;
+        background-repeat: no-repeat;
+
+        .user-name{
+            font-size: 2.3rem;
+            font-weight: 700;
+        }
+
+        .profile-cover-info-container{
+            padding-left: 40px;
+        }
+
+        .progress-circles-container{
+            display: flex;
+        }
+    }
+
+    .profile-image-container {
+        width: 165px;
+        height: 165px;
+        border-radius: 50%;
+        background-color: $profile-green;
+
+        img{
+        width: 170px;
+        height: 170px;
+        border-radius: 50%;
+        }
+
+    }
+}
+
+

@@ -1,5 +1,6 @@
 import React from 'react'
-import {Home, MovieDetailsPage, SearchResultsPage, LoginPage} from '../pages'
+import {Home, MovieDetailsPage, SearchResultsPage,
+   LoginPage, ProfilePage} from '../pages'
 import { Route, Routes } from 'react-router-dom';
 
 export const Main = () => {
@@ -9,10 +10,12 @@ export const Main = () => {
   return (
     <main>
       <Routes>
-        <Route exact path={"/"} element={<Home/>}/>
+        {/* <Route exact path={"/"} element={<Home/>}/> */}
+        <Route exact path={"/"} element={<ProfilePage/>}/>
         <Route exact path={"/login"} element={<LoginPage/>}/>
         <Route path={'/:mediaType/:id'} element={<MovieDetailsPage/>}/>
         <Route path={'/search'} element={<SearchResultsPage/>}/>
+        <Route path={'/profile'} element={<ProfilePage/>}/>
         {/* <Route path="*" element={<NotFound/>}/> */}
       </Routes>
     </main>

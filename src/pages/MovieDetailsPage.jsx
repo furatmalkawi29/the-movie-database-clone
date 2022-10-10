@@ -17,6 +17,10 @@ export const MovieDetailsPage = () => {
   const navigate = useNavigate();
 
   //TODO::convert to state + reducer 
+
+  //TODO:: fix footer issue not sticking in the bottom of the page 
+  // when page has short content
+  
   const [mediaData, setmediaData] = useState(null);
   const [mediaCast, setMediaCast] = useState([]);
   const [movieReviews, setMediaReviews] = useState([]);
