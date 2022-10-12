@@ -10,32 +10,28 @@
     }
     .profile-cover-content{
         display: flex;
-        align-items: center;
         color: white;
-        padding-right: 3%;
-        padding-left: 3%;
         height: 250px;
         background-image: url('https://www.themoviedb.org/assets/2/v4/account_pipes/green-79a9507a08a7e5a9b8c643a69026fe46191c45972cb45b944ab4b5f8a9110b03.svg');
         background-position: 95% 40%;
         background-repeat: no-repeat;
 
         .user-name{
-            font-size: 2.3rem;
-            font-weight: 700;
+            font-size: 2.2rem;
+            font-weight: 600;
         }
 
         .profile-cover-info-container{
-            padding-left: 40px;
+            // padding-left: 40px;
         }
 
         .progress-circles-container{
             display: flex;
+            margin-top: 15px;
         }
     }
 
-    .profile-image-container {
-        width: 165px;
-        height: 165px;
+    .profile-image-placeholder {
         border-radius: 50%;
         background-color: $profile-green;
 
@@ -46,6 +42,57 @@
         }
 
     }
+
+    .user-name-container{
+        display: flex;
+        align-items: center;
+    }
+
+    .rate-circle-wrapper {
+        width: min-content;
+        .circle-title{
+        font-weight: 400;
+    }
+   }
+}
+
+@media (min-width:951px) {
+    
+    .profile-page-wrapper .profile-cover-content {
+        display: flex;
+        align-items: start;
+    }
+
+    .rate-circle-wrapper{
+        flex-direction: row;
+            .circle-title{
+            width: 100px;
+       }
+    }
+
+    .user-name-container .profile-image-placeholder {
+      display: none;
+    }
+    .profile-image-placeholder {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+@media (max-width:950px) {
+    
+    .profile-page-wrapper .profile-cover-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .profile-image-placeholder {
+        width: 100px;
+        height: 100px;
+        margin-right: 5vw;
+    }
+
 }
 
 

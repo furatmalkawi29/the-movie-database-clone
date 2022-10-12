@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import $ from "jquery";
 
-export const RateCircle = ({ percentage, size }) => {
+export const RateCircle = ({ percentage, size, customClass }) => {
   const [dimentions, setDimentions] = useState({});
 
   const [fontStyle, setFontStyle] = useState({});
@@ -193,7 +193,7 @@ export const RateCircle = ({ percentage, size }) => {
 
 
   return (
-    <div className="rate-circle-container">
+    <div className={`rate-circle-container ${customClass}`}>
       <svg
         width={dimentions.width}
         height={dimentions.height}

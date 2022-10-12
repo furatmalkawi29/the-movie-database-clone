@@ -1,0 +1,19 @@
+
+
+.line-vertical-white{
+    width: 1px;
+    background-color: white;
+}
+
+
+@media (min-width:951px) {
+    .line-vertical-white {
+        margin: 15px 30px;
+    }
+}
+
+@media (max-width:950px) {
+    .line-vertical-white {
+        margin: 5px 30px;
+    }
+}
