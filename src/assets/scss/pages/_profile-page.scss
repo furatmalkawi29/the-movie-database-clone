@@ -14,7 +14,7 @@
         height: 250px;
         background-image: url('https://www.themoviedb.org/assets/2/v4/account_pipes/green-79a9507a08a7e5a9b8c643a69026fe46191c45972cb45b944ab4b5f8a9110b03.svg');
         background-position: 95% 40%;
-        background-repeat: no-repeat;
+        // background-repeat: no-repeat;
 
         .user-name{
             font-size: 2.2rem;
@@ -22,7 +22,8 @@
         }
 
         .profile-cover-info-container{
-            // padding-left: 40px;
+            padding-left: 20px;
+            padding-right: 20px;
         }
 
         .progress-circles-container{
@@ -60,7 +61,7 @@
     
     .profile-page-wrapper .profile-cover-content {
         display: flex;
-        align-items: start;
+        align-items: center;
     }
 
     .rate-circle-wrapper{
@@ -76,6 +77,8 @@
     .profile-image-placeholder {
         width: 150px;
         height: 150px;
+        margin-right:2.5vw;
+        margin-left:2.5vw;
     }
 }
 
@@ -87,12 +90,16 @@
         justify-content: center;
     }
 
-    .profile-image-placeholder {
+    .user-name-container .profile-image-placeholder {
         width: 100px;
         height: 100px;
         margin-right: 5vw;
     }
 
+    .circle-title{
+        font-size: .85rem;
+    text-align: center;
+    }
 }
 
 
