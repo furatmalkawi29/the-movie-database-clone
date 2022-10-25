@@ -5,8 +5,6 @@
     .profile-cover-wrapper{
         height: 250px;
         background-color: $tmdb-base-navy;
-
-
     }
     .profile-cover-content{
         display: flex;
@@ -53,6 +51,29 @@
         width: min-content;
         .circle-title{
         font-weight: 400;
+    }
+   }
+
+   .profile-status-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 2vw;
+    max-height: 500px;
+    text-align: center;
+
+    .profile-status-title{
+        margin-bottom: 5px;
+    }
+    .profile-status-item{
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .number-status{
+        color: $profile-green;
+        font-size: 4rem;
+        font-weight: 700;
     }
    }
 }
