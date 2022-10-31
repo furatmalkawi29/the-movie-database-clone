@@ -57,7 +57,7 @@ export const ProfilePage = ({}) => {
         <div className="profile-status-item">
           <p className="profile-status-title">Most Watched Genres</p>
           <div className="profile-status-content">
-          <div className='test1'>
+          <div className='test1'> 
             <MyResponsiveBar/>
           </div>
           </div>
