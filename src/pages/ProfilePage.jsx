@@ -1,5 +1,7 @@
 import React from "react";
 import { RateCircle } from "../components";
+import {MyResponsivePie} from '../components'
+import {MyResponsiveBar} from '../components'
 
 export const ProfilePage = ({}) => {
   return (
@@ -47,13 +49,17 @@ export const ProfilePage = ({}) => {
         <div className="profile-status-item">
           <p className="profile-status-title">Rating Overview</p>
           <div className="profile-status-content">
-          content
+          <div className='test2'>
+            <MyResponsivePie/>
+          </div>
           </div>
         </div>
         <div className="profile-status-item">
           <p className="profile-status-title">Most Watched Genres</p>
           <div className="profile-status-content">
-          content
+          <div className='test1'> 
+            <MyResponsiveBar/>
+          </div>
           </div>
         </div>
       </div>
