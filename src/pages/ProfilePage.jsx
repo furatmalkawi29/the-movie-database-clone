@@ -63,6 +63,12 @@ export const ProfilePage = ({}) => {
           </div>
         </div>
       </div>
+      <div>
+        <p>My Watchlist</p>
+        <div className="wishlist-wrapper">
+
+        </div>
+      </div>
     </div>
   );
 };

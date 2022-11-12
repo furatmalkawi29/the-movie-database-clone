@@ -27,4 +27,5 @@ export * from './InputComponent'
 export * from './FormComponent'
 export * from './PieChart'
 export * from './BarChart'
+export * from './WishlistMediaCard'
 
