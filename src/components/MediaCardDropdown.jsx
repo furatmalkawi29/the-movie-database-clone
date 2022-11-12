@@ -22,7 +22,6 @@ export const MediaCardDropdown = ({
   const [mediaAccountState, setMediaAccountState] = useState(null)
 
   const markAsFavorite = async () => {
-
     const accountId = userAccount && userAccount.id;
     const sessionId = logIn && logIn.sessionId;
     const favoriteValue = !(mediaAccountState && mediaAccountState.favorite);

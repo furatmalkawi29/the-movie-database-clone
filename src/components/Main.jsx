@@ -10,8 +10,7 @@ export const Main = () => {
   return (
     <main>
       <Routes>
-        {/* <Route exact path={"/"} element={<Home/>}/> */}
-        <Route exact path={"/"} element={<ProfilePage/>}/>
+        <Route exact path={"/"} element={<Home/>}/>
         <Route exact path={"/login"} element={<LoginPage/>}/>
         <Route path={'/:mediaType/:id'} element={<MovieDetailsPage/>}/>
         <Route path={'/search'} element={<SearchResultsPage/>}/>

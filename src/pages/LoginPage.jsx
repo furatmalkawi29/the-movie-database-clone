@@ -22,6 +22,7 @@ export const LoginPage = ({ }) => {
     const [accountDetails, setAccountDetails] = useState(null)
     const [sessionId, setSessionId] = useState(null)
     const [sessionCreateDate, setSessionCreateDate] = useState(null)
+    const [isGuestSession, setIsGuestSession] = useState(false)
 
     const loginInfo = useSelector((state) => state.logIn);
     const rememberMeValue = useSelector((state) => state.rememberMe);
@@ -34,20 +35,29 @@ export const LoginPage = ({ }) => {
         
         if (!(response && response.status && response.status !== 200)) {
 
-            console.log('response',response);
 
             setSessionCreateDate(response.expires_at)
             validateWithLogin(response.request_token);
         }
     }
 
-    const validateWithLogin = async (requestToken) => {
 
-        const body = {
+    const validateWithLogin = async (requestToken) => {
+        let body;
+        if(isGuestSession){
+
+            body = {
+                username: 'furatFofo',
+                password: '123',
+                request_token: requestToken,
+            }
+        }else {
+            body = {
                 username: username,
                 password: password,
                 request_token: requestToken,
             }
+        }
             const response = await ValidateWithLogin(body);
 
             if (!(response && response.status && response.status !== 200)) {
@@ -64,23 +74,12 @@ export const LoginPage = ({ }) => {
 
             if (!(response && response.status && response.status !== 200)) {
                 setSessionId(response.session_id);
-                navigate('/')
                 getAccountDetails(response.session_id)
             }
         
     }
-    const createGuestSession = async () => {
 
-            const response = await GetGuestSession();
 
-            if (!(response && response.status && response.status !== 200)) {
-                console.log('response',response);
-                // setSessionId(response.session_id);
-                // navigate('/')
-                // getAccountDetails(response.session_id)
-            }
-        
-    }
     const deleteSession = async () => {
 
         const body = {
@@ -100,26 +99,13 @@ export const LoginPage = ({ }) => {
 
     const getAccountDetails = async (sessionId) =>{
         const response = await GetAccountDetails(sessionId);
-
         if (!(response && response.status && response.status !== 200)) {
             setAccountDetails(response);
+            navigate('/')
             
         } 
     }
 
-
-    // const sessionStorageHandler = (isLogin,sessionId) =>{
-    //     if(isLogin){
-    //         const item = {
-    //             session_id: sessionId,
-    //             created_at: requestTokenInfo.created_at,
-    //         }
-    //         sessionStorage.setItem('app_session', JSON.stringify(item) )
-    //         localStorage.setItem('app_session', null) 
-    //     }else {
-    //         sessionStorage.setItem('app_session', null) 
-    //     }
-    //     }
 
 
     const localStorageHandler = (isLogin,sessionId) =>{
@@ -135,7 +121,7 @@ export const LoginPage = ({ }) => {
         }
     }
 
-    const loginFormHandler = (event)=>{
+    const loginHandler = (event)=>{
         event.preventDefault();
 
         if(password&&username){
@@ -162,8 +148,11 @@ export const LoginPage = ({ }) => {
 
     }
 
-
-
+useEffect(()=>{
+    if(isGuestSession){
+        getRequestToken()
+    }
+},[isGuestSession])
     useEffect(() => {
  
         if(accountDetails){
@@ -180,17 +169,6 @@ export const LoginPage = ({ }) => {
         }
     }, [accountDetails])
 
-    useEffect(()=>{
-
-        createGuestSession();
-        const appSession = JSON.parse(localStorage.getItem('app_session'));
-
-        if(appSession){
-            setSessionId(appSession.session_id)
-            setSessionCreateDate(appSession.created_at)
-        }
-
-    },[])
 
 //make enum file for text
     return (
@@ -203,14 +181,19 @@ export const LoginPage = ({ }) => {
               registering for an account is free and simple. 
               <a target="_blank"  href='https://www.themoviedb.org/signup'> Click here</a> to
              get started. </p>
-             <p>You can also use TMDB features as <a>a guest</a>  . </p>
+             {/* <p>You can also use TMDB features as <span onClick={()=>setIsGuestSession(true)}>a guest</span>  . </p> */}
             </div>
             {/* TODO:: make form component */}
             <FormComponent 
-            submitButtonText='Login'
             classes='form-component-wrapper'
+            submitButtonText='Login'
             submitButtonClasses='basic-button'
-            onSubmitHandler={loginFormHandler}
+            onSubmitHandler={loginHandler}
+            secondaryButtonText='Login as guest'
+            secondaryButtonClasses='basic-button'
+            onSecondaryBtnHandler={()=> {
+                setIsGuestSession(true)
+            }}
             >
             <InputComponent
                 inputType='text'

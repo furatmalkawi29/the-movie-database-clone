@@ -6,7 +6,10 @@ export const FormComponent = ({
     children,
     submitButtonText,
     classes,
-    submitButtonClasses
+    submitButtonClasses,
+    secondaryButtonText,
+    secondaryButtonClasses,
+    onSecondaryBtnHandler
 })=>{
     return (
         <form 
@@ -14,12 +17,22 @@ export const FormComponent = ({
         className={classes}
         >
             {children}
+            <div>
         <input 
         type="submit"
         value={submitButtonText}
         onClick={onSubmitHandler}
         className={submitButtonClasses}
         />
+        {onSecondaryBtnHandler&&
+        <input 
+        type="button"
+        value={secondaryButtonText}
+        onClick={onSecondaryBtnHandler}
+        className={secondaryButtonClasses}
+        />
+        }
+        </div>
         </form>
     )
 }
