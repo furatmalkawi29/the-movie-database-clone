@@ -1,23 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
+import { useSelector } from 'react-redux';
 import { RateCircle } from "../components";
-import {MyResponsivePie} from '../components'
-import {MyResponsiveBar} from '../components'
+import { MyResponsivePie } from '../components'
+import { MyResponsiveBar } from '../components'
 
-export const ProfilePage = ({}) => {
+export const ProfilePage = ({ }) => {
+
+  const { logIn, userAccount } = useSelector((state) => state);
+  
+  const avatarFilePath = `https://www.themoviedb.org/t/p/w150_and_h150_face`
+  
+  const defaultState = {
+    username: userAccount?.username,
+    name: userAccount?.name,
+    avatar: (userAccount?.avatar?.tmdb?.avatar_path) && (`${avatarFilePath}/${userAccount.avatar.tmdb.avatar_path}`)
+  }
+  
+  const [state] = useState(defaultState)
+
+  const avatarStyle = {
+    background: (state.avatar && `url(${state.avatar})`) || `rgb(1 210 119)`
+  }
+
   return (
     <div className="profile-page-wrapper">
-      <div className="profile-cover-wrapper">
-        <div className="profile-cover-content">
-          <div className="profile-image-placeholder"></div>
-          {/* <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png' /> */}
 
-          <div className="profile-cover-info-container">
-            <div className="user-name-container">
-              <div className="profile-image-placeholder"></div>
-              {/* <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png' /> */}
-              <p className="user-name">FuratFofo</p>
+      <div className="profile-cover">
+        <div className="cover-content">
+          <div className="avatar-placeholder" style={avatarStyle}/>
+          <div className="profile-info">
+            <div className="user-info-container">
+              <div className="avatar-placeholder" style={avatarStyle}/>
+              <p className="user-name">{state.name || state.username}</p>
             </div>
-            <div className="progress-circles-container">
+            <div className="rate-circles-container">
               <div className="rate-circle-wrapper large-circle">
                 <RateCircle percentage={57} size={"large"} />
                 <span className="circle-title">Average Movie Score</span>
@@ -39,30 +55,28 @@ export const ProfilePage = ({}) => {
           </div>
         </div>
       </div>
-      <div className="profile-status-wrapper">
-        <div className="profile-status-item">
-          <p className="profile-status-title">Total Ratings</p>
-          <div className="profile-status-content">
+
+      <div className="status-wrapper">
+        <div className="status-item">
+          <p className="status-title">Total Ratings</p>
+          <div className="status-content">
             <span className="number-status">21</span>
           </div>
         </div>
-        <div className="profile-status-item">
-          <p className="profile-status-title">Rating Overview</p>
-          <div className="profile-status-content">
-          <div className='test2'>
-            <MyResponsivePie/>
-          </div>
+        <div className="status-item">
+          <p className="status-title">Rating Overview</p>
+          <div className="status-pie">
+              <MyResponsivePie />
           </div>
         </div>
-        <div className="profile-status-item">
-          <p className="profile-status-title">Most Watched Genres</p>
-          <div className="profile-status-content">
-          <div className='test1'> 
-            <MyResponsiveBar/>
-          </div>
+        <div className="status-item">
+          <p className="status-title">Most Watched Genres</p>
+          <div className="status-bar">
+              <MyResponsiveBar />
           </div>
         </div>
       </div>
+
       <div>
         <p>My Watchlist</p>
         <div className="wishlist-wrapper">

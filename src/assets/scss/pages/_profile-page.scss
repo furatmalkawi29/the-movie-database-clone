@@ -2,47 +2,46 @@
 @use '../abstract/mixins' as *;
 
 .profile-page-wrapper{
-    .profile-cover-wrapper{
+    .profile-cover{
         height: 250px;
         background-color: $tmdb-base-navy;
     }
-    .profile-cover-content{
+    .cover-content{
         display: flex;
         color: white;
         height: 250px;
         background-image: url('https://www.themoviedb.org/assets/2/v4/account_pipes/green-79a9507a08a7e5a9b8c643a69026fe46191c45972cb45b944ab4b5f8a9110b03.svg');
         background-position: 95% 40%;
-        // background-repeat: no-repeat;
 
         .user-name{
             font-size: 2.2rem;
             font-weight: 600;
         }
 
-        .profile-cover-info-container{
+        .profile-info{
             padding-left: 20px;
             padding-right: 20px;
         }
 
-        .progress-circles-container{
+        .rate-circles-container{
             display: flex;
             margin-top: 15px;
         }
     }
 
-    .profile-image-placeholder {
+    .avatar-placeholder {
         border-radius: 50%;
-        background-color: $profile-green;
 
         img{
-        width: 170px;
-        height: 170px;
+        width: 155px;
+        height: 155px;
         border-radius: 50%;
+        margin: auto;
         }
 
     }
 
-    .user-name-container{
+    .user-info-container{
         display: flex;
         align-items: center;
     }
@@ -54,7 +53,7 @@
     }
    }
 
-   .profile-status-wrapper{
+   .status-wrapper{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -62,10 +61,10 @@
     max-height: 500px;
     text-align: center;
 
-    .profile-status-title{
+    .status-title{
         margin-bottom: 5px;
     }
-    .profile-status-item{
+    .status-item{
         padding-left: 30px;
         padding-right: 30px;
     }
@@ -75,12 +74,21 @@
         font-size: 4rem;
         font-weight: 700;
     }
+
+    .status-pie{
+        width: 80px;
+        height: 80px;
+    }
+    .status-bar{
+        width: 250px;
+        height: 90px;
+    }
    }
 }
 
 @media (min-width:951px) {
     
-    .profile-page-wrapper .profile-cover-content {
+    .profile-page-wrapper .cover-content {
         display: flex;
         align-items: center;
     }
@@ -92,10 +100,10 @@
        }
     }
 
-    .user-name-container .profile-image-placeholder {
+    .user-info-container .avatar-placeholder {
       display: none;
     }
-    .profile-image-placeholder {
+    .avatar-placeholder {
         width: 150px;
         height: 150px;
         margin-right:2.5vw;
@@ -105,13 +113,13 @@
 
 @media (max-width:950px) {
     
-    .profile-page-wrapper .profile-cover-content {
+    .profile-page-wrapper .cover-content {
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
-    .user-name-container .profile-image-placeholder {
+    .user-info-container .avatar-placeholder {
         width: 100px;
         height: 100px;
         margin-right: 5vw;
@@ -121,19 +129,4 @@
         font-size: .85rem;
     text-align: center;
     }
-}
-
-
-
-.test2{
-    width: 80px;
-    height: 80px;
-}
-.test1{
-    width: 250px;
-    height: 90px;
-}
-
-.cont-test{
-    display: flex;
 }

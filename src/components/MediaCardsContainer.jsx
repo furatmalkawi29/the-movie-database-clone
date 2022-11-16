@@ -61,9 +61,10 @@ export const MediaCardsContainer = ({
 
       <div className="cards-container">
         {data &&
-          data.map((item) => {
+          data.map((item, index) => {
             return (
                 <MediaCard
+                  key={index}
                   mediaData={item}
                   mediaId={`${item.id}`}
                   mediaType={mediaType}

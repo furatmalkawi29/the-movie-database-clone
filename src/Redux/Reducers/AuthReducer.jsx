@@ -15,7 +15,8 @@ export const authReducer = (state = initialState, action) =>{
               logIn: {
                   isLoggedIn: false,
                   sessionId : action.payload.sessionId,
-                }
+                },
+              userAccount: null
               }
         case 'REMEMBER_ME_CLICKED' : return {
               ...state,

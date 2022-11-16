@@ -65,7 +65,8 @@ export const TrailerCardsContainer = ({ reelId,
 
 
       <div className='cards-container'>
-        {data && data.map(item => <TrailerCard
+        {data && data.map((item,index) => <TrailerCard
+          key={index}
           mediaData={item}
           mediaType={mediaType}
           mediaId={item.id}
