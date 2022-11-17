@@ -1,16 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { DropdownMenu } from "../components";
-import { LogosEnums, AssetImagesEnums } from '../Enums';
-import { ClickAwayListener } from "@mui/material";
 import { useSelector } from 'react-redux';
 import $ from 'jquery'
+import { ClickAwayListener } from "@mui/material";
+import { DropdownMenu } from "../components";
+import { LogosEnums, AssetImagesEnums } from '../Enums';
 
 
 export const Navbar = () => {
-
-  const [activeNavItem, setActiveNavItem] = useState(null)
-  const { logIn } = useSelector(state => state);
+  
   /*stop() used to clear animation queue to prevent delay */
   $(window).on("scroll", function () {
     if ($(window).scrollTop() > 80 && $('.lg-nav-container').css("top") === "0px") {
@@ -19,6 +17,17 @@ export const Navbar = () => {
       $('.lg-nav-container').stop().animate({ top: '0' }, 500);
     }
   })
+  
+  const avatarFilePath = `https://www.themoviedb.org/t/p/w32_and_h32_face`
+  
+  const { logIn, userAccount } = useSelector(state => state);
+  const [activeNavItem, setActiveNavItem] = useState(null)
+  const [avatarFile] = useState((userAccount?.avatar?.tmdb?.avatar_path))
+  
+  
+  const avatarStyle = {
+    background: (avatarFile && `url(${avatarFilePath}/${avatarFile})`) || `rgb(1 210 119)`
+  }
 
   const navItemClickHandler = (event) => {
     const value = event.target.id;
@@ -95,23 +104,15 @@ export const Navbar = () => {
         </div>
 
         <div className="nav-right-part">
-          <div>
-            {/* <Link> */}
-            <img className="plus" src={AssetImagesEnums.plus.Img} />
-            {/* </Link> */}
-          </div>
-          <div>
-            <span>EN</span>
-          </div>
           {logIn && !logIn.isLoggedIn && (
           <div>
             <Link to="/login">Login</Link>
           </div>
+          )||(
+            <Link to="/profile">
+            <div className='user-avatar' style={avatarStyle}/>
+            </Link>
           )}
-          <div>
-            <a>Join TMDB</a>
-            {/* <Link to="">Join TMDB</Link> */}
-          </div>
           <div>
             <img className="magnifier" src={AssetImagesEnums.magnifier.Img} />
           </div>

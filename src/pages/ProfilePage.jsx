@@ -90,7 +90,7 @@ export const ProfilePage = ({ }) => {
               <div className="rate-circle-wrapper small-circle">
                 <RateCircle percentage={getRatingAverage(data.ratedMovies)} size={"small"} />
                 <span className="circle-title">Average Movie Rating</span>
-              </div>
+              </div> 
                 }
               <span className="line-vertical-white"></span>
               {(data.ratedTvShows.length >0)&&

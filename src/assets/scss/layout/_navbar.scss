@@ -47,12 +47,19 @@
 }
 
 .nav-right-part{
-  @extend .nav-items-container;
-  align-items: center;
-  width: 305px;
   display: flex;
-  padding: 0;
+  justify-content: space-around;
+  align-items: center;
+  width: 100px;
 
+  .user-avatar{
+    background-repeat: no-repeat;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
   .plus{
     width: 22.39px;
   }
@@ -62,7 +69,6 @@
   }
 
   span{
-     
     color: white;
     border: white 1px solid;
     padding: 3px 5px;
@@ -70,6 +76,7 @@
     font-size: .85rem;
     font-weight: 600;
   }
+  
 
 }
 
