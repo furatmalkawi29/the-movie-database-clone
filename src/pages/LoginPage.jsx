@@ -167,11 +167,10 @@ export const LoginPage = ({ }) => {
         <div className='login-view-wrapper'>
             <div className='login-top-part'>
                 <h4>Login to your account</h4>
-                <p>In order to use the editing and rating capabilities of
-                    TMDB, as well as get personal recommendations you will
-                    need to login to your account. If you do not have an account,
-                    registering for an account is free and simple.
-                    <a target="_blank" href='https://www.themoviedb.org/signup'> Click here</a> to
+                <p>In order to use the editing and rating capabilities, you will
+                need to login to your account.</p>
+                <p>If you do not have an account,
+                <a target="_blank" href='https://www.themoviedb.org/signup'> Click here</a> to
                     get started. </p>
                 {/* <p>You can also use TMDB features as <span onClick={()=>setIsGuestSession(true)}>a guest</span>  . </p> */}
             </div>
@@ -182,7 +181,7 @@ export const LoginPage = ({ }) => {
                 submitButtonClasses='basic-button'
                 onSubmitHandler={loginHandler}
                 secondaryButtonText='Login as guest'
-                secondaryButtonClasses='basic-button'
+                secondaryButtonClasses='outlined-button'
                 onSecondaryBtnHandler={() => {
                     setIsGuestSession(true)
                 }}

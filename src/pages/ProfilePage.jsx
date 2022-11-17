@@ -15,7 +15,7 @@ export const ProfilePage = ({ }) => {
     avatar: (userAccount?.avatar?.tmdb?.avatar_path) && (`${avatarFilePath}/${userAccount.avatar.tmdb.avatar_path}`)
   }
   
-  const [state] = useState(defaultState)
+  const [state, setState] = useState(defaultState)
   const [data, setData] = useState({
     ratedMovies: [],
     ratedTvShows: [],
@@ -65,6 +65,9 @@ export const ProfilePage = ({ }) => {
   useEffect(()=>{
     getRatedTvShows();
     getRatedMovies();
+    setState(prevState=>({...prevState,
+      avatar:(userAccount?.avatar?.tmdb?.avatar_path)}))
+
   },[userAccount])
 
 

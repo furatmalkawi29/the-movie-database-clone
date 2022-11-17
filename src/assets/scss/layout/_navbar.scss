@@ -50,7 +50,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 100px;
+  width: 140px;
 
   .user-avatar{
     background-repeat: no-repeat;
@@ -67,26 +67,12 @@
   .magnifier{
     width: 29.1px;
   }
-
-  span{
-    color: white;
-    border: white 1px solid;
-    padding: 3px 5px;
-    border-radius: 3px;
-    font-size: .85rem;
-    font-weight: 600;
-  }
   
-
+div{
+  margin: 0px 5px;
+}
 }
 
-
-// .menu-1:hover .movies-menu,
-// .menu-2:hover .tv-shows-menu,
-// .menu-3:hover .people-menu,
-// .menu-4:hover .more-menu{
-// display: block;
-// }
 
 
 

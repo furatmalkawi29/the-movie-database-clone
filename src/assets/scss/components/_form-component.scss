@@ -2,15 +2,39 @@
 .form-component-wrapper{
 
     .basic-button{
-        width: 80px;
-        border-radius: 7px;
-        padding: 8px 5px;
+        width: fit-content;
+        border-radius: 0.5rem;
+        margin: auto 0.5rem;
+        padding: 10px 15px;
         background-color: #01b4e4;
         border: unset;
         color: white;
         font-size: .9rem;
         font-weight: 700;
         cursor: pointer;
+        transition: 0.3s;
+        &:hover{
+            background-color: #cad0d1;
+            color: #424242;
+        }
+    }
+
+    .outlined-button{
+        width: -moz-fit-content;
+        width: fit-content;
+        border-radius: 0.5rem;
+        margin: auto 0.5rem;
+        padding: 8px 10px;
+        background-color: transparent;
+        border: 2px solid #01b4e4;
+        color: #424242;
+        font-size: 0.9rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.3s;
+        &:hover{
+            border: 2px solid transparent;
+        }
     }
 }
 

@@ -6,7 +6,6 @@ import { ClickAwayListener } from "@mui/material";
 import { DropdownMenu } from "../components";
 import { LogosEnums, AssetImagesEnums } from '../Enums';
 
-
 export const Navbar = () => {
   
   /*stop() used to clear animation queue to prevent delay */
@@ -106,7 +105,10 @@ export const Navbar = () => {
         <div className="nav-right-part">
           {logIn && !logIn.isLoggedIn && (
           <div>
-            <Link to="/login">Login</Link>
+            <Link to="/login">
+              <img className="sm-user-icon" src={AssetImagesEnums.maleUser.Img} />
+              <span>Login</span>
+            </Link>
           </div>
           )||(
             <Link to="/profile">
