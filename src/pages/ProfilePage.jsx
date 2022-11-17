@@ -66,7 +66,7 @@ export const ProfilePage = ({ }) => {
     getRatedTvShows();
     getRatedMovies();
     setState(prevState=>({...prevState,
-      avatar:(userAccount?.avatar?.tmdb?.avatar_path)}))
+      avatar:(userAccount?.avatar?.tmdb?.avatar_path) && (`${avatarFilePath}/${userAccount.avatar.tmdb.avatar_path}`)}))
 
   },[userAccount])
 
