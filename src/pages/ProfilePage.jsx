@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from 'react-redux';
-import { RateCircle } from "../components";
-import { MyResponsivePie } from '../components'
-import { MyResponsiveBar } from '../components'
+import { RateCircle, MyResponsivePie, MyResponsiveBar } from '../components'
+import {GetRatedTvShows, GetRatedMovies} from '../Services'
 
 export const ProfilePage = ({ }) => {
 
@@ -17,10 +16,57 @@ export const ProfilePage = ({ }) => {
   }
   
   const [state] = useState(defaultState)
+  const [data, setData] = useState({
+    ratedMovies: [],
+    ratedTvShows: [],
+  })
 
   const avatarStyle = {
     background: (state.avatar && `url(${state.avatar})`) || `rgb(1 210 119)`
   }
+
+
+  const getRatingAverage = (ratedItems)=>{
+    let ratingAverage= 0;
+    if(ratedItems&&ratedItems.length){
+      const numberOfRatedItems = ratedItems.length;
+
+      const ratingsTotal = ratedItems.reduce((total, item)=>{
+        return (total + item.rating)
+      }, 0)
+
+      ratingAverage = Math.ceil(ratingsTotal/numberOfRatedItems)*10;
+    }
+    return ratingAverage;  
+  }
+
+  const getRatedMovies = async () => {
+    const accountId = userAccount && userAccount.id;
+    const sessionId = logIn && logIn.sessionId;
+
+    const response = await GetRatedMovies(accountId,sessionId);
+    if (!(response && response.status && response.status !== 200)) {
+      setData(prevState=>({...prevState,
+        ratedMovies: response.results || [] }));
+    }
+  }
+
+  const getRatedTvShows = async () => {
+    const accountId = userAccount && userAccount.id;
+    const sessionId = logIn && logIn.sessionId;
+
+    const response = await GetRatedTvShows(accountId,sessionId);
+    if (!(response && response.status && response.status !== 200)) {
+      setData(prevState=>({...prevState,
+        ratedTvShows: response.results || [] }));
+    }
+  }
+
+  useEffect(()=>{
+    getRatedTvShows();
+    getRatedMovies();
+  },[userAccount])
+
 
   return (
     <div className="profile-page-wrapper">
@@ -34,23 +80,31 @@ export const ProfilePage = ({ }) => {
               <p className="user-name">{state.name || state.username}</p>
             </div>
             <div className="rate-circles-container">
+                {(data.ratedMovies.length >0)&&
               <div className="rate-circle-wrapper large-circle">
-                <RateCircle percentage={57} size={"large"} />
-                <span className="circle-title">Average Movie Score</span>
+                <RateCircle percentage={getRatingAverage(data.ratedMovies)} size={"large"} />
+                <span className="circle-title">Average Movie Rating</span>
               </div>
+                }
+              {(data.ratedMovies.length >0)&&
               <div className="rate-circle-wrapper small-circle">
-                <RateCircle percentage={57} size={"small"} />
-                <span className="circle-title">Average Movie Score</span>
+                <RateCircle percentage={getRatingAverage(data.ratedMovies)} size={"small"} />
+                <span className="circle-title">Average Movie Rating</span>
               </div>
+                }
               <span className="line-vertical-white"></span>
+              {(data.ratedTvShows.length >0)&&
               <div className="rate-circle-wrapper large-circle">
-                <RateCircle percentage={71} size={"large"} className="" />
-                <span className="circle-title">Average TV Score</span>
+                <RateCircle percentage={getRatingAverage(data.ratedTvShows)} size={"large"} className="" />
+                <span className="circle-title">Average TV Rating</span>
               </div>
+               }
+              {(data.ratedTvShows.length >0)&&
               <div className="rate-circle-wrapper small-circle">
-                <RateCircle percentage={71} size={"small"} className="" />
-                <span className="circle-title">Average TV Score</span>
+                <RateCircle percentage={getRatingAverage(data.ratedTvShows)} size={"small"} className="" />
+                <span className="circle-title">Average TV Rating</span>
               </div>
+              }
             </div>
           </div>
         </div>
