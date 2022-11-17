@@ -173,6 +173,7 @@ export const MediaCardDropdown = ({
     logIn && logIn.isLoggedIn && (
       <div className="movie-card-dropdown actions-dropdown">
         <div className='dropdown-action-item' 
+        title='Add To Favoraites'
         onClick={()=>{
           setMediaAccountState(state=>({
             ...state, 
@@ -188,8 +189,8 @@ export const MediaCardDropdown = ({
           <span>Favorite</span>
         </div>
         <div className='dropdown-action-item' 
+          title='Add To Watchlist'
         onClick={()=>{
-
           setMediaAccountState(state=>({
             ...state, 
           watchlist: state&&(!state.watchlist)
@@ -204,6 +205,7 @@ export const MediaCardDropdown = ({
           <span>Watchlist</span>
         </div>
         <div className='dropdown-action-item last-action-item'
+        title='Rate Movie'
         onClick={()=>{
           setIsRatingPanelOpen(state=>!state)
         }}>

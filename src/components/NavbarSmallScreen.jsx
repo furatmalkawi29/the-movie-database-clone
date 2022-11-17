@@ -59,7 +59,7 @@ useEffect(()=>{
         </Link>
           )||(
         <Link to="/profile">
-          <div className='user-avatar' style={avatarStyle}/>
+          <div className='user-avatar' title='View Profile' style={avatarStyle}/>
         </Link>
           )}
         <img className="sm-magnifier" src={AssetImagesEnums.magnifier.Img} />

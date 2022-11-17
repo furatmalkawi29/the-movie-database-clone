@@ -158,9 +158,7 @@ export const MediaAccountButtons = ({ mediaId, mediaType }) => {
   }, []);
 
   return (
-    //TODO::add small popups when hovering over choices ==> indicates what user should do
     <div className='header-details-icons-block'>
-      {/* <div><ImList2 /></div> */}
       <div
         className='icon-container'
         onClick={() => {

@@ -124,6 +124,7 @@ return (
         <div>
           <img
             className="dotted-circle"
+            title='Actions'
             src={AssetImagesEnums.circleDotted.Img}
             onClick={handleClick}
             />

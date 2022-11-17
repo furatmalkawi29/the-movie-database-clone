@@ -112,7 +112,7 @@ export const Navbar = () => {
           </div>
           )||(
             <Link to="/profile">
-            <div className='user-avatar' style={avatarStyle}/>
+            <div className='user-avatar' title='View Profile' style={avatarStyle}/>
             </Link>
           )}
           <div>

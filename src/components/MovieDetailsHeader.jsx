@@ -294,10 +294,10 @@ export function MovieDetailsHeader({
               mediaType={mediaType}
               />
 
-              <div className="play-btn">
+              {/* <div className="play-btn">
                 <FaPlay viewBox="0 0 600 512" />
                 <span>Play Trailer</span>
-              </div>
+              </div> */}
 
             </div>
           </div>

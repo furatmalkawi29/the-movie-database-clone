@@ -10,10 +10,6 @@ import {
     ValidateWithLogin, GetAccountDetails, GetGuestSession
 } from '../Services';
 import { InputComponent, FormComponent } from '../components'
-//TODO::USE react-cookies to set session expiration after 24 hours 
-//TODO:: add remember me feature 
-//TODO: make guest session 
-//TODO:: add session type to redux : guest or not 
 
 export const LoginPage = ({ }) => {
     const { logIn } = useSelector(state => state);
@@ -170,11 +166,9 @@ export const LoginPage = ({ }) => {
                 <p>In order to use the editing and rating capabilities, you will
                 need to login to your account.</p>
                 <p>If you do not have an account,
-                <a target="_blank" href='https://www.themoviedb.org/signup'> Click here</a> to
+                <a target="_blank" href='https://www.themoviedb.org/signup' title='Move To TMDB Website'> Click here</a> to
                     get started. </p>
-                {/* <p>You can also use TMDB features as <span onClick={()=>setIsGuestSession(true)}>a guest</span>  . </p> */}
             </div>
-            {/* TODO:: make form component */}
             <FormComponent
                 classes='form-component-wrapper'
                 submitButtonText='Login'
@@ -209,10 +203,6 @@ export const LoginPage = ({ }) => {
             </FormComponent>
             <input type="button" value="logout" onClick={logoutClickHandler}
             />
-            {/* <label for="html">Remember Me</label> 
-            <input type="checkbox" 
-            onClick={rememberClickHandler}
-        /> */}
         </div>
     )
 }

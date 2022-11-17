@@ -18,8 +18,12 @@ export const MovieDetailsPage = () => {
 
   //TODO::convert to state + reducer 
 
-  //TODO:: fix footer issue not sticking in the bottom of the page 
-  // when page has short content
+//TODO:: mobile side menu not showing 
+//TODO:: make login page responsive
+
+//TODO add logout navbar popup
+
+//TODO add table for favoraites in profile (like spotify liked songs table)
   
   const [mediaData, setmediaData] = useState(null);
   const [mediaCast, setMediaCast] = useState([]);
@@ -134,7 +138,6 @@ export const MovieDetailsPage = () => {
                 <img src={AssetImagesEnums.rightArrow.Img} />
               </div>
             </div>
-            <p className="wrapper-link">Full Cast & Crew</p>
           </section>
 
           <section className="cards-wrapper">
