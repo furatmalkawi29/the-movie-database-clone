@@ -17,7 +17,7 @@ export const FormComponent = ({
         className={classes}
         >
             {children}
-            <div>
+            <div className='form-buttons'>
         <input 
         type="submit"
         value={submitButtonText}

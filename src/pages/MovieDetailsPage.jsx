@@ -19,7 +19,6 @@ export const MovieDetailsPage = () => {
   //TODO::convert to state + reducer 
 
 //TODO:: mobile side menu not showing 
-//TODO:: make login page responsive
 
 //TODO add logout navbar popup
 

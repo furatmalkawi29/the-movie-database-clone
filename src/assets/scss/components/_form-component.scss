@@ -1,10 +1,14 @@
 
 .form-component-wrapper{
+    .form-buttons{
+        display: flex;
+        width: 35%;
+     }
 
     .basic-button{
-        width: fit-content;
+        width: 50%;
+        margin: 5px;
         border-radius: 0.5rem;
-        margin: auto 0.5rem;
         padding: 10px 15px;
         background-color: #01b4e4;
         border: unset;
@@ -20,10 +24,9 @@
     }
 
     .outlined-button{
-        width: -moz-fit-content;
-        width: fit-content;
+        width: 50%;
+        margin: 5px;
         border-radius: 0.5rem;
-        margin: auto 0.5rem;
         padding: 8px 10px;
         background-color: transparent;
         border: 2px solid #01b4e4;
@@ -43,12 +46,19 @@
     .form-component-wrapper{
             margin: auto;
             width: 75%;
-            
-     .basic-button{
-        margin: 30px auto;
-        display: block;
-        }
-        }
-        
+            .form-buttons{
+               display: flex;
+               flex-wrap: wrap;
+               width: 70%;
+               margin: auto;
+            }
+       
+           .basic-button , .outlined-button{
+            margin: 10px auto;
+            display: block;
+            width: 100%;
+           }
+        } 
         
     }
+

@@ -165,8 +165,8 @@ export const LoginPage = ({ }) => {
                 <h4>Login to your account</h4>
                 <p>In order to use the editing and rating capabilities, you will
                 need to login to your account.</p>
-                <p>If you do not have an account,
-                <a target="_blank" href='https://www.themoviedb.org/signup' title='Move To TMDB Website'> Click here</a> to
+                <p>If you do not have an account,&nbsp;&nbsp;
+                <a target="_blank" href='https://www.themoviedb.org/signup' title='Move To TMDB Website'>Click here</a> to
                     get started. </p>
             </div>
             <FormComponent
@@ -174,7 +174,7 @@ export const LoginPage = ({ }) => {
                 submitButtonText='Login'
                 submitButtonClasses='basic-button'
                 onSubmitHandler={loginHandler}
-                secondaryButtonText='Login as guest'
+                secondaryButtonText='Login As Guest'
                 secondaryButtonClasses='outlined-button'
                 onSecondaryBtnHandler={() => {
                     setIsGuestSession(true)
