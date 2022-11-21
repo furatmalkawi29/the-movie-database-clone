@@ -7,8 +7,8 @@ import { ResponsivePie } from '@nivo/pie'
 // no chart will be rendered.
 // website examples showcase many properties,
 // you'll often use just a few of them.
-// export const MyResponsivePie = ({ data /* see data tab */ }) => {
-export const MyResponsivePie = ({  /* see data tab */ }) => {
+// export const PieChartComponent = ({ data /* see data tab */ }) => {
+export const PieChartComponent = ({  /* see data tab */ }) => {
     const data = [
         {
           "id": "stylus",

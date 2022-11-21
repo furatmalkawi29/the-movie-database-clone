@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from 'react-redux';
-import { RateCircle, MyResponsivePie, MyResponsiveBar } from '../components'
+import { RateCircle, PieChartComponent, BarChartComponent } from '../components'
 import {GetRatedTvShows, GetRatedMovies} from '../Services'
-
+import {initialChartData} from '../assets/DataTemplates/initialChartData'
 export const ProfilePage = ({ }) => {
 
   const { logIn, userAccount } = useSelector((state) => state);
@@ -12,13 +12,16 @@ export const ProfilePage = ({ }) => {
   const defaultState = {
     username: userAccount?.username,
     name: userAccount?.name,
-    avatar: (userAccount?.avatar?.tmdb?.avatar_path) && (`${avatarFilePath}/${userAccount.avatar.tmdb.avatar_path}`)
+    avatar: (userAccount?.avatar?.tmdb?.avatar_path) && (`${avatarFilePath}/${userAccount.avatar.tmdb.avatar_path}`),
+    numberOfRatedMovies: 0,
+    numberOfRatedTvShows: 0,
   }
   
   const [state, setState] = useState(defaultState)
+  const [chartData, setChartData] = useState([])
   const [data, setData] = useState({
-    ratedMovies: [],
-    ratedTvShows: [],
+    ratedMovies: null,
+    ratedTvShows: null,
   })
 
   const avatarStyle = {
@@ -48,6 +51,12 @@ export const ProfilePage = ({ }) => {
     if (!(response && response.status && response.status !== 200)) {
       setData(prevState=>({...prevState,
         ratedMovies: response.results || [] }));
+        
+        setState(prevState=>(
+          {...prevState,
+           numberOfRatedMovies: response.total_results}
+           ))
+
     }
   }
 
@@ -59,14 +68,38 @@ export const ProfilePage = ({ }) => {
     if (!(response && response.status && response.status !== 200)) {
       setData(prevState=>({...prevState,
         ratedTvShows: response.results || [] }));
+
+      setState(prevState=>(
+        {...prevState,
+          numberOfRatedTvShows: response.total_results}
+          ))
     }
   }
+
+  const createBarChartData = ()=>{
+    
+    if(chartData.length==0&&data.ratedMovies&&data.ratedTvShows){
+      const ratedData = [...data.ratedMovies, ...data.ratedTvShows]
+      
+    const filledChartData = ratedData.reduce((initialData, item)=>{
+      initialData[item.rating].count = initialData[item.rating].count + 1;
+      return initialData
+    }, initialChartData)
+
+    setChartData(Object.values(filledChartData))
+  }
+  }
+
+  useEffect(()=>{
+    createBarChartData()
+  },[data])
 
   useEffect(()=>{
     getRatedTvShows();
     getRatedMovies();
     setState(prevState=>({...prevState,
-      avatar:(userAccount?.avatar?.tmdb?.avatar_path) && (`${avatarFilePath}/${userAccount.avatar.tmdb.avatar_path}`)}))
+      avatar:(userAccount?.avatar?.tmdb?.avatar_path) && (`${avatarFilePath}/${userAccount.avatar.tmdb.avatar_path}`)
+    }))
 
   },[userAccount])
 
@@ -83,26 +116,26 @@ export const ProfilePage = ({ }) => {
               <p className="user-name">{state.name || state.username}</p>
             </div>
             <div className="rate-circles-container">
-                {(data.ratedMovies.length >0)&&
+                {(data.ratedMovies&&data.ratedMovies.length >0)&&
               <div className="rate-circle-wrapper large-circle">
                 <RateCircle percentage={getRatingAverage(data.ratedMovies)} size={"large"} />
                 <span className="circle-title">Average Movie Rating</span>
               </div>
                 }
-              {(data.ratedMovies.length >0)&&
+              {(data.ratedMovies&&data.ratedMovies.length >0)&&
               <div className="rate-circle-wrapper small-circle">
                 <RateCircle percentage={getRatingAverage(data.ratedMovies)} size={"small"} />
                 <span className="circle-title">Average Movie Rating</span>
               </div> 
                 }
               <span className="line-vertical-white"></span>
-              {(data.ratedTvShows.length >0)&&
+              {(data.ratedTvShows&&data.ratedTvShows.length >0)&&
               <div className="rate-circle-wrapper large-circle">
                 <RateCircle percentage={getRatingAverage(data.ratedTvShows)} size={"large"} className="" />
                 <span className="circle-title">Average TV Rating</span>
               </div>
                }
-              {(data.ratedTvShows.length >0)&&
+              {(data.ratedTvShows&&data.ratedTvShows.length >0)&&
               <div className="rate-circle-wrapper small-circle">
                 <RateCircle percentage={getRatingAverage(data.ratedTvShows)} size={"small"} className="" />
                 <span className="circle-title">Average TV Rating</span>
@@ -117,19 +150,24 @@ export const ProfilePage = ({ }) => {
         <div className="status-item">
           <p className="status-title">Total Ratings</p>
           <div className="status-content">
-            <span className="number-status">21</span>
+            <span className="number-status">{(state.numberOfRatedMovies+state.numberOfRatedTvShows)}</span>
           </div>
         </div>
+        {
+          chartData&&(chartData.length>0)&&
         <div className="status-item">
-          <p className="status-title">Rating Overview</p>
+        <p className="status-title">Most Watched Genres</p>
           <div className="status-pie">
-              <MyResponsivePie />
+              <PieChartComponent />
           </div>
         </div>
+        }
         <div className="status-item">
-          <p className="status-title">Most Watched Genres</p>
+        <p className="status-title">Rating Overview</p>
           <div className="status-bar">
-              <MyResponsiveBar />
+              <BarChartComponent 
+              data={chartData}
+              />
           </div>
         </div>
       </div>
