@@ -19,10 +19,6 @@ export const MovieDetailsPage = () => {
   //TODO::convert to state + reducer 
 
 //TODO:: mobile side menu not showing 
-
-//TODO add logout navbar popup
-
-//TODO add table for favoraites in profile (like spotify liked songs table)
   
   const [mediaData, setmediaData] = useState(null);
   const [mediaCast, setMediaCast] = useState([]);

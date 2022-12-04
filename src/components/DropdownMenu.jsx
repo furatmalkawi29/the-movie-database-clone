@@ -1,14 +1,11 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React from 'react';
 
-export const DropdownMenu = ({menuClass, content }) => {
-
+export const DropdownMenu = ({ menuClass, content }) => {
   return (
     <div className={menuClass}>
-  {content.map(item => {
-    return <div key={item}><Link to={`/${item}`}></Link>{item}</div>
-  })
-}
+      {content.map((item) => {
+        return <div key={item}>{item}</div>;
+      })}
     </div>
-  )
-}
+  );
+};

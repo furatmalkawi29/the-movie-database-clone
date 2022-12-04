@@ -7,6 +7,9 @@ import {initialPieChartData} from '../assets/DataTemplates/initialPieChartData'
 export const ProfilePage = ({ }) => {
 //todo: add search card to watchlist 
 //add paginantion to watchlist movies
+//OR: 
+//TODO add table for favoraites in profile (like spotify liked songs table)
+
 
 //todo: add toaster library on user actions 
   const { logIn, userAccount } = useSelector((state) => state);

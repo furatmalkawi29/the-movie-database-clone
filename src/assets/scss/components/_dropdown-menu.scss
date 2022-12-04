@@ -8,7 +8,8 @@
   padding: 8px 25px;
   min-width: 175px;
   border: solid 1px rgb(209, 209, 209);
-
+  cursor: pointer;
+  
   a{
     font-size: 1rem;
     font-weight: 400;
@@ -24,7 +25,7 @@
   display: block;
 }
 
-.movies-menu, .tv-shows-menu, .people-menu , .more-menu{
+.movies-menu, .tv-shows-menu, .people-menu , .more-menu, .logout-menu{
   @extend %dropdown-menu;
   position: absolute;
   top: 53px;
@@ -49,6 +50,18 @@ left: 205px;
   left: 452px;
 }
 
+.logout-menu{
+  right: 60px;
+  top: 60px;
+  min-width: fit-content;
+  div{
+    display: flex;
+    align-items: center;
+  }
+  svg{
+    margin: 5px;
+  }
+}
 
 
 

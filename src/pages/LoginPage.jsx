@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 //TODO::make file index for actions, reducers ..)
 import { userLogin } from '../Redux/Actions/LoginAction'
 import { userLogout } from '../Redux/Actions/LogoutAction'
-import { rememberMe } from '../Redux/Actions/RrememberMeAction'
 import {
     GetRequestToken, CreateSession, DeleteSession,
     ValidateWithLogin, GetAccountDetails, GetGuestSession
@@ -13,7 +12,6 @@ import { InputComponent, FormComponent } from '../components'
 
 export const LoginPage = ({ }) => {
     const { logIn } = useSelector(state => state);
-    const rememberMeValue = useSelector((state) => state.rememberMe);
     const dispatch = useDispatch();
     const navigate = useNavigate()
 
@@ -77,31 +75,12 @@ export const LoginPage = ({ }) => {
     }
 
 
-    const deleteSession = async () => {
-
-        const body = {
-            data: {
-                session_id: (sessionId || logIn?.sessionId),
-            },
-        }
-        const response = await DeleteSession(body);
-
-        if (!(response && response.status && response.status !== 200)) {
-            const isLoggedIn = false;
-            localStorageHandler(isLoggedIn)
-        }
-
-    }
-
-
     const getAccountDetails = async (sessionId) => {
         const response = await GetAccountDetails(sessionId);
         if (!(response && response.status && response.status !== 200)) {
             setAccountDetails(response);
         }
     }
-
-
 
     const localStorageHandler = (isLoggedIn, sessionId, accountDetails) => {
         if (isLoggedIn) {
@@ -123,18 +102,6 @@ export const LoginPage = ({ }) => {
             getRequestToken();
         }
     }
-
-
-    const logoutClickHandler = () => {
-        dispatch(
-            userLogout({
-                sessionId: null,
-            }))
-
-        deleteSession();
-
-    }
-
 
     useEffect(() => {
         if (isGuestSession) {
@@ -201,8 +168,6 @@ export const LoginPage = ({ }) => {
                     }}
                 />
             </FormComponent>
-            <input type="button" value="logout" onClick={logoutClickHandler}
-            />
         </div>
     )
 }
