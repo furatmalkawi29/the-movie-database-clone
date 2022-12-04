@@ -71,10 +71,41 @@ const AddToWatchlist= async (accountId,sessionId, body)=>{
       return result;
   }
 
+
+  const GetWatchlistMovies = async (accountId,sessionId)=>{
+
+    const queryList = [];
+    queryList.push(`api_key=${config.api_key}`);
+    if(sessionId)
+    queryList.push(`session_id=${sessionId}`);
+
+      const result = await axios.get(`${config.server_address}/account/${accountId}/watchlist/movies?${queryList.join('&')}`)
+          .then((response) => response.data)
+          .catch((error) => error.response);
+  
+      return result;
+  }
+
+  const GetWatchlistTvShows = async (accountId,sessionId)=>{
+
+    const queryList = [];
+    queryList.push(`api_key=${config.api_key}`);
+    if(sessionId)
+    queryList.push(`session_id=${sessionId}`);
+
+      const result = await axios.get(`${config.server_address}/account/${accountId}/watchlist/tv?${queryList.join('&')}`)
+          .then((response) => response.data)
+          .catch((error) => error.response);
+  
+      return result;
+  }
+
 export {
     GetAccountDetails,
     MarkAsFavorite,
     AddToWatchlist,
     GetRatedMovies,
     GetRatedTvShows,
+    GetWatchlistMovies,
+    GetWatchlistTvShows
 }

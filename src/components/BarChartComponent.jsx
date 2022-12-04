@@ -54,6 +54,5 @@ export const BarChartComponent = ({data}) => {
         enableGridY={false}
         legends={[]}
         role="application"
-        barAriaLabel={function(e){return e.id+": "+e.formattedValue+" in country: "+e.indexValue}}
     />
 )}

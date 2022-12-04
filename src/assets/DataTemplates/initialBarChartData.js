@@ -1,4 +1,4 @@
-export const initialChartData = {
+export const initialBarChartData = {
     1 :{
       "rating": 1,
       "count": 0,

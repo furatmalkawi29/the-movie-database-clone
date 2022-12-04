@@ -1,40 +1,7 @@
-// install (please make sure versions match peerDependencies)
-// yarn add @nivo/core @nivo/pie
+
 import { ResponsivePie } from '@nivo/pie'
 
-// make sure parent container have a defined height when using
-// responsive component, otherwise height will be 0 and
-// no chart will be rendered.
-// website examples showcase many properties,
-// you'll often use just a few of them.
-// export const PieChartComponent = ({ data /* see data tab */ }) => {
-export const PieChartComponent = ({  /* see data tab */ }) => {
-    const data = [
-        {
-          "id": "stylus",
-          "label": "stylus",
-          "value": 151,
-          "color": "hsl(311, 70%, 50%)"
-        },
-        {
-          "id": "css",
-          "label": "css",
-          "value": 235,
-          "color": "hsl(68, 70%, 50%)"
-        },
-        {
-          "id": "hack",
-          "label": "hack",
-          "value": 204,
-          "color": "hsl(241, 70%, 50%)"
-        },
-        {
-          "id": "sass",
-          "label": "sass",
-          "value": 556,
-          "color": "hsl(223, 70%, 50%)"
-        },
-      ]
+export const PieChartComponent = ({data}) => {
 
     return (
     <ResponsivePie
@@ -91,56 +58,7 @@ export const PieChartComponent = ({  /* see data tab */ }) => {
                 spacing: 10
             }
         ]}
-        fill={[
-            {
-                match: {
-                    id: 'ruby'
-                },
-                id: 'dots'
-            },
-            {
-                match: {
-                    id: 'c'
-                },
-                id: 'dots'
-            },
-            {
-                match: {
-                    id: 'go'
-                },
-                id: 'dots'
-            },
-            {
-                match: {
-                    id: 'python'
-                },
-                id: 'dots'
-            },
-            {
-                match: {
-                    id: 'scala'
-                },
-                id: 'lines'
-            },
-            {
-                match: {
-                    id: 'lisp'
-                },
-                id: 'lines'
-            },
-            {
-                match: {
-                    id: 'elixir'
-                },
-                id: 'lines'
-            },
-            {
-                match: {
-                    id: 'javascript'
-                },
-                id: 'lines'
-            }
-        ]}
+
         legends={[
             {
                 anchor: 'bottom',

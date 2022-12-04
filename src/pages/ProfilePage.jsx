@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from 'react-redux';
 import { RateCircle, PieChartComponent, BarChartComponent } from '../components'
-import {GetRatedTvShows, GetRatedMovies} from '../Services'
-import {initialChartData} from '../assets/DataTemplates/initialChartData'
+import {GetRatedTvShows, GetRatedMovies, GetWatchlistTvShows, GetWatchlistMovies} from '../Services'
+import {initialBarChartData} from '../assets/DataTemplates/initialBarChartData'
+import {initialPieChartData} from '../assets/DataTemplates/initialPieChartData'
 export const ProfilePage = ({ }) => {
+//todo: add search card to watchlist 
+//add paginantion to watchlist movies
 
+//todo: add toaster library on user actions 
   const { logIn, userAccount } = useSelector((state) => state);
   
   const avatarFilePath = `https://www.themoviedb.org/t/p/w150_and_h150_face`
@@ -18,10 +22,13 @@ export const ProfilePage = ({ }) => {
   }
   
   const [state, setState] = useState(defaultState)
-  const [chartData, setChartData] = useState([])
+  const [barChartData, setBarChartData] = useState([])
+  const [pieChartData, setPieChartData] = useState([])
   const [data, setData] = useState({
     ratedMovies: null,
     ratedTvShows: null,
+    watchlistTvShows: null,
+    watchlistMovies: null,
   })
 
   const avatarStyle = {
@@ -76,27 +83,86 @@ export const ProfilePage = ({ }) => {
     }
   }
 
+  const getWatchlistTvShows = async () => {
+    const accountId = userAccount && userAccount.id;
+    const sessionId = logIn && logIn.sessionId;
+
+    const response = await GetWatchlistTvShows(accountId,sessionId);
+    if (!(response && response.status && response.status !== 200)) {
+      setData(prevState=>({...prevState,
+        watchlistTvShows: response.results || [] }));
+
+    }
+  }
+
+  const getWatchlistMovies = async () => {
+    const accountId = userAccount && userAccount.id;
+    const sessionId = logIn && logIn.sessionId;
+
+    const response = await GetWatchlistMovies(accountId,sessionId);
+    if (!(response && response.status && response.status !== 200)) {
+      setData(prevState=>({...prevState,
+        watchlistMovies: response.results || [] }));
+
+    }
+  }
+
   const createBarChartData = ()=>{
     
-    if(chartData.length==0&&data.ratedMovies&&data.ratedTvShows){
+    if(barChartData.length==0&&data.ratedMovies&&data.ratedTvShows){
       const ratedData = [...data.ratedMovies, ...data.ratedTvShows]
       
     const filledChartData = ratedData.reduce((initialData, item)=>{
       initialData[item.rating].count = initialData[item.rating].count + 1;
       return initialData
-    }, initialChartData)
+    }, initialBarChartData)
 
-    setChartData(Object.values(filledChartData))
+    setBarChartData(Object.values(filledChartData))
   }
+  }
+
+
+  const createPieChartData = ()=>{
+    if (pieChartData.length == 0 && data.watchlistMovies && data.watchlistTvShows) {
+      const watchlistData = [...data.watchlistMovies, ...data.watchlistTvShows];
+
+      // Genre IDs from TMDB:
+      const dramaID = 28;
+      const comedyID = 35;
+      const actionID = 18;
+
+      const filledChartData = watchlistData.reduce((initialData, item) => {
+        const movieGenresIDs = item.genre_ids;
+
+        const isDrama = movieGenresIDs.includes(dramaID);
+        const isComedy = movieGenresIDs.includes(comedyID);
+        const isAction = movieGenresIDs.includes(actionID);
+
+        let genreID;
+
+        if (isDrama) genreID = dramaID;
+        else if (isComedy) genreID = comedyID;
+        else if (isAction) genreID = actionID;
+        else genreID = 0;
+
+        initialData[genreID].value = initialData[genreID].value + 1;
+        return initialData;
+      }, initialPieChartData);
+
+      setPieChartData(Object.values(filledChartData))
+    }
   }
 
   useEffect(()=>{
-    createBarChartData()
+    createBarChartData();
+    createPieChartData();
   },[data])
 
   useEffect(()=>{
     getRatedTvShows();
     getRatedMovies();
+    getWatchlistTvShows();
+    getWatchlistMovies();
     setState(prevState=>({...prevState,
       avatar:(userAccount?.avatar?.tmdb?.avatar_path) && (`${avatarFilePath}/${userAccount.avatar.tmdb.avatar_path}`)
     }))
@@ -154,20 +220,24 @@ export const ProfilePage = ({ }) => {
           </div>
         </div>
         {
-          chartData&&(chartData.length>0)&&
+          pieChartData&&(pieChartData.length>0)&&
         <div className="status-item">
         <p className="status-title">Most Watched Genres</p>
           <div className="status-pie">
-              <PieChartComponent />
+              <PieChartComponent 
+              data={pieChartData}
+              />
           </div>
         </div>
         }
         <div className="status-item">
         <p className="status-title">Rating Overview</p>
           <div className="status-bar">
+            {barChartData&&(barChartData.length>0)&&
               <BarChartComponent 
-              data={chartData}
+              data={barChartData}
               />
+            }
           </div>
         </div>
       </div>
