@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {TrailerCardsContainer,Header,TrailerModal} from "../components";
 import {MediaCardsContainer} from '../components/MediaCardsContainer'
-import { useTitle } from '../assets/Hookes';
+import { useTitle } from '../Hookes';
 import {GetWeekTrendingMovies,
   GetPopularMovies,
   GetNowPlayingMovies,

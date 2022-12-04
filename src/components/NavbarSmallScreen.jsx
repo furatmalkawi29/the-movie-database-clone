@@ -1,10 +1,13 @@
 import React, {useState, useEffect} from "react";
-import {SideMenu} from "../components";
-import { Link } from "react-router-dom";
-import { AssetImagesEnums, LogosEnums } from '../Enums';
-import { useSelector } from 'react-redux';
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
 import $ from 'jquery';
-
+import {SideMenu} from "../components";
+import { AssetImagesEnums, LogosEnums } from '../Enums';
+import { showSuccessMessage } from '../Helper';
+import { DeleteSession } from '../Services';
+import { FiLogOut, FiSettings } from "react-icons/fi";
+import { userLogout } from '../Redux/Actions/LogoutAction'
 
 export const NavbarSmallScreen =() => {
   
@@ -30,10 +33,48 @@ const avatarFilePath = `https://www.themoviedb.org/t/p/w32_and_h32_face`
 
 const { logIn, userAccount } = useSelector(state => state);
 const [avatarFile,setAvatarFile] = useState((userAccount?.avatar?.tmdb?.avatar_path))
+const [isLogoutPopupOpen, setIsLogoutPopupVisable] = useState(false)
+const dispatch = useDispatch();
+const navigate = useNavigate()
 
 const avatarStyle = {
   background: (avatarFile && `url(${avatarFilePath}/${avatarFile})`) || `rgb(1 210 119)`
 }
+
+const deleteSession = async () => {
+
+  const sessionId = logIn && logIn.sessionId;
+  const body = {
+      data: {
+          session_id: (sessionId || logIn?.sessionId),
+      },
+  }
+  const response = await DeleteSession(body);
+
+  if (!(response && response.status && response.status !== 200)) {
+      navigate('/');
+      localStorage.removeItem('app_session')
+      showSuccessMessage('Logged Out')
+  }
+
+}
+
+const showLogoutPopup = () => {
+  setIsLogoutPopupVisable(prevState=> !prevState);
+};
+
+const handleLogoutClick = () => {
+  
+  setIsLogoutPopupVisable(prevState=> !prevState);
+  
+  dispatch(
+    userLogout({
+        sessionId: null,
+    }))
+
+  deleteSession();
+  
+};
 
 useEffect(()=>{
   setAvatarFile((userAccount?.avatar?.tmdb?.avatar_path))
@@ -58,11 +99,20 @@ useEffect(()=>{
           <img className="sm-user-icon" src={AssetImagesEnums.maleUser.Img} />
         </Link>
           )||(
-        <Link to="/profile">
-          <div className='user-avatar' title='View Profile' style={avatarStyle}/>
-        </Link>
+            <>
+              <Link to="/profile">
+                <div className='user-avatar' title='View Profile' style={avatarStyle} />
+              </Link>
+              <div className='setting-icon' onClick={showLogoutPopup}>
+                <FiSettings />
+              </div>
+            </>
           )}
-        <img className="sm-magnifier" src={AssetImagesEnums.magnifier.Img} />
+        {isLogoutPopupOpen &&
+          <div className='logout-menu' onClick={handleLogoutClick}>
+            <div>Logout <FiLogOut /></div>
+          </div>
+        }
       </div>
 
       <SideMenu/>

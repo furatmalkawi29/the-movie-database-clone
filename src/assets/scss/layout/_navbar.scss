@@ -64,15 +64,21 @@
     width: 22.39px;
   }
 
-  .magnifier{
-    width: 29.1px;
-  }
   
-div{
-  margin: 0px 5px;
-}
+  div{
+    margin: 0px 5px;
+  }
 }
 
+.setting-icon {
+  cursor: pointer;
+  
+svg{
+    height: 1.3em;
+    width: 1.3em;
+    color: #e3e3e3;
+}
+}
 
 
 

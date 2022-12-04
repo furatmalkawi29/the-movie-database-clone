@@ -1,4 +1,5 @@
 export * from './BottomMenu'
+export * from '../Helper/ToastNotifications'
 export * from './TrailerCardsContainer'
 export * from './CastCard'
 export * from './DropdownMenu'

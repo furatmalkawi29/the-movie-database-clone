@@ -1,6 +1,6 @@
 import React, {useState, useRef} from 'react'
 import {useNavigate } from 'react-router-dom'
-import headerImagesList from '../assets/helpers/header-images'
+import headerImagesList from '../assets/DataTemplates/header-images'
 
 export function Header() {
   const navigate = useNavigate();

@@ -1,8 +1,0 @@
-
-
-
-const cardReelsRoutes = {
-    "popular": {
-        "on"
-    }
-}

@@ -22,3 +22,18 @@ body{
   border-radius: 50px;
 }
 
+.react-toast-notifications__container {
+  z-index: 1000000 !important;
+
+  .css-18gu508-Content{
+    word-wrap: break-word;
+    min-height: unset;      
+  }
+  .css-nvf14r-ToastContainer {
+    z-index: 1000000 !important;
+  }
+  .css-1mf073k-ToastElement{
+    width: fit-content;
+  }
+  
+}

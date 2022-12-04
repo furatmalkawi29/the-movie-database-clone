@@ -3,6 +3,8 @@ import { AssetImagesEnums } from '../Enums'
 import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { IconsEnums } from '../Enums';
+import { showSuccessMessage } from '../Helper';
+
 import {
   MarkAsFavorite, AddToWatchlist, RateTvShow,
   RateMovie, RemoveMovieRating, RemoveTvShowRating,
@@ -24,18 +26,23 @@ export const MediaCardDropdown = ({
   const markAsFavorite = async () => {
     const accountId = userAccount && userAccount.id;
     const sessionId = logIn && logIn.sessionId;
-    const favoriteValue = !(mediaAccountState && mediaAccountState.favorite);
+    const isFavorite = !(mediaAccountState && mediaAccountState.favorite);
 
     const body = {
       media_type: mediaType,
       media_id: mediaId,
-      favorite: favoriteValue,
+      favorite: isFavorite,
     }
 
     const response = await MarkAsFavorite(accountId, sessionId, body);
 
     if (!(response && response.status && response.status !== 200)) {
       getMediaAccountState()
+      if(isFavorite){
+        showSuccessMessage('Added To Favorites!')
+      }else{
+        showSuccessMessage('Removed From Favorites')
+      }
     } 
   }
 
@@ -43,18 +50,22 @@ export const MediaCardDropdown = ({
 
     const accountId = userAccount && userAccount.id;
     const sessionId = logIn && logIn.sessionId;
-    const watchlistValue = !(mediaAccountState && mediaAccountState.watchlist);
+    const isWatchlisted = !(mediaAccountState && mediaAccountState.watchlist);
 
     const body = {
       media_type: mediaType,
       media_id: mediaId,
-      watchlist: watchlistValue
+      watchlist: isWatchlisted
     }
 
     const response = await AddToWatchlist(accountId, sessionId, body);
     if (!(response && response.status && response.status !== 200)) {
       getMediaAccountState()
-
+      if(isWatchlisted){
+        showSuccessMessage('Added To Watchlist!')
+      }else{
+        showSuccessMessage('Removed From Watchlist')
+      }
     } 
   }
 
@@ -68,6 +79,7 @@ export const MediaCardDropdown = ({
     const response = await RateMovie({movieId: mediaId, body, sessionId});
     if (!(response && response.status && response.status !== 200)) {
       getMediaAccountState()
+      showSuccessMessage('Rated Successfully!')
     } 
   }
 
@@ -78,6 +90,7 @@ export const MediaCardDropdown = ({
     const response =  await RemoveMovieRating({movieId: mediaId, sessionId});
     if (!(response && response.status && response.status !== 200)) {
       getMediaAccountState()
+      showSuccessMessage('Rating Removed')
     } 
 
   }
@@ -93,6 +106,7 @@ export const MediaCardDropdown = ({
     const response =  await RateTvShow({tvShowId: mediaId, body, sessionId });
     if (!(response && response.status && response.status !== 200)) {
       getMediaAccountState()
+      showSuccessMessage('Rated Successfully!')
     } 
   }
 
@@ -103,7 +117,7 @@ export const MediaCardDropdown = ({
     const response =  await RemoveTvShowRating({tvShowId: mediaId, sessionId});
     if (!(response && response.status && response.status !== 200)) {
       getMediaAccountState()
-
+      showSuccessMessage('Rating Removed')
     } 
   }
 

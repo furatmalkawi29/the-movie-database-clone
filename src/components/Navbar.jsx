@@ -1,12 +1,13 @@
 import React, { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import $ from 'jquery'
 import { ClickAwayListener } from "@mui/material";
 import { DropdownMenu } from "../components";
 import { LogosEnums, AssetImagesEnums } from '../Enums';
+import { showSuccessMessage } from '../Helper';
 import { DeleteSession } from '../Services';
-import { FiLogOut } from "react-icons/fi";
+import { FiLogOut, FiSettings } from "react-icons/fi";
 import { userLogout } from '../Redux/Actions/LogoutAction'
 
 export const Navbar = () => {
@@ -27,6 +28,7 @@ export const Navbar = () => {
   const [isLogoutPopupOpen, setIsLogoutPopupVisable] = useState(false)
   const [avatarFile] = useState((userAccount?.avatar?.tmdb?.avatar_path))
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
 
   const avatarStyle = {
@@ -44,7 +46,9 @@ export const Navbar = () => {
     const response = await DeleteSession(body);
 
     if (!(response && response.status && response.status !== 200)) {
+        navigate('/');
         localStorage.removeItem('app_session')
+        showSuccessMessage('Logged Out')
     }
 
 }
@@ -150,22 +154,20 @@ export const Navbar = () => {
               </Link>
             </div>
           ) || (
-            <>
-              <div onClick={showLogoutPopup}>
+              <>
                 <Link to="/profile">
                   <div className='user-avatar' title='View Profile' style={avatarStyle} />
                 </Link>
-              </div>
-              {isLogoutPopupOpen &&
-              <div className='logout-menu' onClick={handleLogoutClick}>
-                <div>Logout <FiLogOut/></div>
-              </div>
-              }
-            </>
+                <div className='setting-icon' onClick={showLogoutPopup}>
+                  <FiSettings />
+                </div>
+              </>
             )}
-          <div>
-            <img className="magnifier" src={AssetImagesEnums.magnifier.Img} />
-          </div>
+          {isLogoutPopupOpen &&
+            <div className='logout-menu' onClick={handleLogoutClick}>
+              <div>Logout <FiLogOut /></div>
+            </div>
+          }
         </div>
       </div>
     </nav>

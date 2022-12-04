@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 //TODO::make file index for actions, reducers ..)
 import { userLogin } from '../Redux/Actions/LoginAction'
-import { userLogout } from '../Redux/Actions/LogoutAction'
 import {
     GetRequestToken, CreateSession, DeleteSession,
     ValidateWithLogin, GetAccountDetails, GetGuestSession
 } from '../Services';
 import { InputComponent, FormComponent } from '../components'
+import { showSuccessMessage, showErrorMessage} from '../Helper'
 
 export const LoginPage = ({ }) => {
     const { logIn } = useSelector(state => state);
@@ -70,6 +70,9 @@ export const LoginPage = ({ }) => {
         if (!(response && response.status && response.status !== 200)) {
             setSessionId(response.session_id);
             getAccountDetails(response.session_id)
+            showSuccessMessage('Logged In Successfully')
+        }else {
+            showErrorMessage('Logged In Successfully')
         }
 
     }
