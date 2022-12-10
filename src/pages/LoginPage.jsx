@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-//TODO::make file index for actions, reducers ..)
 import { userLogin } from '../Redux/Actions/LoginAction'
 import {
     GetRequestToken, CreateSession, DeleteSession,
@@ -128,7 +127,6 @@ export const LoginPage = ({ }) => {
     }, [accountDetails])
 
 
-    //TODO: make enum file for static text
     return (
         <div className='login-view-wrapper'>
             <div className='login-top-part'>

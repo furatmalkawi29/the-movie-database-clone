@@ -46,9 +46,9 @@ export const Navbar = () => {
     const response = await DeleteSession(body);
 
     if (!(response && response.status && response.status !== 200)) {
-        navigate('/');
-        localStorage.removeItem('app_session')
-        showSuccessMessage('Logged Out')
+      localStorage.removeItem('app_session')
+      navigate('/');
+      showSuccessMessage('Logged Out')
     }
 
 }
@@ -85,7 +85,7 @@ export const Navbar = () => {
       <div className="lg-nav-container">
         <div className="nav-left-part">
           <Link to="/">
-            <img className="nav-logo" src={LogosEnums.blueShortLogo.Img} />
+            <img title="Home" className="nav-logo" src={LogosEnums.blueShortLogo.Img} />
           </Link>
           <ClickAwayListener onClickAway={handleClickAway}>
             <div className="nav-items-container">
@@ -97,7 +97,6 @@ export const Navbar = () => {
                       "Popular",
                       "Now Playing",
                       "Upcoming",
-                      "Top Rated",
                     ]}
                     menuClass="movies-menu"
                   />
@@ -110,7 +109,6 @@ export const Navbar = () => {
                   <DropdownMenu
                     content={[
                       "Popular",
-                      "Airing Today",
                       "On TV",
                       "Top Rated",
                     ]}
@@ -118,7 +116,7 @@ export const Navbar = () => {
                   />
                 }
               </div>
-              <div>
+              {/* <div>
                 <span id="3" onClick={navItemClickHandler}>People</span>
                 {activeNavItem === '3' &&
                   <DropdownMenu
@@ -140,7 +138,7 @@ export const Navbar = () => {
                     menuClass="more-menu"
                   />
                 }
-              </div>
+              </div> */}
             </div>
           </ClickAwayListener>
         </div>

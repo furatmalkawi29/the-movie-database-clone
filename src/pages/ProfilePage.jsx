@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from 'react-redux';
-import { RateCircle, PieChartComponent, BarChartComponent } from '../components'
-import {GetRatedTvShows, GetRatedMovies, GetWatchlistTvShows, GetWatchlistMovies} from '../Services'
+import { Link } from "react-router-dom";
+import { RateCircle, PieChartComponent, BarChartComponent, ResultMediaCard,
+   PaginationComponent } from '../components'
+import {GetRatedTvShows, GetRatedMovies, GetWatchlistTvShows, GetWatchlistMovies,
+  GetFavoriteMovies, GetFavoriteTvShows} from '../Services'
 import {initialBarChartData} from '../assets/DataTemplates/initialBarChartData'
 import {initialPieChartData} from '../assets/DataTemplates/initialPieChartData'
 export const ProfilePage = ({ }) => {
-//todo: add search card to watchlist 
-//add paginantion to watchlist movies
-//OR: 
-//TODO add table for favoraites in profile (like spotify liked songs table)
 
-
-//todo: add toaster library on user actions 
   const { logIn, userAccount } = useSelector((state) => state);
   
   const avatarFilePath = `https://www.themoviedb.org/t/p/w150_and_h150_face`
@@ -25,6 +22,8 @@ export const ProfilePage = ({ }) => {
   }
   
   const [state, setState] = useState(defaultState)
+  const [activePage, setActivePage] = useState(1)
+  const [numberOfPages, setNumberOfPages] = useState(1)
   const [barChartData, setBarChartData] = useState([])
   const [pieChartData, setPieChartData] = useState([])
   const [data, setData] = useState({
@@ -32,10 +31,24 @@ export const ProfilePage = ({ }) => {
     ratedTvShows: null,
     watchlistTvShows: null,
     watchlistMovies: null,
+    favoriteMovies: null,
   })
 
   const avatarStyle = {
     background: (state.avatar && `url(${state.avatar})`) || `rgb(1 210 119)`
+  }
+
+  const getMoviePageUrl = (item) =>{
+    let pageUrl = ''
+    if(item.media_type){
+      pageUrl = `/${item.media_type}/${item.id}`;
+    }else if (item.release_date){
+      pageUrl = `/movie/${item.id}`;
+    }else if (item.first_air_date){
+      pageUrl = `/tv/${item.id}`;
+    }
+
+    return pageUrl
   }
 
 
@@ -102,11 +115,25 @@ export const ProfilePage = ({ }) => {
     const accountId = userAccount && userAccount.id;
     const sessionId = logIn && logIn.sessionId;
 
-    const response = await GetWatchlistMovies(accountId,sessionId);
+    const response = await GetWatchlistMovies(accountId,sessionId, activePage);
     if (!(response && response.status && response.status !== 200)) {
       setData(prevState=>({...prevState,
         watchlistMovies: response.results || [] }));
+    }
+  }
 
+  const getFavoriteMovies = async () => {
+    const accountId = userAccount && userAccount.id;
+    const sessionId = logIn && logIn.sessionId;
+
+    const response = await GetFavoriteMovies(accountId,sessionId, activePage);
+    if (!(response && response.status && response.status !== 200)) {
+      setData(prevState => ({
+        ...prevState,
+        favoriteMovies: response&&response.results || []
+      }));
+
+      setNumberOfPages(response&&response.total_pages)
     }
   }
 
@@ -166,13 +193,17 @@ export const ProfilePage = ({ }) => {
     getRatedMovies();
     getWatchlistTvShows();
     getWatchlistMovies();
-    setState(prevState=>({...prevState,
-      avatar:(userAccount?.avatar?.tmdb?.avatar_path) && (`${avatarFilePath}/${userAccount.avatar.tmdb.avatar_path}`)
+    setState(prevState => ({
+      ...prevState,
+      avatar: (userAccount?.avatar?.tmdb?.avatar_path) && (`${avatarFilePath}/${userAccount.avatar.tmdb.avatar_path}`)
     }))
 
   },[userAccount])
 
-
+  useEffect(()=>{
+    getFavoriteMovies();
+  },[userAccount, activePage])
+console.log('activePage', activePage);
   return (
     <div className="profile-page-wrapper">
 
@@ -225,7 +256,7 @@ export const ProfilePage = ({ }) => {
         {
           pieChartData&&(pieChartData.length>0)&&
         <div className="status-item">
-        <p className="status-title">Most Watched Genres</p>
+        <p className="status-title">Most Watched</p>
           <div className="status-pie">
               <PieChartComponent 
               data={pieChartData}
@@ -245,11 +276,18 @@ export const ProfilePage = ({ }) => {
         </div>
       </div>
 
-      <div>
-        <p>My Watchlist</p>
-        <div className="wishlist-wrapper">
-
-        </div>
+      <div className='favourites-container'>
+        <p className='profile-heading'>My Favourites</p>
+        <div className='results-container'>
+        {(data.favoriteMovies&&data.favoriteMovies.length>0&&data.favoriteMovies.map(item=>((item.media_type==="tv"||item.media_type==="movie"||!item.known_for)&&<Link to={getMoviePageUrl(item)}><ResultMediaCard
+        data={item}/></Link>)||<ResultMediaCard 
+        data={item}/>))||<p>You Still Have No Favourites .</p>}
+      </div>
+      <PaginationComponent
+      activePage={activePage}
+      setActivePage={setActivePage}
+      numberOfPages={numberOfPages}
+      />
       </div>
     </div>
   );

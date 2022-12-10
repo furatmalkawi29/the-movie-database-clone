@@ -237,7 +237,6 @@ export const MediaAccountButtons = ({ mediaId, mediaType }) => {
                 rated: { value: +value * 2 },
               }));
 
-              //is this state neccessary? refactor code to only use setMediaAccountState?
               setMediaRating(value);
 
               if (value && mediaType === 'tv') {

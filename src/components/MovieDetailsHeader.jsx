@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useReducer } from 'react'
 import $ from 'jquery'
 import {RateCircle} from "../components";
-import { FaPlay } from 'react-icons/fa'
 import { HiArrowsExpand } from 'react-icons/hi'
 import { useColor } from "color-thief-react";
 import {GetCreditsDetails} from '../Services'
@@ -168,11 +167,8 @@ export function MovieDetailsHeader({
 
 
   useEffect(() => {
-
     /* when color thief loading is done call functions */
     if (!loading) {
-      //  setRgbValue(data)
-
 
       /* change background color in case its small screen size */
       changeBgColor();
@@ -199,8 +195,6 @@ export function MovieDetailsHeader({
     backgroundImage: `linear-gradient(to right, rgba(${rgbValue[0]},${rgbValue[1]},${rgbValue[2]}, 1.00) 20%, rgba(${rgbValue[0]},${rgbValue[1]},${rgbValue[2]}, 0.00) 50%), url(${state.backdropUrl})`,
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
-    // backgroundPosition: "20px 0px",
-
   }
 
 

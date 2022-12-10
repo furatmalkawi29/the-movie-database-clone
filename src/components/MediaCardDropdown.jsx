@@ -278,7 +278,7 @@ export const MediaCardDropdown = ({
       </div>
       <div className="second-box">
         <h3>Not a member?</h3>
-        <div><p>Sign up and join the community</p><img src={AssetImagesEnums.leftArrow.Img} /></div>
+        <div><a target="_blank" href="https://www.themoviedb.org/signup"><p>Sign up and join the community</p></a><img src={AssetImagesEnums.leftArrow.Img} /></div>
       </div>
     </div>)
   )

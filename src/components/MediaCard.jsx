@@ -60,7 +60,6 @@ setState({
 
   }
 },[mediaData])
-//TODO::check placeholders all over the project
   return (
     <div id={mediaId} className="movie-card">
     <div className='movie-card-img-container'>

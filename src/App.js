@@ -6,8 +6,6 @@ import { ToastProvider } from 'react-toast-notifications';
 
 
 function App() {
-
-  // const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
   return (
     <>
       <ToastProvider>

@@ -80,7 +80,7 @@ export const Home = () => {
               and Amazon Prime Video.
             </p>
 
-            <button>Sign Up</button>
+            <button><a target="_blank" href="https://www.themoviedb.org/signup">Sign Up</a></button>
           </div>
           <div>
             <ul>

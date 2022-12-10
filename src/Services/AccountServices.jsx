@@ -100,6 +100,38 @@ const AddToWatchlist= async (accountId,sessionId, body)=>{
       return result;
   }
 
+  const GetFavoriteMovies = async (accountId,sessionId, page)=>{
+
+    const queryList = [];
+    queryList.push(`api_key=${config.api_key}`);
+    if(sessionId)
+    queryList.push(`session_id=${sessionId}`);
+    if(page)
+    queryList.push(`page=${page}`);
+
+      const result = await axios.get(`${config.server_address}/account/${accountId}/favorite/movies?${queryList.join('&')}`)
+          .then((response) => response.data)
+          .catch((error) => error.response);
+  
+      return result;
+  }
+
+  const GetFavoriteTvShows = async (accountId,sessionId, page)=>{
+
+    const queryList = [];
+    queryList.push(`api_key=${config.api_key}`);
+    if(sessionId)
+    queryList.push(`session_id=${sessionId}`);
+    if(page)
+    queryList.push(`page=${page}`);
+
+      const result = await axios.get(`${config.server_address}/account/${accountId}/favorite/tv?${queryList.join('&')}`)
+          .then((response) => response.data)
+          .catch((error) => error.response);
+  
+      return result;
+  }
+
 export {
     GetAccountDetails,
     MarkAsFavorite,
@@ -107,5 +139,7 @@ export {
     GetRatedMovies,
     GetRatedTvShows,
     GetWatchlistMovies,
-    GetWatchlistTvShows
+    GetWatchlistTvShows,
+    GetFavoriteTvShows,
+    GetFavoriteMovies
 }

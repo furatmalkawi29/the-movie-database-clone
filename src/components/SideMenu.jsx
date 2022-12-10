@@ -23,7 +23,6 @@ export const SideMenu = () => {
         <span className="side-menu-1">Movies</span>
         <div className="side-menu-content-1">
           <Link to="">Popular</Link>
-          <Link to="">Top Rated</Link>
           <Link to="">Upcoming</Link>
           <Link to="">Now Playing</Link>
         </div>
@@ -34,26 +33,11 @@ export const SideMenu = () => {
           <Link to="">Popular</Link>
           <Link to="">Top Rated</Link>
           <Link to="">On TV</Link>
-          <Link to="">Airing Today</Link>
-        </div>
-        </div>
-      <div>
-        <span className="side-menu-3">People</span>
-        <div className="side-menu-content-3">
-          <Link to="">Popular People</Link>
         </div>
         </div>
 
         <div className="menu-outer-link">
-        <Link to="">Contribution Bible</Link>
-        <Link to="">Apps</Link>
-        <Link to="">Discussions</Link>
-        <Link to="">Leadboard</Link>
-        <Link to="">Contribute</Link>
-        <Link to="">API</Link>
-        <Link to="">Support</Link>
-        <Link to="">About</Link>
-        <Link to="">Login</Link>
+        <Link to="/login">Login</Link>
         </div>
     </div>
   )

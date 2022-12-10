@@ -7,6 +7,4 @@ export const initialState = {
     sessionId: appSession?.session_id || null,
   },
   userAccount: appSession?.userAccount
-  // rememberMe: false, //get initial value from local storage
-
 };

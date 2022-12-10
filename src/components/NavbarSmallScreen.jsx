@@ -91,7 +91,7 @@ useEffect(()=>{
         </svg>
       </div>
       <Link to="/">
-      <img className="sm-nav-logo" src={LogosEnums.mobileNavLogo.Img} />
+      <img title="Home" className="sm-nav-logo" src={LogosEnums.mobileNavLogo.Img} />
       </Link>
       <div className="sm-icons-container">
       {logIn && !logIn.isLoggedIn && (

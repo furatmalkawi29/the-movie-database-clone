@@ -16,10 +16,6 @@ export const MovieDetailsPage = () => {
   const { id, mediaType } = useParams();
   const navigate = useNavigate();
 
-  //TODO::convert to state + reducer 
-
-//TODO:: mobile side menu not showing 
-  
   const [mediaData, setmediaData] = useState(null);
   const [mediaCast, setMediaCast] = useState([]);
   const [movieReviews, setMediaReviews] = useState([]);
