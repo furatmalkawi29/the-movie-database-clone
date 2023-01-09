@@ -36,8 +36,8 @@ export const LoginPage = ({ }) => {
 
     const loginAsGuest = async (requestToken) => {
         const  body = {
-                username: 'furatFofo',
-                password: '123',
+                username: process.env.REACT_APP_GUEST_USERNAME,
+                password: process.env.REACT_APP_GUEST_PASSWORD,
                 request_token: requestToken,
             }
 
