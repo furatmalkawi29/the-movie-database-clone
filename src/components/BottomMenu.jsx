@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { IconsEnums } from '../Enums';
-import heartIcon from '../assets/images/heart-fav.svg'
-import pinkHeartIcon from '../assets/images/pink-heart-fav.svg'
-
 import { showSuccessMessage } from '../Helper';
 import {
   MarkAsFavorite,
@@ -17,6 +14,7 @@ import {
 } from '../Services';
 import { RatingPanel } from '../components';
 import $ from 'jquery';
+// import logo from '%PUBLIC_URL%/logo192.png'
 
 export const BottomMenu = ({ mediaId, mediaType }) => {
 
@@ -213,11 +211,13 @@ export const BottomMenu = ({ mediaId, mediaType }) => {
           setIsRatingPanelOpen(false);
         }}>
         <img
-          src={'https://icon-library.com/images/white-heart-icon-png/white-heart-icon-png-28.jpg'}
+          src={
+            apiMediaAccountState && apiMediaAccountState.favorite
+              ? IconsEnums.pinkHeartIcon.Img
+              : IconsEnums.heartIcon.Img
+          }
           className={apiMediaAccountState && !apiMediaAccountState.favorite&&'white-heart-icon'}
         />
-
-        <link rel="shortcut icon" href="%PUBLIC_URL%/heart-fav.svg'"></link>
       </div>
       <div
         className='bottom-menu-item'
@@ -249,7 +249,7 @@ export const BottomMenu = ({ mediaId, mediaType }) => {
               ? 'yellow-star-icon'
               : 'white-star-icon'
           }
-          src={IconsEnums.star.Img}
+          src={'%PUBLIC_URL%/logo192.png'}
         />
         {isRatingPanelOpen && (
           <RatingPanel
