@@ -195,7 +195,6 @@ export const BottomMenu = ({ mediaId, mediaType }) => {
   useEffect(() => {
     trackMenuScroll();
   });
-  
   return (
     <div className='bottom-menu-wrapper'>
       <div className='bottom-menu'>
@@ -209,14 +208,13 @@ export const BottomMenu = ({ mediaId, mediaType }) => {
           markAsFavorite();
           setIsRatingPanelOpen(false);
         }}>
-        <img
-          src={
-            apiMediaAccountState && apiMediaAccountState.favorite
+          {apiMediaAccountState && <img src={
+            apiMediaAccountState.favorite
               ? IconsEnums.pinkHeartIcon.Img
               : IconsEnums.heartIcon.Img
           }
           className={apiMediaAccountState && !apiMediaAccountState.favorite&&'white-heart-icon'}
-        />
+        />}
       </div>
       <div
         className='bottom-menu-item'
@@ -228,28 +226,28 @@ export const BottomMenu = ({ mediaId, mediaType }) => {
           addToWatchList();
           setIsRatingPanelOpen(false);
         }}>
-        <img
+        {apiMediaAccountState && <img
           className={
-            apiMediaAccountState && apiMediaAccountState.watchlist
+             apiMediaAccountState.watchlist
               ? 'red-bookmark-icon'
               : 'white-bookmark-icon'
           }
           src={IconsEnums.bookmarkIcon.Img}
-        />
+        />}
       </div>
       <div
         className='bottom-menu-item'
         onClick={() => {
           setIsRatingPanelOpen((state) => !state);
         }}>
-        <img
+        {apiMediaAccountState && <img
           className={
-            apiMediaAccountState && apiMediaAccountState.rated
+             apiMediaAccountState.rated
               ? 'yellow-star-icon'
               : 'white-star-icon'
           }
           src={IconsEnums.star.Img}
-        />
+        />}
         {isRatingPanelOpen && (
           <RatingPanel
             mobilePanel
