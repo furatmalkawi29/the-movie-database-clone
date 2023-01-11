@@ -189,14 +189,16 @@ export const BottomMenu = ({ mediaId, mediaType }) => {
 
   useEffect(() => {
     getMediaAccountState();
-  }, [mediaType, mediaId]);
+  }, []);
 
 
   useEffect(() => {
     trackMenuScroll();
   });
+  
   return (
     <div className='bottom-menu-wrapper'>
+      {apiMediaAccountState && 
       <div className='bottom-menu'>
       <div
         className='bottom-menu-item'
@@ -208,13 +210,14 @@ export const BottomMenu = ({ mediaId, mediaType }) => {
           markAsFavorite();
           setIsRatingPanelOpen(false);
         }}>
-          {apiMediaAccountState && <img src={
+        <img
+          src={
             apiMediaAccountState.favorite
               ? IconsEnums.pinkHeartIcon.Img
               : IconsEnums.heartIcon.Img
           }
-          className={apiMediaAccountState && !apiMediaAccountState.favorite&&'white-heart-icon'}
-        />}
+          className={!apiMediaAccountState.favorite&&'white-heart-icon'}
+        />
       </div>
       <div
         className='bottom-menu-item'
@@ -226,28 +229,28 @@ export const BottomMenu = ({ mediaId, mediaType }) => {
           addToWatchList();
           setIsRatingPanelOpen(false);
         }}>
-        {apiMediaAccountState && <img
+        <img
           className={
-             apiMediaAccountState.watchlist
+            apiMediaAccountState.watchlist
               ? 'red-bookmark-icon'
               : 'white-bookmark-icon'
           }
           src={IconsEnums.bookmarkIcon.Img}
-        />}
+        />
       </div>
       <div
         className='bottom-menu-item'
         onClick={() => {
           setIsRatingPanelOpen((state) => !state);
         }}>
-        {apiMediaAccountState && <img
+        <img
           className={
-             apiMediaAccountState.rated
+            apiMediaAccountState.rated
               ? 'yellow-star-icon'
               : 'white-star-icon'
           }
           src={IconsEnums.star.Img}
-        />}
+        />
         {isRatingPanelOpen && (
           <RatingPanel
             mobilePanel
@@ -285,6 +288,7 @@ export const BottomMenu = ({ mediaId, mediaType }) => {
         )}
       </div>
       </div>
+      }
     </div>
   );
 };
