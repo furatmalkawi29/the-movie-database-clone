@@ -189,7 +189,7 @@ export const BottomMenu = ({ mediaId, mediaType }) => {
 
   useEffect(() => {
     getMediaAccountState();
-  }, []);
+  }, [mediaAccountState, mediaId, mediaType]);
 
 
   useEffect(() => {
