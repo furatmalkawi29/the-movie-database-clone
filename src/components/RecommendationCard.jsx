@@ -1,11 +1,11 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import movieImagePlaceholder from '../assets/images/movie-image-placeholder.svg';
 import {ImagesPathEnum, AssetImagesEnums} from '../Enums'
 
 export function RecommendationCard({
   data
 }) {
+  const movieImagePlaceholder = '/assets/images/movie-image-placeholder.svg';  
 
   const roundRatingNumber = (number) =>{
     return Math.round(number)

@@ -1,7 +1,6 @@
 import React, { useState, useReducer, useEffect } from "react";
 import {RateCircle, MediaCardDropdown} from ".";
 import { ClickAwayListener } from "@mui/material";
-import movieImagePlaceholder from '../assets/images/movie-image-placeholder.svg';
 import moment from 'moment';
 import {ImagesPathEnum, AssetImagesEnums} from '../Enums'
 import { Link } from "react-router-dom";
@@ -12,6 +11,7 @@ export const MediaCard = ({
   mediaType
   }) => {
 
+  const movieImagePlaceholder = '/assets/images/movie-image-placeholder.svg';  
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const initialState={
     name:null,

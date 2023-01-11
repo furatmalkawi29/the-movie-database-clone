@@ -1,9 +1,9 @@
 import React from 'react'
-import movieImagePlaceholder from '../assets/images/movie-image-placeholder.svg';
 import {ImagesPathEnum} from '../Enums'
 
 export const ResultMediaCard = ({data}) => {
 
+  const movieImagePlaceholder = '/assets/images/movie-image-placeholder.svg';  
   return (
     data&&!data.adult&&((data.media_type=='person'||data.known_for)&&
     <div className='search-person-container'>
