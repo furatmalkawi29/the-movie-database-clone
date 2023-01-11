@@ -249,7 +249,7 @@ export const BottomMenu = ({ mediaId, mediaType }) => {
               ? 'yellow-star-icon'
               : 'white-star-icon'
           }
-          src={'%PUBLIC_URL%/logo192.png'}
+          src={process.env.PUBLIC_URL+'/logo192.png'}
         />
         {isRatingPanelOpen && (
           <RatingPanel
