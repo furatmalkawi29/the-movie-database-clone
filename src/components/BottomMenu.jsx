@@ -22,7 +22,11 @@ export const BottomMenu = ({ mediaId, mediaType }) => {
 
   const [mediaRating, setMediaRating] = useState(null);
   const [isRatingPanelOpen, setIsRatingPanelOpen] = useState(false);
-  const [apiMediaAccountState, setApiMediaAccountState] = useState(null);
+  const [apiMediaAccountState, setApiMediaAccountState] = useState({
+    rated: false,
+    favorite: false,
+    watchlist: false,
+  });
   const [mediaAccountState, setMediaAccountState] = useState(null);
 
   const markAsFavorite = async () => {
@@ -189,9 +193,9 @@ export const BottomMenu = ({ mediaId, mediaType }) => {
 
   useEffect(() => {
     getMediaAccountState();
-  }, [mediaAccountState, mediaId, mediaType]);
+  }, []);
 
-
+console.log('apiMediaAccountState', apiMediaAccountState);
   useEffect(() => {
     trackMenuScroll();
   });
