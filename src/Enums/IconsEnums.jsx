@@ -1,47 +1,36 @@
-import facebook from '../assets/images/facebook.svg'
-import insta from '../assets/images/insta.svg'
-import twitter from '../assets/images/twitter.svg'
-import link from '../assets/images/link.svg'
-import justwatch from '../assets/images/justwatch.svg'
-import star from '../assets/images/star.svg'
-import playIcon from '../assets/images/playIcon.svg'
-import heartIcon from '../assets/images/heart-fav.svg'
-import pinkHeartIcon from '../assets/images/pink-heart-fav.svg'
-import bookmarkIcon from '../assets/images/bookmark-icon.svg'
-import removeIcon from '../assets/images/remove-icon.svg'
 
 export const IconsEnums = {
     facebook: {
-        Img: facebook
+        Img: '/assets/images/remove-icon.svg'
     },
     insta: {
-        Img: insta
+        Img: '/assets/images/insta.svg'
     },
     twitter: {
-        Img: twitter
+        Img: '/assets/images/twitter.svg'
     },
     link: {
-        Img: link
+        Img: '/assets/images/link.svg'
     },
     justwatch: {
-        Img: justwatch
+        Img: '/assets/images/justwatch.svg'
     },
     star: {
-        Img: star
+        Img: '/assets/images/star.svg'
     },
     playIcon: {
-        Img: playIcon
+        Img: '/assets/images/playIcon.svg'
     },
     heartIcon: {
-        Img: heartIcon
+        Img: '/assets/images/heart-fav.svg'
     },
     pinkHeartIcon: {
-        Img: pinkHeartIcon
+        Img: '/assets/images/pink-heart-fav.svg'
     },
     bookmarkIcon: {
-        Img: bookmarkIcon
+        Img: '/assets/images/bookmark-icon.svg'
     },
     removeIcon: {
-        Img: removeIcon
+        Img: '/assets/images/remove-icon.svg'
     },
 }
