@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { IconsEnums } from '../Enums';
+import heartIcon from '../assets/images/heart-fav.svg'
+import pinkHeartIcon from '../assets/images/pink-heart-fav.svg'
+
 import { showSuccessMessage } from '../Helper';
 import {
   MarkAsFavorite,
@@ -15,22 +18,14 @@ import {
 import { RatingPanel } from '../components';
 import $ from 'jquery';
 
-export const BottomMenu = ({
-   mediaId,
-   mediaType,
-   apiMediaAccountState,
-   getMediaAccountState }) => {
+export const BottomMenu = ({ mediaId, mediaType }) => {
 
 
   const { logIn, userAccount } = useSelector((state) => state);
 
   const [mediaRating, setMediaRating] = useState(null);
   const [isRatingPanelOpen, setIsRatingPanelOpen] = useState(false);
-  // const [apiMediaAccountState, setApiMediaAccountState] = useState({
-  //   rated: false,
-  //   favorite: false,
-  //   watchlist: false,
-  // });
+  const [apiMediaAccountState, setApiMediaAccountState] = useState(null);
   const [mediaAccountState, setMediaAccountState] = useState(null);
 
   const markAsFavorite = async () => {
@@ -135,51 +130,51 @@ export const BottomMenu = ({
     }
   };
 
-  // const getMovieAccountState = async () => {
-  //   const sessionId = logIn && logIn.sessionId;
+  const getMovieAccountState = async () => {
+    const sessionId = logIn && logIn.sessionId;
 
-  //   const response = await GetMovieAccountState({
-  //     movieId: mediaId,
-  //     sessionId,
-  //   });
+    const response = await GetMovieAccountState({
+      movieId: mediaId,
+      sessionId,
+    });
 
-  //   if (!(response && response.status && response.status !== 200)) {
-  //     setApiMediaAccountState(response);
+    if (!(response && response.status && response.status !== 200)) {
+      setApiMediaAccountState(response);
 
-  //     if (!mediaAccountState) {
-  //       setMediaAccountState(response);
-  //     }
+      if (!mediaAccountState) {
+        setMediaAccountState(response);
+      }
 
-  //     convertInitalRateRange(response.rated);
-  //   }
-  // };
+      convertInitalRateRange(response.rated);
+    }
+  };
 
-  // const getTvShowAccountState = async () => {
-  //   const sessionId = logIn && logIn.sessionId;
+  const getTvShowAccountState = async () => {
+    const sessionId = logIn && logIn.sessionId;
 
-  //   const response = await GetTvShowAccountState({
-  //     tvShowId: mediaId,
-  //     sessionId,
-  //   });
+    const response = await GetTvShowAccountState({
+      tvShowId: mediaId,
+      sessionId,
+    });
 
-  //   if (!(response && response.status && response.status !== 200)) {
-  //     setApiMediaAccountState(response);
+    if (!(response && response.status && response.status !== 200)) {
+      setApiMediaAccountState(response);
 
-  //     if (!mediaAccountState) {
-  //       setMediaAccountState(response);
-  //     }
+      if (!mediaAccountState) {
+        setMediaAccountState(response);
+      }
 
-  //     convertInitalRateRange(response.rated);
-  //   }
-  // };
+      convertInitalRateRange(response.rated);
+    }
+  };
 
-  // const getMediaAccountState = () => {
-  //   if (mediaType === 'tv') {
-  //     getTvShowAccountState();
-  //   } else if (mediaType === 'movie') {
-  //     getMovieAccountState();
-  //   }
-  // };
+  const getMediaAccountState = () => {
+    if (mediaType === 'tv') {
+      getTvShowAccountState();
+    } else if (mediaType === 'movie') {
+      getMovieAccountState();
+    }
+  };
 
   const trackMenuScroll =() =>{
     var previousScroll = 0;
@@ -195,18 +190,17 @@ export const BottomMenu = ({
     });
   }
 
-  // useEffect(() => {
-  //   getMediaAccountState();
-  // }, []);
+  useEffect(() => {
+    getMediaAccountState();
+  }, []);
 
-console.log('apiMediaAccountState', apiMediaAccountState);
+
   useEffect(() => {
     trackMenuScroll();
   });
   
   return (
     <div className='bottom-menu-wrapper'>
-      {apiMediaAccountState&&
       <div className='bottom-menu'>
       <div
         className='bottom-menu-item'
@@ -219,15 +213,12 @@ console.log('apiMediaAccountState', apiMediaAccountState);
           setIsRatingPanelOpen(false);
         }}>
         <img
-        key={apiMediaAccountState.favorite
-          ? IconsEnums.pinkHeartIcon.Img
-          : IconsEnums.heartIcon.Img}
           src={
-            apiMediaAccountState.favorite
-              ? IconsEnums.pinkHeartIcon.Img
-              : IconsEnums.heartIcon.Img
+            apiMediaAccountState && apiMediaAccountState.favorite
+              ? pinkHeartIcon
+              : heartIcon
           }
-          className={!apiMediaAccountState.favorite&&'white-heart-icon'}
+          className={apiMediaAccountState && !apiMediaAccountState.favorite&&'white-heart-icon'}
         />
       </div>
       <div
@@ -242,12 +233,11 @@ console.log('apiMediaAccountState', apiMediaAccountState);
         }}>
         <img
           className={
-            apiMediaAccountState.watchlist
+            apiMediaAccountState && apiMediaAccountState.watchlist
               ? 'red-bookmark-icon'
               : 'white-bookmark-icon'
           }
           src={IconsEnums.bookmarkIcon.Img}
-          key={IconsEnums.bookmarkIcon.Img}
         />
       </div>
       <div
@@ -257,12 +247,11 @@ console.log('apiMediaAccountState', apiMediaAccountState);
         }}>
         <img
           className={
-            apiMediaAccountState.rated
+            apiMediaAccountState && apiMediaAccountState.rated
               ? 'yellow-star-icon'
               : 'white-star-icon'
           }
           src={IconsEnums.star.Img}
-          key={IconsEnums.star.Img}
         />
         {isRatingPanelOpen && (
           <RatingPanel
@@ -301,7 +290,6 @@ console.log('apiMediaAccountState', apiMediaAccountState);
         )}
       </div>
       </div>
-}
     </div>
   );
 };
