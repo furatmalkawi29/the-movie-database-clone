@@ -308,7 +308,6 @@ console.log('apiMediaAccountState', apiMediaAccountState);
           <MediaFacts
             mediaData={mediaData}
             mediaType={mediaType}
-            apiMediaAccountState={apiMediaAccountState}
           />
         </div>
       </section>

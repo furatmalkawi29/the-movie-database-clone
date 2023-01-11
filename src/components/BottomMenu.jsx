@@ -219,6 +219,9 @@ console.log('apiMediaAccountState', apiMediaAccountState);
           setIsRatingPanelOpen(false);
         }}>
         <img
+        key={apiMediaAccountState.favorite
+          ? IconsEnums.pinkHeartIcon.Img
+          : IconsEnums.heartIcon.Img}
           src={
             apiMediaAccountState.favorite
               ? IconsEnums.pinkHeartIcon.Img
@@ -244,6 +247,7 @@ console.log('apiMediaAccountState', apiMediaAccountState);
               : 'white-bookmark-icon'
           }
           src={IconsEnums.bookmarkIcon.Img}
+          key={IconsEnums.bookmarkIcon.Img}
         />
       </div>
       <div
@@ -258,6 +262,7 @@ console.log('apiMediaAccountState', apiMediaAccountState);
               : 'white-star-icon'
           }
           src={IconsEnums.star.Img}
+          key={IconsEnums.star.Img}
         />
         {isRatingPanelOpen && (
           <RatingPanel
