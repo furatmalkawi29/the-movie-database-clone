@@ -213,7 +213,7 @@ export const BottomMenu = ({ mediaId, mediaType }) => {
           setIsRatingPanelOpen(false);
         }}>
         <img
-          src={pinkHeartIcon}
+          src={'https://icon-library.com/images/white-heart-icon-png/white-heart-icon-png-28.jpg'}
           className={apiMediaAccountState && !apiMediaAccountState.favorite&&'white-heart-icon'}
         />
 
