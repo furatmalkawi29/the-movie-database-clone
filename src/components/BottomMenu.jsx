@@ -15,6 +15,17 @@ import {
 import { RatingPanel } from '../components';
 import $ from 'jquery';
 // import logo from '%PUBLIC_URL%/logo192.png'
+import facebook from '../assets/images/facebook.svg'
+import insta from '../assets/images/insta.svg'
+import twitter from '../assets/images/twitter.svg'
+import link from '../assets/images/link.svg'
+import justwatch from '../assets/images/justwatch.svg'
+import star from '../assets/images/star.svg'
+import playIcon from '../assets/images/playIcon.svg'
+import heartIcon from '../assets/images/heart-fav.svg'
+import pinkHeartIcon from '../assets/images/pink-heart-fav.svg'
+import bookmarkIcon from '../assets/images/bookmark-icon.svg'
+import removeIcon from '../assets/images/remove-icon.svg'
 
 export const BottomMenu = ({ mediaId, mediaType }) => {
 
@@ -213,8 +224,8 @@ export const BottomMenu = ({ mediaId, mediaType }) => {
         <img
           src={
             apiMediaAccountState && apiMediaAccountState.favorite
-              ? IconsEnums.pinkHeartIcon.Img
-              : IconsEnums.heartIcon.Img
+              ? pinkHeartIcon
+              : heartIcon
           }
           className={apiMediaAccountState && !apiMediaAccountState.favorite&&'white-heart-icon'}
         />
@@ -235,7 +246,7 @@ export const BottomMenu = ({ mediaId, mediaType }) => {
               ? 'red-bookmark-icon'
               : 'white-bookmark-icon'
           }
-          src={IconsEnums.bookmarkIcon.Img}
+          src={bookmarkIcon}
         />
       </div>
       <div
