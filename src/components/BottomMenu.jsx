@@ -213,13 +213,11 @@ export const BottomMenu = ({ mediaId, mediaType }) => {
           setIsRatingPanelOpen(false);
         }}>
         <img
-          src={
-            apiMediaAccountState && apiMediaAccountState.favorite
-              ? pinkHeartIcon
-              : heartIcon
-          }
+          src={pinkHeartIcon}
           className={apiMediaAccountState && !apiMediaAccountState.favorite&&'white-heart-icon'}
         />
+
+        <link rel="shortcut icon" href="%PUBLIC_URL%/heart-fav.svg'"></link>
       </div>
       <div
         className='bottom-menu-item'
