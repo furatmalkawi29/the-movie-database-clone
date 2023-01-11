@@ -15,18 +15,22 @@ import {
 import { RatingPanel } from '../components';
 import $ from 'jquery';
 
-export const BottomMenu = ({ mediaId, mediaType }) => {
+export const BottomMenu = ({
+   mediaId,
+   mediaType,
+   apiMediaAccountState,
+   getMediaAccountState }) => {
 
 
   const { logIn, userAccount } = useSelector((state) => state);
 
   const [mediaRating, setMediaRating] = useState(null);
   const [isRatingPanelOpen, setIsRatingPanelOpen] = useState(false);
-  const [apiMediaAccountState, setApiMediaAccountState] = useState({
-    rated: false,
-    favorite: false,
-    watchlist: false,
-  });
+  // const [apiMediaAccountState, setApiMediaAccountState] = useState({
+  //   rated: false,
+  //   favorite: false,
+  //   watchlist: false,
+  // });
   const [mediaAccountState, setMediaAccountState] = useState(null);
 
   const markAsFavorite = async () => {
@@ -131,51 +135,51 @@ export const BottomMenu = ({ mediaId, mediaType }) => {
     }
   };
 
-  const getMovieAccountState = async () => {
-    const sessionId = logIn && logIn.sessionId;
+  // const getMovieAccountState = async () => {
+  //   const sessionId = logIn && logIn.sessionId;
 
-    const response = await GetMovieAccountState({
-      movieId: mediaId,
-      sessionId,
-    });
+  //   const response = await GetMovieAccountState({
+  //     movieId: mediaId,
+  //     sessionId,
+  //   });
 
-    if (!(response && response.status && response.status !== 200)) {
-      setApiMediaAccountState(response);
+  //   if (!(response && response.status && response.status !== 200)) {
+  //     setApiMediaAccountState(response);
 
-      if (!mediaAccountState) {
-        setMediaAccountState(response);
-      }
+  //     if (!mediaAccountState) {
+  //       setMediaAccountState(response);
+  //     }
 
-      convertInitalRateRange(response.rated);
-    }
-  };
+  //     convertInitalRateRange(response.rated);
+  //   }
+  // };
 
-  const getTvShowAccountState = async () => {
-    const sessionId = logIn && logIn.sessionId;
+  // const getTvShowAccountState = async () => {
+  //   const sessionId = logIn && logIn.sessionId;
 
-    const response = await GetTvShowAccountState({
-      tvShowId: mediaId,
-      sessionId,
-    });
+  //   const response = await GetTvShowAccountState({
+  //     tvShowId: mediaId,
+  //     sessionId,
+  //   });
 
-    if (!(response && response.status && response.status !== 200)) {
-      setApiMediaAccountState(response);
+  //   if (!(response && response.status && response.status !== 200)) {
+  //     setApiMediaAccountState(response);
 
-      if (!mediaAccountState) {
-        setMediaAccountState(response);
-      }
+  //     if (!mediaAccountState) {
+  //       setMediaAccountState(response);
+  //     }
 
-      convertInitalRateRange(response.rated);
-    }
-  };
+  //     convertInitalRateRange(response.rated);
+  //   }
+  // };
 
-  const getMediaAccountState = () => {
-    if (mediaType === 'tv') {
-      getTvShowAccountState();
-    } else if (mediaType === 'movie') {
-      getMovieAccountState();
-    }
-  };
+  // const getMediaAccountState = () => {
+  //   if (mediaType === 'tv') {
+  //     getTvShowAccountState();
+  //   } else if (mediaType === 'movie') {
+  //     getMovieAccountState();
+  //   }
+  // };
 
   const trackMenuScroll =() =>{
     var previousScroll = 0;
@@ -191,9 +195,9 @@ export const BottomMenu = ({ mediaId, mediaType }) => {
     });
   }
 
-  useEffect(() => {
-    getMediaAccountState();
-  }, []);
+  // useEffect(() => {
+  //   getMediaAccountState();
+  // }, []);
 
 console.log('apiMediaAccountState', apiMediaAccountState);
   useEffect(() => {
@@ -202,7 +206,7 @@ console.log('apiMediaAccountState', apiMediaAccountState);
   
   return (
     <div className='bottom-menu-wrapper'>
-      {apiMediaAccountState && 
+      {apiMediaAccountState&&
       <div className='bottom-menu'>
       <div
         className='bottom-menu-item'
@@ -292,7 +296,7 @@ console.log('apiMediaAccountState', apiMediaAccountState);
         )}
       </div>
       </div>
-      }
+}
     </div>
   );
 };

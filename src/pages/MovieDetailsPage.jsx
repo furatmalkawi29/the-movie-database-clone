@@ -11,6 +11,19 @@ import {
   GetTvShowImages, GetTvShowVideos, GetTvShowRecommendations,
   GetTvShowReviews, GetMovieDetails, GetTvShowDetails,
 } from "../Services";
+import { useSelector } from 'react-redux';
+import { showSuccessMessage } from '../Helper';
+import {
+  MarkAsFavorite,
+  AddToWatchlist,
+  RateTvShow,
+  RateMovie,
+  RemoveMovieRating,
+  RemoveTvShowRating,
+  GetMovieAccountState,
+  GetTvShowAccountState,
+} from '../Services';
+import { RatingPanel } from '../components';
 
 export const MovieDetailsPage = () => {
   const { id, mediaType } = useParams();
@@ -22,6 +35,77 @@ export const MovieDetailsPage = () => {
   const [movieMediaImages, setMovieMediaImages] = useState([]);
   const [mediaVideo, setMediaVideo] = useState(null);
   const [mediaRecommendations, setMediaRecommendations] = useState([]);
+
+  const { logIn, userAccount } = useSelector((state) => state);
+
+  const [mediaRating, setMediaRating] = useState(null);
+  const [isRatingPanelOpen, setIsRatingPanelOpen] = useState(false);
+  const [apiMediaAccountState, setApiMediaAccountState] = useState({
+    rated: false,
+    favorite: false,
+    watchlist: false,
+  });
+  const [mediaAccountState, setMediaAccountState] = useState(null);
+
+  const convertInitalRateRange = (rateData) => {
+    if (!mediaRating) {
+      const newRatingValue = rateData && rateData.value ? Math.floor(rateData.value / 2) : null;
+
+      setMediaRating(newRatingValue);
+    }
+  };
+
+  const getMovieAccountState = async () => {
+    const sessionId = logIn && logIn.sessionId;
+
+    const response = await GetMovieAccountState({
+      movieId: id,
+      sessionId,
+    });
+
+    if (!(response && response.status && response.status !== 200)) {
+      setApiMediaAccountState(response);
+
+      if (!mediaAccountState) {
+        setMediaAccountState(response);
+      }
+
+      convertInitalRateRange(response.rated);
+    }
+  };
+
+  const getTvShowAccountState = async () => {
+    const sessionId = logIn && logIn.sessionId;
+
+    const response = await GetTvShowAccountState({
+      tvShowId: id,
+      sessionId,
+    });
+
+    if (!(response && response.status && response.status !== 200)) {
+      setApiMediaAccountState(response);
+
+      if (!mediaAccountState) {
+        setMediaAccountState(response);
+      }
+
+      convertInitalRateRange(response.rated);
+    }
+  };
+
+  const getMediaAccountState = () => {
+    if (mediaType === 'tv') {
+      getTvShowAccountState();
+    } else if (mediaType === 'movie') {
+      getMovieAccountState();
+    }
+  };
+
+  useEffect(() => {
+    getMediaAccountState();
+  }, [id,mediaType]);
+
+console.log('apiMediaAccountState', apiMediaAccountState);
 
   const getMediaCredits = async () => {
     const response =
@@ -224,10 +308,13 @@ export const MovieDetailsPage = () => {
           <MediaFacts
             mediaData={mediaData}
             mediaType={mediaType}
+            apiMediaAccountState={apiMediaAccountState}
           />
         </div>
       </section>
       <BottomMenu 
+      apiMediaAccountState={apiMediaAccountState}
+      getMediaAccountState={getMediaAccountState}
       mediaId={id}
       mediaType={mediaType}
       />
