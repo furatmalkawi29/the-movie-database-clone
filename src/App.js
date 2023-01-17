@@ -1,8 +1,8 @@
 import './App.scss';
 import {Main, Footer, Navbar, NavbarSmallScreen, 
   ToastNotifications} from './components';
-import { BrowserRouter } from 'react-router-dom';
-import { ToastProvider } from 'react-toast-notifications';
+  import { HashRouter } from "react-router-dom";
+  import { ToastProvider } from 'react-toast-notifications';
 
 
 function App() {
@@ -11,12 +11,12 @@ function App() {
       <ToastProvider>
         <ToastNotifications />
       </ToastProvider>
-      <BrowserRouter>
+      <HashRouter>
         <Navbar />
         <NavbarSmallScreen />
         <Main />
         <Footer />
-      </BrowserRouter>
+      </HashRouter>
     </>
   );
 }
