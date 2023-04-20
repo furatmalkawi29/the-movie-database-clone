@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useReducer, useCallback } from "react";
+import { useSelector } from 'react-redux';
 import {
   BottomMenu, MovieDetailsHeader, MediaFacts,
   TopMenu, CastCard, RecommendationCard, ReviewCard
@@ -15,7 +16,7 @@ import {
 export const MovieDetailsPage = () => {
   const { id, mediaType } = useParams();
   const navigate = useNavigate();
-
+  const { logIn } = useSelector(state => state);
   const [mediaData, setmediaData] = useState(null);
   const [mediaCast, setMediaCast] = useState([]);
   const [movieReviews, setMediaReviews] = useState([]);
@@ -227,10 +228,10 @@ export const MovieDetailsPage = () => {
           />
         </div>
       </section>
-      <BottomMenu 
+      {logIn.isLoggedIn && <BottomMenu 
       mediaId={id}
       mediaType={mediaType}
-      />
+      />}
     </>
   );
 }

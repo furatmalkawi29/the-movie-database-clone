@@ -59,7 +59,7 @@ export function MediaFacts({ mediaData, mediaType }) {
     });
     setState({
       id: 'homePageLink',
-      value: mediaData?.homepage || '#',
+      value: mediaData?.homepage,
     });
   }, [mediaData]);
   return (
@@ -72,9 +72,9 @@ export function MediaFacts({ mediaData, mediaType }) {
   </div>
 */}
         <span />
-        <a href={state.homePageLink} target='_blank'>
+        {state.homePageLink?<a href={state.homePageLink} target='_blank'>
           <img src={IconsEnums.link.Img} />
-        </a>
+        </a>: <img src={IconsEnums.link.Img} />}
         <span />
       </div>
 

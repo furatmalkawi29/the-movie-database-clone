@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useReducer } from 'react'
+import { useSelector } from 'react-redux';
 import $ from 'jquery'
 import {RateCircle} from "../components";
 import { HiArrowsExpand } from 'react-icons/hi'
@@ -11,9 +12,8 @@ export function MovieDetailsHeader({
   mediaId,
   mediaType,
   mediaData }) {
-
+  const { logIn } = useSelector(state => state);
   const [rgbValue, setRgbValue] = useState([31, 36, 61])
-
   const [isLoading, setIsLoading] = useState(true);
 
   const initialState = {
@@ -283,10 +283,10 @@ export function MovieDetailsHeader({
 
               <div className="separation-line" />
 
-              <MediaAccountButtons
+              {logIn.isLoggedIn && <MediaAccountButtons
               mediaId={mediaId}
               mediaType={mediaType}
-              />
+              />}
 
               {/* <div className="play-btn">
                 <FaPlay viewBox="0 0 600 512" />
