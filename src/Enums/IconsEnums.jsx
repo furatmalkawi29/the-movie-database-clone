@@ -1,7 +1,8 @@
+import link from '../assets/images/link.svg'
 
 export const IconsEnums = {
     facebook: {
-        Img: '/assets/images/remove-icon.svg'
+        Img: '/assets/images/facebook.svg'
     },
     insta: {
         Img: '/assets/images/insta.svg'
@@ -10,7 +11,7 @@ export const IconsEnums = {
         Img: '/assets/images/twitter.svg'
     },
     link: {
-        Img: '/assets/images/link.svg'
+        Img: link
     },
     justwatch: {
         Img: '/assets/images/justwatch.svg'
