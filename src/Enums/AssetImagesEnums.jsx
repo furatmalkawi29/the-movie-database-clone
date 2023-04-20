@@ -1,25 +1,33 @@
+import circleDotted from '../assets/images/circle-dotted.svg'
+import plus from '../assets/images/plus.svg'
+import magnifier from '../assets/images/magnifier.svg'
+import maleUser from '../assets/images/male-user.png'
+import calender from '../assets/images/calender.svg'
+import rightArrow from '../assets/images/right-arrow.svg'
+import leftArrow from '../assets/images/left-arrow.png'
+
 
 export const AssetImagesEnums = {
     circleDotted: {
-        Img : "/assets/images/circle-dotted.svg"
+        Img : circleDotted,
     },
     leftArrow: {
-        Img : '/assets/images/left-arrow.png'
+        Img : leftArrow
     },
     plus: {
-        Img : "/assets/images/plus.svg"
+        Img : plus,
     },
     magnifier: {
-        Img : "/assets/images/magnifier.svg"
+        Img : magnifier,
     },
     maleUser: {
-        Img : "/assets/images/male-user.png"
+        Img : maleUser
     },
     calender: {
-        Img : '/assets/images/calender.svg'
+        Img : calender
     },
     rightArrow: {
-        Img : "/assets/images/right-arrow.svg"
+        Img : rightArrow,
     },
 
 }
