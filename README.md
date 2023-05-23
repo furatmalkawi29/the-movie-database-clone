@@ -20,14 +20,26 @@ npm start or yarn start
 ```
 Now enter  [`localhost:3000`](http://localhost:3000/)  in the address bar of your browser.
 
-## About TMDB APIs 
+## About TMDB APIs 🔐
 
 API services were available on the website with all of the details including payload and response examples .
- You need to signup and get your own API key  to be able to try them out 🔐 .
+ You need to signup and get your own API key  to be able to try them out  .
 
 >  Our API is a system we provide for you and your team to programmatically fetch and use our data and/or images. 
 
 ------>> imggggg
 
-## App Features 🔮
+## Technical Description 🔮
+ I did my best following Clean Code Principles, by making reusable components as much as possible, depending on certain patterns and an organized file structure. 
+ 
+✅ **Pure CSS** without using libraries like bootstrap/tailwind .
+✅ **Used Scss** as a css-preprocessor
+✅ **Responsive** 
+✅ **ReactJs** :  Functional components + hooks 
+✅ **React Redux** for state management 
+✅ **Axios** library
+✅ **40+ End points** connected all over the app (TMDB     V3 APIs) 
+✅ **Authentication** (TMDB Auth APIs) 
+
+## App Features  🚀
 
