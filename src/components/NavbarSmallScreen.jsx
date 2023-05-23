@@ -96,6 +96,7 @@ useEffect(()=>{
       <div className="sm-icons-container">
       {logIn && !logIn.isLoggedIn && (
         <Link to="/login">
+          <span>Login</span>
           <img className="sm-user-icon" src={AssetImagesEnums.maleUser.Img} />
         </Link>
           )||(

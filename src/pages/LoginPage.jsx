@@ -26,10 +26,10 @@ export const LoginPage = ({ }) => {
         const response = await GetRequestToken();
 
         if (!(response && response.status && response.status !== 200)) {
-            if (isGuestSession) loginAsGuest(response.request_token)
-            else loginAsUser(response.request_token);
+            if (isGuestSession) loginAsGuest(response?.request_token)
+            else loginAsUser(response?.request_token);
 
-            setSessionCreateDate(response.expires_at)
+            setSessionCreateDate(response?.expires_at)
         }
     }
 
@@ -67,8 +67,8 @@ export const LoginPage = ({ }) => {
         const response = await CreateSession(body);
 
         if (!(response && response.status && response.status !== 200)) {
-            setSessionId(response.session_id);
-            getAccountDetails(response.session_id)
+            setSessionId(response?.session_id);
+            getAccountDetails(response?.session_id)
             showSuccessMessage('Logged In Successfully')
         }else {
             showErrorMessage('Logged In Successfully')

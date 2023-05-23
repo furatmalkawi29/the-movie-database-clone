@@ -277,7 +277,7 @@ console.log('activePage', activePage);
       </div>
 
       <div className='favourites-container'>
-        <p className='profile-heading'>My Favourites</p>
+        <p className='profile-heading'>My Favourite Movies</p>
         <div className='results-container'>
         {(data.favoriteMovies&&data.favoriteMovies.length>0&&data.favoriteMovies.map(item=>((item.media_type==="tv"||item.media_type==="movie"||!item.known_for)&&<Link to={getMoviePageUrl(item)}><ResultMediaCard
         data={item}/></Link>)||<ResultMediaCard 

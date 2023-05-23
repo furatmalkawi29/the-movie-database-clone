@@ -5,7 +5,7 @@ import {
   TopMenu, CastCard, RecommendationCard, ReviewCard
 } from "../components";
 import {ImagesPathEnum, AssetImagesEnums, IconsEnums} from '../Enums';
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   GetMovieCredits,GetTvShowCredits,GetMovieImages,
   GetMovieVideos, GetMovieRecommendations, GetMovieReviews,
@@ -15,7 +15,6 @@ import {
 
 export const MovieDetailsPage = () => {
   const { id, mediaType } = useParams();
-  const navigate = useNavigate();
   const { logIn } = useSelector(state => state);
   const [mediaData, setmediaData] = useState(null);
   const [mediaCast, setMediaCast] = useState([]);
@@ -98,7 +97,6 @@ export const MovieDetailsPage = () => {
   });
 
   useEffect(() => {
-    navigate(`/${mediaType}/${id}`);
     getMediaDetails();
   }, [id]);
 

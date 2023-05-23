@@ -92,7 +92,7 @@ export const RateCircle = ({ percentage, size, customClass }) => {
         {
           setFontStyle({
             fontSize: "1rem",
-            top: "18px",
+            top: "15px",
             left: fontLeftPosition,
           });
         }
@@ -152,7 +152,7 @@ export const RateCircle = ({ percentage, size, customClass }) => {
       setFontLeftPosition("16px");
       break;
       case 3:       
-      setFontLeftPosition("10px");
+      setFontLeftPosition("15px");
       break;
       
       default:
