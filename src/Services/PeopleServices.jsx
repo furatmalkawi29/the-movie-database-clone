@@ -1,13 +1,10 @@
-import axios from 'axios'
+import {CustomAxios} from './CustomAxios'
 import {config} from './config'
 
 
  const GetCreditsDetails = async (id)=>{
-
-    const queryList = [];
-    queryList.push(`api_key=${config.api_key}`);
   
-      const result = await axios.get(`${config.server_address}/credit/${id}?${queryList.join('&')}`)
+      const result = await CustomAxios.get(`${config.server_address}/credit/${id}`)
           .then((response) => response.data)
           .catch((error) => error.response);
   

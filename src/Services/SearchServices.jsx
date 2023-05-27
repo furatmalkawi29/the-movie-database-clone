@@ -1,14 +1,13 @@
-import axios from 'axios'
+import {CustomAxios} from './CustomAxios'
 import {config} from './config'
 
 
  const CategorySearch = async ({searchCategory,searchQuery})=>{
 
   const queryList = [];
-  queryList.push(`api_key=${config.api_key}`);
   queryList.push(`query=${searchQuery}`);
 
-const result = await axios.get(`${config.server_address}/search/${searchCategory}?${queryList.join('&')}`)
+const result = await CustomAxios.get(`${config.server_address}/search/${searchCategory}?${queryList.join('&')}`)
         .then((response) => response.data)
         .catch((error) => error.response);
 
@@ -19,10 +18,9 @@ const result = await axios.get(`${config.server_address}/search/${searchCategory
  const MultiSearch = async (searchQuery)=>{
 
   const queryList = [];
-  queryList.push(`api_key=${config.api_key}`);
   queryList.push(`query=${searchQuery}`);
 
-const result = await axios.get(`${config.server_address}/search/multi?${queryList.join('&')}`)
+const result = await CustomAxios.get(`${config.server_address}/search/multi?${queryList.join('&')}`)
         .then((response) => response.data)
         .catch((error) => error.response);
 

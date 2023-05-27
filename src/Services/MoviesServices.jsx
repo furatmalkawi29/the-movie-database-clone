@@ -1,12 +1,9 @@
-import axios from 'axios'
+import {CustomAxios} from './CustomAxios'
 import {config} from './config'
 
  const GetMovieDetails = async (id)=>{
 
-  const queryList = [];
-  queryList.push(`api_key=${config.api_key}`);
-
-    const result = await axios.get(`${config.server_address}/movie/${id}?${queryList.join('&')}`)
+    const result = await CustomAxios.get(`${config.server_address}/movie/${id}`)
         .then((response) => response.data)
         .catch((error) => error.response);
 
@@ -15,10 +12,7 @@ import {config} from './config'
 
  const GetWeekTrendingMovies = async ()=>{
 
-  const queryList = [];
-  queryList.push(`api_key=${config.api_key}`);
-
-    const result = await axios.get(`${config.server_address}/trending/movie/week?${queryList.join('&')}`)
+    const result = await CustomAxios.get(`${config.server_address}/trending/movie/week`)
         .then((response) => response.data)
         .catch((error) => error.response);
 
@@ -27,10 +21,8 @@ import {config} from './config'
 
  const GetPopularMovies = async ()=>{
 
-  const queryList = [];
-  queryList.push(`api_key=${config.api_key}`);
 
-    const result = await axios.get(`${config.server_address}/movie/popular?${queryList.join('&')}`)
+    const result = await CustomAxios.get(`${config.server_address}/movie/popular`)
         .then((response) => response.data)
         .catch((error) => error.response);
 
@@ -40,10 +32,8 @@ import {config} from './config'
 
  const GetNowPlayingMovies = async ()=>{
 
-  const queryList = [];
-  queryList.push(`api_key=${config.api_key}`);
 
-    const result = await axios.get(`${config.server_address}/movie/now_playing?${queryList.join('&')}`)
+    const result = await CustomAxios.get(`${config.server_address}/movie/now_playing`)
         .then((response) => response.data)
         .catch((error) => error.response);
 
@@ -52,10 +42,8 @@ import {config} from './config'
 
  const GetMovieCredits = async (id)=>{
 
-  const queryList = [];
-  queryList.push(`api_key=${config.api_key}`);
 
-    const result = await axios.get(`${config.server_address}/movie/${id}/credits?${queryList.join('&')}`)
+    const result = await CustomAxios.get(`${config.server_address}/movie/${id}/credits`)
         .then((response) => response.data)
         .catch((error) => error.response);
 
@@ -65,10 +53,8 @@ import {config} from './config'
 
  const GetMovieImages = async (id)=>{
 
-  const queryList = [];
-  queryList.push(`api_key=${config.api_key}`);
 
-    const result = await axios.get(`${config.server_address}/movie/${id}/images?${queryList.join('&')}`)
+    const result = await CustomAxios.get(`${config.server_address}/movie/${id}/images`)
         .then((response) => response.data)
         .catch((error) => error.response);
 
@@ -78,10 +64,8 @@ import {config} from './config'
 
  const GetMovieVideos = async (id)=>{
 
-  const queryList = [];
-  queryList.push(`api_key=${config.api_key}`);
 
-    const result = await axios.get(`${config.server_address}/movie/${id}/videos?${queryList.join('&')}`)
+    const result = await CustomAxios.get(`${config.server_address}/movie/${id}/videos`)
         .then((response) => response.data)
         .catch((error) => error.response);
 
@@ -90,10 +74,8 @@ import {config} from './config'
 
  const GetMovieRecommendations = async (id)=>{
 
-  const queryList = [];
-  queryList.push(`api_key=${config.api_key}`);
 
-    const result = await axios.get(`${config.server_address}/movie/${id}/recommendations?${queryList.join('&')}`)
+    const result = await CustomAxios.get(`${config.server_address}/movie/${id}/recommendations`)
         .then((response) => response.data)
         .catch((error) => error.response);
 
@@ -102,10 +84,8 @@ import {config} from './config'
 
  const GetMovieReviews = async (id)=>{
 
-  const queryList = [];
-  queryList.push(`api_key=${config.api_key}`);
 
-    const result = await axios.get(`${config.server_address}/movie/${id}/reviews?${queryList.join('&')}`)
+    const result = await CustomAxios.get(`${config.server_address}/movie/${id}/reviews`)
         .then((response) => response.data)
         .catch((error) => error.response);
 
@@ -115,10 +95,8 @@ import {config} from './config'
 
  const GetMovieKeywords = async (id)=>{
 
-  const queryList = [];
-  queryList.push(`api_key=${config.api_key}`);
 
-    const result = await axios.get(`${config.server_address}/movie/${id}/keywords?${queryList.join('&')}`)
+    const result = await CustomAxios.get(`${config.server_address}/movie/${id}/keywords`)
         .then((response) => response.data)
         .catch((error) => error.response);
 
@@ -127,12 +105,11 @@ import {config} from './config'
 
  const RateMovie = async ({movieId,sessionId, body})=>{
 
-  const queryList = [];
-  queryList.push(`api_key=${config.api_key}`);
+  const queryList = []
   if(sessionId)
   queryList.push(`session_id=${sessionId}`);
 
-    const result = await axios.post(`${config.server_address}/movie/${movieId}/rating?${queryList.join('&')}`, body)
+    const result = await CustomAxios.post(`${config.server_address}/movie/${movieId}/rating?${queryList.join('&')}`, body)
         .then((response) => response.data)
         .catch((error) => error.response);
 
@@ -141,12 +118,11 @@ import {config} from './config'
 
 const RemoveMovieRating = async ({movieId,sessionId})=>{
     
-    const queryList = [];
-  queryList.push(`api_key=${config.api_key}`);
+  const queryList = []
   if(sessionId)
   queryList.push(`session_id=${sessionId}`);
   
-  const result = await axios.delete(`${config.server_address}/movie/${movieId}/rating?${queryList.join('&')}`)
+  const result = await CustomAxios.delete(`${config.server_address}/movie/${movieId}/rating?${queryList.join('&')}`)
   .then((response) => response.data)
   .catch((error) => error.response);
   
@@ -156,11 +132,10 @@ const RemoveMovieRating = async ({movieId,sessionId})=>{
 const GetMovieAccountState = async ({movieId,sessionId})=>{
 
  const queryList = [];
- queryList.push(`api_key=${config.api_key}`);
  if(sessionId)
  queryList.push(`session_id=${sessionId}`);
 
-   const result = await axios.get(`${config.server_address}/movie/${movieId}/account_states?${queryList.join('&')}`)
+   const result = await CustomAxios.get(`${config.server_address}/movie/${movieId}/account_states`)
        .then((response) => response.data)
        .catch((error) => error.response);
 

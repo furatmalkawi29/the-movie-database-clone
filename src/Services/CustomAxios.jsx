@@ -1,16 +1,12 @@
 import axios from 'axios'
-
-axios.interceptors.request.use( configurations => {
-    const localConfigurations = configurations;
-    return localConfigurations;
-},
-(error) => {
-    Promise.reject(error);
-  }
-)
+import { config } from './config'
 
 
-export const CustomAxios ={
+axios.defaults.headers.common['Authorization'] = `Bearer ${config.access_token}` 
+
+
+
+export const CustomAxios = {
     get: axios.get,
     post: axios.post,
     put: axios.put,

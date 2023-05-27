@@ -1,14 +1,12 @@
-import axios from 'axios'
+import {CustomAxios} from './CustomAxios'
 import {config} from './config'
 
 
 
 const GetRequestToken = async ()=>{
 
-    const queryList = [];
-    queryList.push(`api_key=${config.api_key}`);
   
-      const result = await axios.get(`${config.server_address}/authentication/token/new?${queryList.join('&')}`)
+      const result = await CustomAxios.get(`${config.server_address}/authentication/token/new`)
           .then((response) => response.data)
           .catch((error) => error.response);
   
@@ -17,10 +15,8 @@ const GetRequestToken = async ()=>{
   
   const ValidateWithLogin = async (body)=>{
     
-    const queryList = [];
-    queryList.push(`api_key=${config.api_key}`);
 
-      const result = await axios.post(`${config.server_address}/authentication/token/validate_with_login?${queryList.join('&')}`, body)
+      const result = await CustomAxios.post(`${config.server_address}/authentication/token/validate_with_login`, body)
           .then((response) => response.data)
           .catch((error) => error.response);
   
@@ -30,10 +26,7 @@ const GetRequestToken = async ()=>{
     
    const CreateSession = async (body)=>{
 
-    const queryList = [];
-    queryList.push(`api_key=${config.api_key}`);
-
-      const result = await axios.post(`${config.server_address}/authentication/session/new?${queryList.join('&')}`, body)
+      const result = await CustomAxios.post(`${config.server_address}/authentication/session/new`, body)
           .then((response) => response.data)
           .catch((error) => error.response);
           
@@ -42,10 +35,7 @@ const GetRequestToken = async ()=>{
 
   const GetGuestSession = async ()=>{
         
-      const queryList = [];
-      queryList.push(`api_key=${config.api_key}`);
-        
-      const result = await axios.get(`${config.server_address}/authentication/guest_session/new?${queryList.join('&')}`)
+      const result = await CustomAxios.get(`${config.server_address}/authentication/guest_session/new`)
           .then((response) => response.data)
           .catch((error) => error.response);
         
@@ -54,10 +44,7 @@ const GetRequestToken = async ()=>{
 
   const DeleteSession = async (body)=>{
 
-    const queryList = [];
-    queryList.push(`api_key=${config.api_key}`);
-
-      const result = await axios.delete(`${config.server_address}/authentication/session?${queryList.join('&')}`, body)
+      const result = await CustomAxios.delete(`${config.server_address}/authentication/session`, body)
       .then((response) => response.data)
           .catch((error) => error.response);
   

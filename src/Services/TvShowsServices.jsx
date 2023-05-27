@@ -1,13 +1,10 @@
-import axios from 'axios'
+import {CustomAxios} from './CustomAxios'
 import {config} from './config'
 
 
 const GetTvShowDetails = async (id)=>{
 
-    const queryList = [];
-    queryList.push(`api_key=${config.api_key}`);
-  
-      const result = await axios.get(`${config.server_address}/tv/${id}?${queryList.join('&')}`)
+      const result = await CustomAxios.get(`${config.server_address}/tv/${id}`)
           .then((response) => response.data)
           .catch((error) => error.response);
   
@@ -16,10 +13,7 @@ const GetTvShowDetails = async (id)=>{
 
   const GetTodayTrendingTvShows = async ()=>{
 
-    const queryList = [];
-    queryList.push(`api_key=${config.api_key}`);
-  
-      const result = await axios.get(`${config.server_address}/trending/tv/week?${queryList.join('&')}`)
+      const result = await CustomAxios.get(`${config.server_address}/trending/tv/week`)
           .then((response) => response.data)
           .catch((error) => error.response);
   
@@ -28,10 +22,7 @@ const GetTvShowDetails = async (id)=>{
 
   const GetPopularTvShows = async ()=>{
 
-    const queryList = [];
-    queryList.push(`api_key=${config.api_key}`);
-  
-      const result = await axios.get(`${config.server_address}/tv/popular?${queryList.join('&')}`)
+      const result = await CustomAxios.get(`${config.server_address}/tv/popular`)
           .then((response) => response.data)
           .catch((error) => error.response);
   
@@ -39,10 +30,7 @@ const GetTvShowDetails = async (id)=>{
   }
   const GetOnAirTvShows = async ()=>{
 
-    const queryList = [];
-    queryList.push(`api_key=${config.api_key}`);
-  
-      const result = await axios.get(`${config.server_address}/tv/on_the_air?${queryList.join('&')}`)
+      const result = await CustomAxios.get(`${config.server_address}/tv/on_the_air`)
           .then((response) => response.data)
           .catch((error) => error.response);
   
@@ -51,10 +39,7 @@ const GetTvShowDetails = async (id)=>{
 
  const GetTvShowCredits = async (id)=>{
 
-  const queryList = [];
-  queryList.push(`api_key=${config.api_key}`);
-
-    const result = await axios.get(`${config.server_address}/tv/${id}/credits?${queryList.join('&')}`)
+    const result = await CustomAxios.get(`${config.server_address}/tv/${id}/credits`)
         .then((response) => response.data)
         .catch((error) => error.response);
 
@@ -64,10 +49,7 @@ const GetTvShowDetails = async (id)=>{
 
  const GetTvShowImages = async (id)=>{
 
-  const queryList = [];
-  queryList.push(`api_key=${config.api_key}`);
-
-    const result = await axios.get(`${config.server_address}/tv/${id}/images?${queryList.join('&')}`)
+    const result = await CustomAxios.get(`${config.server_address}/tv/${id}/images`)
         .then((response) => response.data)
         .catch((error) => error.response);
 
@@ -77,10 +59,7 @@ const GetTvShowDetails = async (id)=>{
 
  const GetTvShowVideos = async (id)=>{
 
-  const queryList = [];
-  queryList.push(`api_key=${config.api_key}`);
-
-    const result = await axios.get(`${config.server_address}/tv/${id}/videos?${queryList.join('&')}`)
+    const result = await CustomAxios.get(`${config.server_address}/tv/${id}/videos`)
         .then((response) => response.data)
         .catch((error) => error.response);
 
@@ -89,10 +68,7 @@ const GetTvShowDetails = async (id)=>{
 
  const GetTvShowRecommendations = async (id)=>{
 
-  const queryList = [];
-  queryList.push(`api_key=${config.api_key}`);
-
-    const result = await axios.get(`${config.server_address}/tv/${id}/recommendations?${queryList.join('&')}`)
+    const result = await CustomAxios.get(`${config.server_address}/tv/${id}/recommendations`)
         .then((response) => response.data)
         .catch((error) => error.response);
 
@@ -101,10 +77,7 @@ const GetTvShowDetails = async (id)=>{
 
  const GetTvShowReviews = async (id)=>{
 
-  const queryList = [];
-  queryList.push(`api_key=${config.api_key}`);
-
-    const result = await axios.get(`${config.server_address}/tv/${id}/reviews?${queryList.join('&')}`)
+    const result = await CustomAxios.get(`${config.server_address}/tv/${id}/reviews`)
         .then((response) => response.data)
         .catch((error) => error.response);
 
@@ -112,10 +85,7 @@ const GetTvShowDetails = async (id)=>{
 }
  const GetTvShowKeywords = async (id)=>{
 
-  const queryList = [];
-  queryList.push(`api_key=${config.api_key}`);
-
-    const result = await axios.get(`${config.server_address}/tv/${id}/keywords?${queryList.join('&')}`)
+    const result = await CustomAxios.get(`${config.server_address}/tv/${id}/keywords`)
         .then((response) => response.data)
         .catch((error) => error.response);
 
@@ -125,11 +95,10 @@ const GetTvShowDetails = async (id)=>{
 const RateTvShow = async ({tvShowId,sessionId, body})=>{
 
     const queryList = [];
-    queryList.push(`api_key=${config.api_key}`);
     if(sessionId)
     queryList.push(`session_id=${sessionId}`);
   
-      const result = await axios.post(`${config.server_address}/tv/${tvShowId}/rating?${queryList.join('&')}`, body)
+      const result = await CustomAxios.post(`${config.server_address}/tv/${tvShowId}/rating?${queryList.join('&')}`, body)
           .then((response) => response.data)
           .catch((error) => error.response);
   
@@ -139,11 +108,10 @@ const RateTvShow = async ({tvShowId,sessionId, body})=>{
   const RemoveTvShowRating = async ({tvShowId,sessionId})=>{
 
     const queryList = [];
-    queryList.push(`api_key=${config.api_key}`);
     if(sessionId)
     queryList.push(`session_id=${sessionId}`);
   
-      const result = await axios.delete(`${config.server_address}/tv/${tvShowId}/rating?${queryList.join('&')}`)
+      const result = await CustomAxios.delete(`${config.server_address}/tv/${tvShowId}/rating?${queryList.join('&')}`)
           .then((response) => response.data)
           .catch((error) => error.response);
   
@@ -153,11 +121,10 @@ const RateTvShow = async ({tvShowId,sessionId, body})=>{
   const GetTvShowAccountState = async ({tvShowId,sessionId})=>{
 
     const queryList = [];
-    queryList.push(`api_key=${config.api_key}`);
     if(sessionId)
     queryList.push(`session_id=${sessionId}`);
    
-      const result = await axios.get(`${config.server_address}/tv/${tvShowId}/account_states?${queryList.join('&')}`)
+      const result = await CustomAxios.get(`${config.server_address}/tv/${tvShowId}/account_states?${queryList.join('&')}`)
           .then((response) => response.data)
           .catch((error) => error.response);
    
