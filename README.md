@@ -13,7 +13,7 @@ cd the-movie-database-clone
 npm install or yarn install
 ```
 
-## Start the server
+## Start the server ⚡
 
 ```bash
 npm start or yarn start
@@ -25,19 +25,19 @@ The project is deployed using [netlify](https://www.netlify.com/) and you can vi
 ## Technical Description 🔮
  I did my best following Clean Code Principles, by making **reusable components** as much as possible, depending on certain patterns and an organized file structure. 
  
-✅ **Pure CSS** without using libraries like bootstrap/tailwind in making app componnets .
-✅ **Used Scss** as a css-preprocessor
-✅ **Responsive** 
-✅ **ReactJs** :  Functional components + hooks 
-✅ **React Redux** for state management 
-✅ **Axios** library
-✅ **40+ End points** connected all over the app (TMDB     V3 APIs) 
+✅ **Pure CSS** without using libraries like bootstrap/tailwind in making app componnets .\
+✅ **Used Scss** as a css-preprocessor\
+✅ **Responsive** \
+✅ **ReactJs** :  Functional components + hooks \
+✅ **React Redux** for state management \
+✅ **Axios** library\
+✅ **40+ End points** connected all over the app (TMDB     V3 APIs) \
 ✅ **Authentication** (TMDB Auth APIs) 
 
 
 ## About TMDB APIs 🔐
 
-API services were available on the website with all of the details including payload and response examples .
+API services were available on the website with all of the details including payload and response examples .\
  You need to signup and get your own API key  to be able to try them out  .
 
 >  Our API is a system we provide for you and your team to programmatically fetch and use our data and/or images. 
@@ -45,11 +45,11 @@ API services were available on the website with all of the details including pay
 ------>> imggggg
 ## App Features  🚀
 ➕ Viewing brief descriptions of movies/shows, the cast and any other           
- actor/actress in the field .
-➕ Rating movies/shows and contribute with the movies fans community .
-➕ Adding movies/shows to favorite list that appears in user's account. 
-➕ Searching movies/shows/actors/directors..) .
-➕ Recommending movies/show based on the movie/show the user's currently interested in .
-➕ Getting to know the lately released movies/shows  .
-➕ Bookmark movies/shows to watch them later . 
+ actor/actress in the field .\
+➕ Rating movies/shows and contribute with the movies fans community .\
+➕ Adding movies/shows to favorite list that appears in user's account. \
+➕ Searching movies/shows/actors/directors..) .\
+➕ Recommending movies/show based on the movie/show the user's currently interested in .\
+➕ Getting to know the lately released movies/shows  .\
+➕ Bookmark movies/shows to watch them later .
 
