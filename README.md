@@ -5,6 +5,7 @@ TMDB is a **CRUD** application.
 
  The UI is made with **ReactJs** and it is a clone of the famous website [The Movie Database](https://www.themoviedb.org/) . For backend I relied on [TMDB API services](https://developer.themoviedb.org/reference/intro/getting-started)  ( Version 3) . 
 <br/>
+<br/>
 
 ## Installation
 
@@ -14,6 +15,7 @@ cd the-movie-database-clone
 npm install or yarn install
 ```
 <br/>
+<br/>
 
 ## Start the server ⚡
 
@@ -22,9 +24,11 @@ npm start or yarn start
 ```
 Now enter  [`localhost:3000`](http://localhost:3000/)  in the address bar of your browser.
 <br/>
+<br/>
 
 ## Live website 🔗 
 The project is deployed using [netlify](https://www.netlify.com/) and you can view it using this [`link`](https://63bc31fa174f621426a96a57--vocal-sherbet-e8a780.netlify.app/) .
+<br/>
 <br/>
 
 ## Technical Description 🔮
@@ -40,6 +44,7 @@ The project is deployed using [netlify](https://www.netlify.com/) and you can vi
 ✅ **Authentication** (TMDB Auth APIs) 
 
 <br/>
+<br/>
 
 ## About TMDB APIs 🔐
 
@@ -50,6 +55,8 @@ API services were available on the website with all of the details including pay
 
 ------>> imggggg
 <br/>
+<br/>
+
 ## App Features  🚀
 ➕ Viewing brief descriptions of movies/shows, the cast and any other           
  actor/actress in the field .\
