@@ -27,7 +27,7 @@ Now enter  [`localhost:3000`](http://localhost:3000/)  in the address bar of you
 <br/>
 
 ## Live website 🔗 
-The project is deployed using [netlify](https://www.netlify.com/) and you can view it using this [`link`](https://63bc31fa174f621426a96a57--vocal-sherbet-e8a780.netlify.app/) .
+The project is deployed using [netlify](https://www.netlify.com/) and you can view it using this [`link`](https://vocal-sherbet-e8a780.netlify.app/) .
 <br/>
 <br/>
 
