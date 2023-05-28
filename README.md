@@ -61,9 +61,9 @@ TMDB API services were available on the website with all of the details includin
 ➕ Viewing brief descriptions of movies/shows, the cast and any other           
  actor/actress in the field .\
 ➕ Rating movies/shows and contribute with the movies fans community .\
-➕ Adding movies/shows to favorite list that appears in user's account. \
+➕ Adding movies/shows to a favorites list which eventually appears in user's account. \
 ➕ Searching movies/shows/actors/directors..) .\
 ➕ Recommending movies/show based on the movie/show the user's currently interested in .\
-➕ Getting to know the lately released movies/shows  .\
+➕ Getting to know the lately released and most popular movies/shows  .\
 ➕ Bookmark movies/shows to watch them later .
 
