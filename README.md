@@ -48,7 +48,7 @@ The project is deployed using [netlify](https://www.netlify.com/) and you can vi
 
 ## About TMDB APIs 🔐
 
-API services were available on the website with all of the details including payload and response examples .\
+TMDB API services were available on the website with all of the details including payload and response examples .\
  You need to signup and get your own API key  to be able to try them out  .
 
 >  Our API is a system we provide for you and your team to programmatically fetch and use our data and/or images. 
