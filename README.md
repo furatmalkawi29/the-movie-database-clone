@@ -6,7 +6,10 @@ TMDB is a **CRUD** application.
  The UI is made with **ReactJs** and it is a clone of the famous website [The Movie Database](https://www.themoviedb.org/) . For backend I relied on [TMDB API services](https://developer.themoviedb.org/reference/intro/getting-started)  ( Version 3) . 
 <br/>
 <br/>
-
+## Live website 🔗 
+The project is deployed using [netlify](https://www.netlify.com/) and you can view it using this [`link`](https://vocal-sherbet-e8a780.netlify.app/) .
+<br/>
+<br/>
 ## Installation
 
 ```bash
@@ -17,10 +20,7 @@ npm install or yarn install
 <br/>
 <br/>
 
-## Live website 🔗 
-The project is deployed using [netlify](https://www.netlify.com/) and you can view it using this [`link`](https://vocal-sherbet-e8a780.netlify.app/) .
-<br/>
-<br/>
+
 ## Start the server ⚡
 
 ```bash
