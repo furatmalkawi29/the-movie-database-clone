@@ -59,7 +59,9 @@ TMDB API services were available on the website with all of the details includin
 
 >  Our API is a system we provide for you and your team to programmatically fetch and use our data and/or images. 
 
------->> imggggg
+<br/>
+
+![image](https://github.com/furatmalkawi29/the-movie-database-clone/blob/main/src/assets/images/tmd-apis.png)
 <br/>
 <br/>
 
