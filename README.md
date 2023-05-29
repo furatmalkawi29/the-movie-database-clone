@@ -8,8 +8,14 @@ TMDB is a **CRUD** application.
 <br/>
 ## Live website 🔗 
 The project is deployed using [netlify](https://www.netlify.com/) and you can view it using this [`link`](https://vocal-sherbet-e8a780.netlify.app/) .
+
+<br/>
+
+![image](https://github.com/furatmalkawi29/the-movie-database-clone/blob/main/src/assets/images/readme(2).gif)
+
 <br/>
 <br/>
+
 ## Installation
 
 ```bash
@@ -58,13 +64,42 @@ TMDB API services were available on the website with all of the details includin
 <br/>
 
 ## App Features  🚀
+
+➕ Getting to know the lately released and most popular movies/shows  .\
 ➕ Viewing brief descriptions of movies/shows, the cast and any other           
  actor/actress in the field .\
+➕ Recommending movies/show based on the movie/show the user's currently interested in .\
+
+<br/>
+
+![image](https://github.com/furatmalkawi29/the-movie-database-clone/blob/main/src/assets/images/readme(8).gif)
+
+<br/>
+
+![image](https://github.com/furatmalkawi29/the-movie-database-clone/blob/main/src/assets/images/readme(6).gif)
+
+<br/>
+
+➕ Searching movies/shows/actors/directors..) .\
+<br/>
+
+![image](https://github.com/furatmalkawi29/the-movie-database-clone/blob/main/src/assets/images/readme(4).gif)
+
+<br/>
+
 ➕ Rating movies/shows and contribute with the movies fans community .\
 ➕ Adding movies/shows to a favorites list which eventually appears in user's account. \
-➕ Searching movies/shows/actors/directors..) .\
-➕ Recommending movies/show based on the movie/show the user's currently interested in .\
-➕ Getting to know the lately released and most popular movies/shows  .\
 ➕ Bookmark movies/shows to watch them later .
 
-![image](/assets/images/readme(2).gif)
+<br/>
+
+![image](https://github.com/furatmalkawi29/the-movie-database-clone/blob/main/src/assets/images/readme(5).gif)
+
+<br/>
+
+![image](https://github.com/furatmalkawi29/the-movie-database-clone/blob/main/src/assets/images/readme(7).gif)
+
+<br/>
+
+
+
