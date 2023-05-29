@@ -17,6 +17,10 @@ npm install or yarn install
 <br/>
 <br/>
 
+## Live website 🔗 
+The project is deployed using [netlify](https://www.netlify.com/) and you can view it using this [`link`](https://vocal-sherbet-e8a780.netlify.app/) .
+<br/>
+<br/>
 ## Start the server ⚡
 
 ```bash
@@ -26,10 +30,6 @@ Now enter  [`localhost:3000`](http://localhost:3000/)  in the address bar of you
 <br/>
 <br/>
 
-## Live website 🔗 
-The project is deployed using [netlify](https://www.netlify.com/) and you can view it using this [`link`](https://vocal-sherbet-e8a780.netlify.app/) .
-<br/>
-<br/>
 
 ## Technical Description 🔮
  I did my best following Clean Code Principles, by making **reusable components** as much as possible, depending on certain patterns and an organized file structure. 
