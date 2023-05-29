@@ -67,3 +67,4 @@ TMDB API services were available on the website with all of the details includin
 ➕ Getting to know the lately released and most popular movies/shows  .\
 ➕ Bookmark movies/shows to watch them later .
 
+![image](/assets/images/readme(2).gif)
