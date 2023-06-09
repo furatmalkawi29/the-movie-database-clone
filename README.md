@@ -47,10 +47,10 @@ Now enter  [`localhost:3000`](http://localhost:3000/)  in the address bar of you
 ✅ **React Redux** for state management \
 ✅ **Axios** library\
 ✅ **40+ End points** connected all over the app (TMDB     V3 APIs) \
-✅ **Authentication** (TMDB Auth APIs) 
-✅ **Toaster Notifications** (Used [React Toast Notifications](https://www.npmjs.com/package//react-toast-notifications) )
-✅ **Menus Click Away** (Used ClickAwayListener component from MUI)
-✅ **Profile Dashboard Charts** (Used [Nivo Library](https://nivo.rocks/)  )
+✅ **Authentication** (TMDB Auth APIs) \
+✅ **Toaster Notifications** (Used [React Toast Notifications](https://www.npmjs.com/package//react-toast-notifications) ) \
+✅ **Menus Click Away** (Used ClickAwayListener component from MUI) \
+✅ **Profile Dashboard Charts** (Used [Nivo Library](https://nivo.rocks/)  ) \
 
 <br/>
 <br/>
